@@ -18,6 +18,10 @@ return [
     'Google'                                   => ' Google' ,
     'Not_a_member?'                            => 'Not A Member' ,
     'Sign_up_now'                              => 'Register Now ', 
+    'forget_password'                          => 'Forget Password',
+    'Reset_Password'                           => 'Reset Password',
+    'Send_Password_Reset_Link'                 => 'Send Password Reset Link' ,
+    'PasswordConfirmation'                      => 'Password Confirmation',
     //////////////// end auth.login ///////////////////////////
     ////////////////////////////////////////////////////////////
     'name_Field_is_required'                   => 'Name Required ' ,

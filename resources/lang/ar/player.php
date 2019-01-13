@@ -18,6 +18,10 @@ return [
     'Google'                                   => ' جوجل' ,
     'Not_a_member?'                            => 'لست عضوا ؟' ,
     'Sign_up_now'                              => 'سجل الآن', 
+    'forget_password'                          => 'نسيت كلمة السر',
+    'Reset_Password'                           => 'إعادة تعيين كلمة السر',
+    'Send_Password_Reset_Link'                 => 'إرسل رابط إعادة تعيين كلمة السر' ,
+    'PasswordConfirmation'                      => 'أعد كتابة كلمة السر',
     //////////////// end auth.login ///////////////////////////
     ////////////////////////////////////////////////////////////
     'name_Field_is_required'                   => 'الإسم مطلوب' ,
