@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller ;
 use App\Model\User;
 use App\Model\Sport;
 use App\Model\Event;
+use App\Model\Country;
+use App\Model\Governorate;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 use App\Model\Filters\EventFilters ;
-use App\Model\PlayerFilters ;
+use App\Model\Filters\PlayerFilters ;
 
 use Illuminate\Http\Request;
 
@@ -22,10 +24,15 @@ class SportsController extends Controller
 
 		$id = sm_crypt($id, 'd') ;
 		/*if ($id == '') {
+
+
 			$Sports = Sport::with('users')->get() ;
-			//return $Sports ;
+
+			//return $Sports ; 
 			return view('sports.sportsShow', compact('Sports')) ;
+
 		}*/
+
 
 		$Sport = Sport::with('users')
 						->with('sportEvents')
@@ -35,9 +42,9 @@ class SportsController extends Controller
 			abort(404) ;
 		}
 		
-		//return $Sport ;
+        //return $Sport ;
         $title = $Sport->en_sport_name ;
-        return view('player.sport.pages.sport', compact('title', 'Sport')) ;
+		return view('player.sport.pages.sport', compact('title', 'Sport')) ;
 	}
 
     public function AddToUser(Sport $Sport)
@@ -55,7 +62,9 @@ class SportsController extends Controller
     //////////////////////////////////////////////////////////////////////////////////
     public function sportGetInfo($data = '')
     {
-		//return $data ;
+        //return $data ;
+        $countries = Country::get();
+		$governorate = Governorate::with('areas')->get();
         $vars = explode('-', $data);
         
         $userId     = $vars[0] ;
@@ -72,11 +81,11 @@ class SportsController extends Controller
 								//->where('E_JQueryFrom', '<', Carbon::now())
 								->whereHas('creator',function($query){
 									//$query->where('id','!=', Auth::id());
-									$query->whereHas('playerProfile',function($query){
+									/*$query->whereHas('playerProfile',function($query){
                                         $query->where('p_country', '=', Auth::user()->playerProfile->p_country)
                                         ->where('p_city', '=', Auth::user()->playerProfile->p_city)
-                                        ->where('p_area', '=', Auth::user()->playerProfile->p_area);
-									});
+                                        ->where('p_city', '=', Auth::user()->playerProfile->p_city);
+									});*/
                                 })
                                 ->orderBy('E_date', 'DESC')
 								->with('creator')
@@ -92,11 +101,11 @@ class SportsController extends Controller
                 
                 break;
             case "players":
-                $players = User::where('id', '!=', Auth::id())
+                $players = User::where('our_is_active', '=', 1)
+                                ->where('type', '=', 1)
+                                ->where('id', '!=', Auth::id())
                                 ->whereHas('playerProfile',function($query){
-                                    $query->where('p_country', '=', Auth::user()->playerProfile->p_country)
-                                    ->where('p_city', '=', Auth::user()->playerProfile->p_city)
-                                    ->where('p_area', '=', Auth::user()->playerProfile->p_area);
+                                    $query->whereIn('p_preferred_gender', [0, 3, Auth::user()->playerProfile->p_gender]);
                                 })
                                 ->whereHas('sports',function($query) use($sport){
                                     $query->where('sports.id', '=', $sport);
@@ -104,7 +113,7 @@ class SportsController extends Controller
                                 ->get();
                 
                 //return $players ;
-                return view('player.sport.pageParts.sport.players', compact('players'));
+                return view('player.sport.pageParts.sport.players', compact('countries', 'governorate', 'players'));
                 
                 break;
             case "challenges":
@@ -123,7 +132,7 @@ class SportsController extends Controller
             case "sportInfo":
 				$Sport = Sport::with('users')->with('sportEvents')->find($sport) ;
 
-                return view('player.sport.pageParts.sport.sportInfo', compact('Sport'));
+                return view('player.sport.pageParts.sport.sportInfo', compact('countries', 'governorate', 'Sport'));
             default:
                 echo "Error";
         }
@@ -144,13 +153,7 @@ class SportsController extends Controller
                         ->where('E_creator_id', '!=', Auth::id())
                         //->where('E_sport_id', '=', $sport)
                         //->where('E_JQueryFrom', '<', Carbon::now())
-                        /*->whereHas('creator',function($query){
-                            $query->whereHas('playerProfile',function($query){
-                                $query->where('p_country', '=', Auth::user()->playerProfile->p_country)
-                                ->where('p_city', '=', Auth::user()->playerProfile->p_city)
-                                ->where('p_area', '=', Auth::user()->playerProfile->p_area);
-                            });
-                        })*/
+                        
                         ->orderBy('E_date', 'DESC')
                         ->with('creator')
                         ->get();
@@ -178,13 +181,13 @@ class SportsController extends Controller
 		$new_events = Event::where('E_creator_id', '!=', Auth::id())
                         ->where('E_sport_id', '=', $vars[3])
                         //->where('E_JQueryFrom', '<', Carbon::now())
-                        /*->whereHas('creator',function($query){
+                        ->whereHas('creator',function($query){
                             $query->whereHas('playerProfile',function($query){
                                 $query->where('p_country', '=', Auth::user()->playerProfile->p_country)
                                 ->where('p_city', '=', Auth::user()->playerProfile->p_city)
                                 ->where('p_area', '=', Auth::user()->playerProfile->p_area);
                             });
-                        })*/
+                        })
                         ->orderBy('E_date', 'DESC')
                         ->with('creator')
                         ->get();
@@ -252,22 +255,31 @@ class SportsController extends Controller
     //////////////////////////////////////////////////////////////////////////////////
 	public function getSportPlayersSearchResults(Request $request, PlayerFilters $filters)
 	{
-		
-        $players = User::filter($filters)
+		$countries = Country::get();
+		$governorate = Governorate::with('areas')->get();
+        /*$players = User::filter($filters)
                         ->where('id', '!=', Auth::id())
-                        /*->whereHas('playerProfile',function($query){
-									$query->where('p_country', '=', Auth::user()->playerProfile->p_country)
+                        ->whereHas('playerProfile',function($query){
+                                    $query->where('p_country', '=', Auth::user()->playerProfile->p_country)
                                     ->where('p_city', '=', Auth::user()->playerProfile->p_city)
 									->where('p_area', '=', Auth::user()->playerProfile->p_area)
-									->whereIn('p_preferred_gender', [null, 3, Auth::user()->playerProfile->p_gender]);
-								})*/ 
-                        /* ->whereHas('sports',function($query) use($sport){
+									->whereIn('p_preferred_gender', [0, 3, Auth::user()->playerProfile->p_gender]);
+								}) 
+                        ->whereHas('sports',function($query) use($sport){
                             $query->where('sports.id', '=', $sport);
-                        }) */
+                        }) 
+                        ->get(); */
+        $players = User::filter($filters)
+                        ->where('our_is_active', '=', 1)
+                        ->where('type', '=', 1)
+                        ->where('id', '!=', Auth::id())
+                        ->whereHas('playerProfile',function($query){
+                            $query->whereIn('p_preferred_gender', [0, 3, Auth::user()->playerProfile->p_gender]);
+                        })
                         ->get();
 
 		
-		$view = view('player.sport.pageParts.sport.players.playersSearch.playerSearchResult', compact('players') )->render();
+		$view = view('player.sport.pageParts.sport.players.playersSearch.playerSearchResult', compact('countries', 'governorate', 'players') )->render();
 		return response($view);
 		//return $users;
     }
@@ -281,24 +293,25 @@ class SportsController extends Controller
 	public function freshSportPlayersSearchResults($data = '')
 	{
         //return $data ;
+        $countries = Country::get();
+		$governorate = Governorate::with('areas')->get();
         $vars = explode('-', $data);
 		$userId     = $vars[0] ;
         $model      = $vars[1] ;
         $filter     = $vars[2] ;
         $sport      = $vars[3] ;
-		$players = User::where('id', '!=', Auth::id())
-                        /*->whereHas('playerProfile',function($query){
-									$query->where('p_country', '=', Auth::user()->playerProfile->p_country)
-                                    ->where('p_city', '=', Auth::user()->playerProfile->p_city)
-									->where('p_area', '=', Auth::user()->playerProfile->p_area)
-									->whereIn('p_preferred_gender', [null, 3, Auth::user()->playerProfile->p_gender]);
-								}) 
-                        ->whereHas('sports',function($query) use($sport){
-                            $query->where('sports.id', '=', $sport);
-                        })*/
-                        ->get();
+		$players = User::where('our_is_active', '=', 1)
+                                ->where('type', '=', 1)
+                                ->where('id', '!=', Auth::id())
+                                ->whereHas('playerProfile',function($query){
+                                    $query->whereIn('p_preferred_gender', [0, 3, Auth::user()->playerProfile->p_gender]);
+                                })
+                                ->whereHas('sports',function($query) use($sport){
+                                    $query->where('sports.id', '=', $sport);
+                                })
+                                ->get();
 		//return $events ;		
-		$view = view('player.sport.pageParts.sport.players.playersSearch.playerSearchResult', compact('players', 'model') )->render();
+		$view = view('player.sport.pageParts.sport.players.playersSearch.playerSearchResult', compact('countries', 'governorate', 'players', 'model') )->render();
 		return response($view);
 		//return $users;
     }

@@ -18,7 +18,7 @@
           <div class="form-group">
             <label for="name" style="color:#06774a;">{{ trans('player.Event_creator') }}</label>
             <input type="text" 
-                    name="newEvents_filter_name" 
+                    name="newEvents_filter_creator" 
                     class="newEventsSearch sm-inputs form-control" 
                     id="newEventCreatorInput" 
             >

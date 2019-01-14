@@ -1,1 +1,0 @@
-<a href="{{ url('club/user/' . $id) }}" class="btn btn-info"><i class="fa fa-edit"></i></a>

@@ -72,11 +72,11 @@ $(document).on('click', "#newEvents_filter", function () {
     var data = {};
     var sport = $("input[name=sport_id]").val();
 
-    var name_in = $("input[type=text][name=" + id + "_name]").val();
-    //alert(name_in);
-    if (name_in !== null && name_in !== "" && name_in.replace(/\s/g, "") !== "") {
-        var name = name_in;
-        data['name'] = name;
+    var creator_in = $("input[type=text][name=" + id + "_creator]").val();
+    //alert(creator_in);
+    if (creator_in !== null && creator_in !== "" && creator_in.replace(/\s/g, "") !== "") {
+        var creator = creator_in;
+        data['creator'] = creator;
     }
     var from_in = $("select[name=" + id + "_from]").val();
     if (from_in != null && from_in != "") {
@@ -213,7 +213,7 @@ $(document).on('click', "#myEvents_filter", function () {
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// End Search in sport players //////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-$(document).on('click', "#players_filter", function () {
+$(document).on('click', "#player_filters", function () {
     $("#playersSearchResult").css("filter", "blur(2px)");
     //$("#search-filtter").css("filter", "blur(2px)");
     var id = this.id;
@@ -242,6 +242,24 @@ $(document).on('click', "#players_filter", function () {
     if (preferred_gender_in != null && preferred_gender_in != "") {
         var preferred_gender = preferred_gender_in;
         data['preferred_gender'] = preferred_gender;
+    }
+
+    var country_in =  $("select[name=" + id + "_country] option:selected").val();
+    if (country_in != null && country_in != "" ) {
+        var country = country_in ;
+        data['country'] = country;
+    }
+
+    var city_in =  $("select[name=" + id + "_city] option:selected").val();
+    if (city_in != null && city_in != "" ) {
+        var city = city_in ;
+        data['city'] = city;
+    }
+
+    var area_in =  $("select[name=" + id + "_area] option:selected").val();
+    if (area_in != null && area_in != "" ) {
+        var area = area_in ;
+        data['area'] = area;
     }
 
     console.log(jQuery.isEmptyObject(data) ? 'empty' : data);
@@ -294,13 +312,13 @@ $(document).on('click', "#addNewEvent", function () {
 
     var currentDate = new Date();
 
-      var Cdate = currentDate.getDate();
-      var Cmonth = currentDate.getMonth(); //Be careful! January is 0 not 1
-      var Cyear = currentDate.getFullYear();
+    var Cdate = currentDate.getDate();
+    var Cmonth = currentDate.getMonth(); //Be careful! January is 0 not 1
+    var Cyear = currentDate.getFullYear();
 
-      var dateString = Cdate + "-" +(Cmonth + 1) + "-" + Cyear;
+    var dateString = Cdate + "-" +(Cmonth + 1) + "-" + Cyear;
 
-    if (date == null || date == "") {
+    if (date == null || date == "" ) {
         err = 1;
     }
     var from = $("select[name=E_from]").val();

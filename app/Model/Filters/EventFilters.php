@@ -11,13 +11,8 @@ class EventFilters extends QueryFilter
 {
 
 	public $creatorType ; // == 1 => Auth is the creator || == 2 => Auth is not the creator  
-	public $name ;
-
+	public $name ; public $creator ;
 	public $candidate ;
-
-	//public $p_gender ;
-
-    //public $p_preferred_gender ; */
     
     /*
     *make sure creator not Auth
@@ -37,7 +32,7 @@ class EventFilters extends QueryFilter
     }
 	
 	/*
-    * get events where from = $from
+    * get events where date = $date
     */
     public function date($date)
 	{
@@ -53,7 +48,7 @@ class EventFilters extends QueryFilter
 	}
 
 	/*
-    * get events where sport = $sport
+    * get events where to = $to
     */
     public function to($to)
 	{
@@ -69,17 +64,17 @@ class EventFilters extends QueryFilter
 	}
 
 	/*
-    * get events where creator name == $name 
+    * get events where creator $creator
     */
-	/* public function name($name)
+	public function creator($creator)
 	{
-		$this->name = $name ;
+		$this->creator = $creator ;
 		return $this->builder->whereHas('creator', function ($lquery) {
-		    $lquery->where('name', 'LIKE', '%'.$this->name.'%') ;
+		    $lquery->where('name', 'LIKE', '%'.$this->creator.'%') ;
 		}) ;
 		
 	}
- */
+
 	/*
     * get events where candidate name == $candidate 
     */
@@ -113,9 +108,6 @@ class EventFilters extends QueryFilter
 				$lquery->where('name', 'LIKE', '%'.$this->candidate.'%') ;
 			}) ;
 		} */
-		
-		
-
 		
 		
 	}

@@ -1,1 +1,0 @@
-<img width="40px" src="{{ Storage::url($c_logo) }}">

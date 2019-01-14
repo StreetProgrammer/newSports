@@ -1,1 +1,0 @@
-<a href="{{ aurl('players/' . $id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>

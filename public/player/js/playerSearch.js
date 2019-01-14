@@ -49,7 +49,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 
 	/* to get search results and display it  */
-	$(document).on('click', "#player_filtters", function () {
+	$(document).on('click', "#player_filters", function () {
 		$("#search-result").css("filter", "blur(2px)");
 		//$("#search-filtter").css("filter", "blur(2px)");
 		var id = this.id ;
@@ -79,10 +79,29 @@
 			var preferred_gender = preferred_gender_in ;
 			data['preferred_gender'] = preferred_gender;
 		}
+
+		var country_in =  $("select[name=" + id + "_country] option:selected").val();
+		if (country_in != null && country_in != "" ) {
+			var country = country_in ;
+			data['country'] = country;
+		}
+
+		var city_in =  $("select[name=" + id + "_city] option:selected").val();
+		if (city_in != null && city_in != "" ) {
+			var city = city_in ;
+			data['city'] = city;
+		}
+
+		var area_in =  $("select[name=" + id + "_area] option:selected").val();
+		if (area_in != null && area_in != "" ) {
+			var area = area_in ;
+			data['area'] = area;
+		}
 		
 		console.log( jQuery.isEmptyObject(data) ? 'empty' : data );
 		//alert(err) ;
 		if(jQuery.isEmptyObject(data) == false){
+			console.log(data) ;
 			$('.reCheckLoader').fadeIn();
 			var _token = $("input[name=_token]").val();
 			var playgroundId = $("input[name=playgroundId]").val();
@@ -95,7 +114,7 @@
 					$("#search-result").removeAttr("style");
 		    		playerLoader.fadeOut();
 		            $('#search-result').html(data) ;
-		            console.log(data) ;
+		            //console.log(data) ;
 		         }
 		   });
 		}else{
@@ -107,7 +126,7 @@
 					playerLoader.fadeOut();
 					$("#search-result").removeAttr("style");
 		            $('#search-result').html(data) ;
-		            console.log(data) ;
+		            //console.log(data) ;
 		         }
 		   });
 		}
