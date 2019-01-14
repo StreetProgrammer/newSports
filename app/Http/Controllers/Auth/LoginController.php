@@ -126,7 +126,8 @@ class LoginController extends Controller
 
             playerProfile::create(['p_user_id'              => $newuser->id,
                                    'p_country'              => getCountry(),
-                                   'p_preferred_gender'     => 3,
+                                   'p_preferred_gender'     => 0,
+                                   'p_gender'               => 0,
                                 ]) ;
             return 1;
         }
