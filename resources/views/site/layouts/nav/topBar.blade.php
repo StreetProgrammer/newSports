@@ -75,8 +75,8 @@
         >
           <i class="fa fa-user-plus"></i> {{ trans('player.register') }}
         </a>
-      </li>
-      {{-- <li>
+      </li>--
+      --<li>
         <a href="#" 
           data-toggle="modal" 
           data-target="#RegisterAs" 
@@ -91,7 +91,7 @@
         >
           <i class="fa fa-user-plus"></i> {{ trans('player.register') }}
         </a>
-      </li> --}} 
+      </li>
     </ul>
   </div>
 {{-- visitor nav --}}

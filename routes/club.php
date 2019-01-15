@@ -83,8 +83,8 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 });
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//	
-	//used to add main club info to create user, clubProfile record
-	Route::post('/registerClub', 'Club\ClubProfilesController@registerClub');
+	//used to add main club info to create user, clubProfile record //first fuction//
+	Route::post('/registerClub', 'Club\ClubProfilesController@registerClub'); // final 
 
 	Route::get('/registerAddBranchPlayground', 'Club\ClubProfilesController@registerAddBranchPlayground');
 

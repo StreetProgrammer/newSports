@@ -46,7 +46,7 @@ Route::get('/try', function (){
 | Web Routes
 |--------------------------------------------------------------------------
 */
-//***************** start routes for Home  **************//
+//***************** start routes for [ Home - static pages ] **************//
 
 Route::get('/', 'HomeController@index'); // final
 
@@ -54,7 +54,7 @@ Route::get('/privacy_policy', 'HomeController@privacy_policy'); // final
 Route::get('/social_media_disclosure', 'HomeController@social_media_disclosure'); // final
 Route::get('/terms_of_service', 'HomeController@terms_of_service'); // final
 
-//************************ start routes for Home ********************//
+//************************ start routes for [ Home - static pages ]********************//
 
 Route::get('/olfat', function () {
     //$user = App\User::with('roles')->first();
@@ -75,13 +75,15 @@ Route::get('/olfat', function () {
     $Model->save();
     return $Model;
 });
-
+//////////////////////////start register [ club / player ] //////////////////////
 Auth::routes();
 
+// to display preregister options [ club / player ] as acomplete page // final
 Route::get('/preregister', function () {
     return view('auth/preRegister');
 });
-//////////////////////////start register [ club / player ] //////////////////////
+
+// used to redirect to register page depending on type [ club / player ] // final 
 Route::any('/handlepreregister',function(){
     //$type = Input::get ( 'type' );
     $type = $_GET['type'];

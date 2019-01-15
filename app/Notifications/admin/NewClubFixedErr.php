@@ -33,8 +33,8 @@ class NewClubFixedErr extends Notification /*implements ShouldQueue*/
      */
     public function via($notifiable)
     {
-        //return ['mail', 'database'];
-        return ['database'];
+        return ['mail', 'database'];
+        //return ['database'];
     }
 
     /**

@@ -93,7 +93,7 @@ class ClubProfilesController extends Controller
                 'name'              => $request['name'],
                 'email'             => $request['email'],
                 'slug'              => $slug,
-                'user_img'          => $request['user_img'],
+                'user_img'          => '',
                 'type'              => $request['type'],
                 'user_is_active'    => 1,
                 'our_is_active'     => 0,
@@ -473,12 +473,16 @@ class ClubProfilesController extends Controller
 
     public function registerAddBranch($when = '')
     {
+        //return $when ;
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
-        if ($when = 'ear') {
+        //ear => edit after register 
+        if ($when == 'ear') {
+            //return 2 ;
             return view('club.Edits.pageParts.addNewBranch', compact('club', 'governorate')) ;
         } else {
+            //return 1;
             return view('club.register.pageParts.addNewBranch', compact('club', 'governorate')) ;
         }
 

@@ -97,16 +97,29 @@
             </span>
           </div>
 
-          <div class="contact100-form-checkbox m-l-4">
-            <input class="input-checkbox100" 
-                  id="ckb1" type="checkbox" 
-                  name="remember" 
-                  {{ old('remember') ? 'checked' : '' }}
-            >
-            <label class="label-checkbox100" for="ckb1">
-              {{ trans('player.Remember_me') }}
-            </label>
-          </div>
+           @if ( $errors->has('password') || $errors->has('email') )
+              {{-- start forget password --}}
+
+            <div class="contact100-form-checkbox m-l-4">
+              <a href="{{ url('/') }}/password/reset">
+                <label class="" style="color:#c80000;cursor:pointer">
+                  {{ trans('player.forget_password') }}
+                </label>
+              </a>
+            </div>
+              {{-- end forget password --}}
+          @else
+            <div class="contact100-form-checkbox m-l-4">
+              <input class="input-checkbox100" 
+                    id="ckb1" type="checkbox" 
+                    name="remember" 
+                    {{ old('remember') ? 'checked' : '' }}
+              >
+              <label class="label-checkbox100" for="ckb1">
+                {{ trans('player.Remember_me') }}
+              </label>
+            </div>
+          @endif
           
           <div class="container-login100-form-btn p-t-25">
             <button type="submit" class="login100-form-btn">

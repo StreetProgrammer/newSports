@@ -309,8 +309,8 @@ class ClubBranchesController extends Controller
         $governorate = Governorate::with('areas')->get();
         $clubBranch = clubBranche::where('id', $clubBranch)
                         ->firstOrFail();
-
-        if ($when == ear) {
+        // ear => edit after register
+        if ($when == 'ear') {
             return view('club.Edits.pageParts.editBranch', compact('clubBranch', 'governorate')) ;
         } else {
             return view('club.register.pageParts.editBranch', compact('clubBranch', 'governorate')) ;

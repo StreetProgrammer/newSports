@@ -1,5 +1,80 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(8);
 
 
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, exports) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //// start proccess of club Profile ImageFile crop in [[ register Proccess ]] to [[ store ]] //////
@@ -28,13 +103,13 @@ $(document).on('change', "#clubProfileImageFile", function () {
         }).then(function () {
             console.log('jQuery bind complete');
         });
-    }
+    };
     reader.readAsDataURL(this.files[0]);
     //alert('done') ;
     $('#clubProfileImageModal').modal('show');
     setTimeout(function () {
         //$('#uploadimageModal').modal('hide');
-        var clubProfileImageFile = $("#clubProfileImageFile");
+        var clubProfileImageFile = $('#clubProfileImageFile');
         clubProfileImageFile.val('');
     }, 1000);
 });
@@ -56,7 +131,7 @@ $(document).on('click', ".crop_clubProfileImage", function (event) {
         $('#clubProfileImageModal').modal('hide');
         var clubProfileImageFile = $("#clubProfileImageFile");
         clubProfileImageFile.replaceWith(clubProfileImageFile = clubProfileImageFile.clone(true));
-    })
+    });
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +165,7 @@ $(document).on('change', "#editClubProfileImageFile", function () {
         }).then(function () {
             console.log('jQuery bind complete');
         });
-    }
+    };
     reader.readAsDataURL(this.files[0]);
     //alert('done') ;
     $('#EditclubProfileImageModal').modal('show');
@@ -120,7 +195,7 @@ $(document).on('click', ".crop_editClubProfileImage", function (event) {
         var editClubProfileImageFile = $("#editClubProfileImageFile");
         editClubProfileImageFile.val('');
         editClubProfileImageFile.replaceWith(editClubProfileImageFile = editClubProfileImageFile.clone(true));
-    })
+    });
 });
 
 //end proccess of club Profile ImageFile crop in [[ register Proccess ]] to [[ update ]]
@@ -149,7 +224,7 @@ $(document).on('change', "#upload", function () {
         }).then(function () {
             console.log('jQuery bind complete');
         });
-    }
+    };
     reader.readAsDataURL(this.files[0]);
     //alert('done') ;
     $('#uploadimageModal').modal('show');
@@ -174,7 +249,7 @@ $(document).on('click', ".crop_image", function (event) {
                 "_token": _token,
                 'clubId': clubId
             },
-            success: function (data) {
+            success: function success(data) {
                 var upload = $("#upload");
                 upload.replaceWith(upload = upload.clone(true));
                 $('#uploadimageModal').modal('hide');
@@ -188,10 +263,8 @@ $(document).on('click', ".crop_image", function (event) {
                 console.log(data.imgUrl);
             }
         });
-    })
+    });
 });
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////// end proccess of club Profile ImageFile crop in [[ register Proccess ]] to [[ update ]] /////
@@ -214,7 +287,6 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=name]").css({
             border: '2px solid #5cb85c',
@@ -231,7 +303,6 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_phone]").css({
             border: '2px solid #5cb85c',
@@ -248,7 +319,6 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=email]").css({
             border: '2px solid #5cb85c',
@@ -265,7 +335,6 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_city]").css({
             border: '2px solid #5cb85c',
@@ -282,7 +351,6 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_area]").css({
             border: '2px solid #5cb85c',
@@ -299,7 +367,6 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_address]").css({
             border: '2px solid #5cb85c',
@@ -316,7 +383,6 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=password]").css({
             border: '2px solid #5cb85c',
@@ -376,16 +442,16 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
                 c_area: c_area,
                 c_address: c_address,
                 password: password,
-                c_desc: c_desc,
+                c_desc: c_desc
             },
-            success: function (data) {
+            success: function success(data) {
                 if (data.errors) {
-                    console.log(data) ;
+                    console.log(data);
                     swal({
                         title: "Not Valid ?",
                         text: "Check Errors, and try again !!!",
                         icon: "warning",
-                        dangerMode: true,
+                        dangerMode: true
                     });
                     $('#contentChangable').css('opacity', '1');
                     $('.Loader').fadeOut();
@@ -394,30 +460,25 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
                         title: "Created",
                         text: "Club Account Main Information Created successfuly !!!",
                         icon: "success",
-                        dangerMode: false,
+                        dangerMode: false
                     });
                     //$('#clubUserName').text(data);
                     $('#contentChangable').css('opacity', '1');
                     $('.Loader').fadeOut();
-                    $('#contentChangable').load('/club/editMainRegisterInfo').fadeIn('slow');
+                    $('#contentChangable').load('/club/editMainRegisterInfo/ear').fadeIn('slow');
                     $('#pageTop').load('/club/registerPageTop').fadeIn('slow');
                 }
-                
-
             }
         });
-
     } else {
 
         swal({
             title: "Not Valid ?",
             text: "Check Errors, and try again !!!",
             icon: "warning",
-            dangerMode: true,
+            dangerMode: true
         });
-
     }
-
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// end validate and [[ Store ]] club profile main data [[ before register]] //////////
@@ -446,10 +507,8 @@ $(document).ready(function () {
     });
 });
 
-
-
 $(document).on('change', "#newPlaygroundImageFile", function () {
-    //alert('done') ;
+    alert('done');
     var reader = new FileReader();
     reader.onload = function (event) {
         $newPlaygroundImg.croppie('bind', {
@@ -457,11 +516,11 @@ $(document).on('change', "#newPlaygroundImageFile", function () {
         }).then(function () {
             console.log('jQuery bind complete');
         });
-    }
+    };
     reader.readAsDataURL(this.files[0]);
     //alert('done') ;
     $('#newPlaygroundImageFileModal').modal('show');
-    //$('#addPlaygroundImageFileModal').modal('show');
+    $('#addPlaygroundImageFileModal').modal('show');
     setTimeout(function () {
         //$('#uploadimageModal').modal('hide');
         var newPlaygroundImageFile = $("#newPlaygroundImageFile");
@@ -477,14 +536,14 @@ $(document).on('click', ".crop_newPlaygroundImage", function (event) {
 
         $('#newPlaygroundImageFileModal').modal('hide');
         var newPlaygroundImageFile = $("#newPlaygroundImageFile");
-        newPlaygroundImageFile.val('') ;
+        newPlaygroundImageFile.val('');
         //newPlaygroundImageFile.replaceWith(newPlaygroundImageFile = newPlaygroundImageFile.clone(true));
         if ($('.gallaryImg').length > 4) {
-            $('#forPlaygroundImageFile').fadeOut();
+            $('#newPlaygroundImageFile').fadeOut();
         } else {
-            $('#forPlaygroundImageFile').fadeIn();
+            $('#newPlaygroundImageFile').fadeIn();
         }
-    })
+    });
 });
 
 $(document).on('click', ".DelImg", function () {
@@ -497,14 +556,13 @@ $(document).on('click', ".DelImg", function () {
     } else {
         $('#forPlaygroundImageFile').fadeIn();
     }
-
 });
 
- //end proccess of playground images crop and prepare input value in [[ register Proccess ]] to [[ store ]]
+//end proccess of playground images crop and prepare input value in [[ register Proccess ]] to [[ store ]]
 
- ///////////////////////////////////////////////////////////////////////////////////////////////////
- // end for playground image gallary in register proccess to handle it in add or edit court ////////
- ///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// end for playground image gallary in register proccess to handle it in add or edit court ////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 // start proccess of playground images crop and prepare input value in [[ register Proccess ]] to [[ store ]]
 $(document).ready(function () {
@@ -530,7 +588,7 @@ $(document).on('change', "#addPlaygroundImageFile", function () {
         }).then(function () {
             console.log('jQuery bind complete');
         });
-    }
+    };
     reader.readAsDataURL(this.files[0]);
     //alert('done') ;
     $('#addPlaygroundImageFileModal').modal('show');
@@ -548,7 +606,6 @@ $(document).on('click', ".crop_playgroundImage", function (event) {
     }).then(function (response) {
         $('.playgroundGallaryPlaceholder').append('<div class="col-md-3 text-center" style="position: relative;display: inline-block;"><div style="padding:5px;"><img class="img img-thumbnail gallaryImg" style="width:100px" src="' + response + '"></div><span class="completelyDelImg" id="newPhotoAdded" style="cursor: pointer;position: absolute;top: 10px;right: 45px;color: #3c8dbc;"><i class="fa fa-times-circle"></i></span></div>');
 
-
         var _token = $("input[name=_token]").val();
         var playgroundId = $("input[name=playgroundId]").val();
         $.ajax({
@@ -559,7 +616,7 @@ $(document).on('click', ".crop_playgroundImage", function (event) {
                 "_token": _token,
                 'playgroundId': playgroundId
             },
-            success: function (data) {
+            success: function success(data) {
                 $('#addPlaygroundImageFileModal').modal('hide');
                 var addPlaygroundImageFile = $("#addPlaygroundImageFile");
                 addPlaygroundImageFile.replaceWith(addPlaygroundImageFile = addPlaygroundImageFile.clone(true));
@@ -572,7 +629,7 @@ $(document).on('click', ".crop_playgroundImage", function (event) {
                 console.log(data.imgUrl);
             }
         });
-    })
+    });
 });
 
 $(document).on('click', ".completelyDelImg", function () {
@@ -594,28 +651,25 @@ $(document).on('click', ".completelyDelImg", function () {
         data: {
             _token: _token,
             PlaygroundId: PlaygroundId,
-            photoId: photoId,
+            photoId: photoId
         },
-        success: function (data) {
+        success: function success(data) {
             console.log(data);
             //alert(data);
             swal({
                 title: "Deleted",
                 text: "Photo Deleted successfuly !!!",
                 icon: "success",
-                dangerMode: false,
+                dangerMode: false
             });
             $('.Loader').delay(500).fadeOut();
             //$('#contentChangable').load('/club/registerAddBranch').fadeIn('slow');
             //$('#contentChangable').fadeIn('200');
         }
     });
-
 });
 
- //end proccess of playground images crop and prepare input value in [[ register Proccess ]] to [[ store ]]
-
-
+//end proccess of playground images crop and prepare input value in [[ register Proccess ]] to [[ store ]]
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -654,7 +708,6 @@ $(document).on('click', "#showHidePlaygrounds", function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////// start validate and [[ Update ]] club profile main data [[ before register]] /////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -672,7 +725,6 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=name]").css({
             border: '2px solid #5cb85c',
@@ -689,7 +741,6 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_phone]").css({
             border: '2px solid #5cb85c',
@@ -706,7 +757,6 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=email]").css({
             border: '2px solid #5cb85c',
@@ -723,7 +773,6 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_city]").css({
             border: '2px solid #5cb85c',
@@ -740,7 +789,6 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_area]").css({
             border: '2px solid #5cb85c',
@@ -757,7 +805,6 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_address]").css({
             border: '2px solid #5cb85c',
@@ -768,11 +815,9 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
     var password = $("input[name=password]").val();
 
     /*if(password.replace(/\s/g,"") === ""){
-
-          errors = 1;
+            errors = 1;
         $("input[name=password]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
-
-    }else{
+      }else{
         $("input[name=password]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
     }*/
 
@@ -828,36 +873,32 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
                 c_area: c_area,
                 c_address: c_address,
                 password: password,
-                c_desc: c_desc,
+                c_desc: c_desc
             },
-            success: function (data) {
+            success: function success(data) {
                 //alert(data);
                 swal({
                     title: "Updated",
                     text: "Club Account Main Information Updated successfuly !!!",
                     icon: "success",
-                    dangerMode: false,
+                    dangerMode: false
                 });
                 //$('#clubUserName').text(data);
                 $('#contentChangable').css('opacity', '1');
                 $('.Loader').fadeOut();
-                $('#contentChangable').load('/club/editMainRegisterInfo').fadeIn('slow');
+                $('#contentChangable').load('/club/editMainRegisterInfo/ear').fadeIn('slow');
                 //$('#EventGames').load('http://127.0.0.1:8000/Event/' + MainEvent + '/Games').fadeIn('slow');
-
             }
         });
-
     } else {
 
         swal({
             title: "Not Valid ?",
             text: "Check Errors, and try again !!!",
             icon: "warning",
-            dangerMode: true,
+            dangerMode: true
         });
-
     }
-
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// end validate and [[ Update ]] club profile main data [[ before register]] ////////////////
@@ -884,26 +925,24 @@ $(document).on('click', "#updateClubProfileImage", function (e) {
             _token: _token,
             clubId: clubId,
             //clubBranchId:clubBranchId,
-            user_img: user_img,
+            user_img: user_img
         },
-        success: function (data) {
+        success: function success(data) {
 
             //alert(data);
             swal({
                 title: "Updated",
                 text: "Image Updated successfuly !!!",
                 icon: "success",
-                dangerMode: false,
+                dangerMode: false
             });
             //$('#clubUserName').text(data);
             $('#contentChangable').css('opacity', '1');
             $('.Loader').fadeOut();
             //$('.mainBranchInfo').load('/branches/' + clubBranchId + '/loadUpdateLogobanner/').fadeIn('slow');
             //$('#EventGames').load('http://127.0.0.1:8000/Event/' + MainEvent + '/Games').fadeIn('slow');
-
         }
     });
-
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// end [[ Update ]] club profile image [[ before register]]/////////////
@@ -941,7 +980,6 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_name]").css({
             border: '2px solid #5cb85c',
@@ -958,7 +996,6 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_phone]").css({
             border: '2px solid #5cb85c',
@@ -975,7 +1012,6 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_p_sport_id]").css({
             border: '2px solid #5cb85c',
@@ -992,7 +1028,6 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_price_per_hour]").css({
             border: '2px solid #5cb85c',
@@ -1009,7 +1044,6 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_p_city]").css({
             border: '2px solid #5cb85c',
@@ -1026,7 +1060,6 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_p_area]").css({
             border: '2px solid #5cb85c',
@@ -1043,7 +1076,6 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_address]").css({
             border: '2px solid #5cb85c',
@@ -1107,37 +1139,33 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
                 c_b_p_address: c_b_p_address,
                 c_b_p_desc: c_b_p_desc,
                 photosArr: photosArr,
-                features: features,
+                features: features
             },
-            success: function (data) {
+            success: function success(data) {
                 console.log(data);
                 //alert(data);
                 swal({
                     title: "Created",
                     text: "Playground Created successfuly !!!",
                     icon: "success",
-                    dangerMode: false,
+                    dangerMode: false
                 });
                 //$('#clubUserName').text(data);
                 $('.contentChangable').css('opacity', '1');
                 $('.Loader').fadeOut();
-                $('#contentChangable').load('club/registerAddBranch').fadeIn('slow');
+                $('#contentChangable').load('club/registerAddBranch/ear').fadeIn('slow');
                 //$('#EventGames').load('http://127.0.0.1:8000/Event/' + MainEvent + '/Games').fadeIn('slow');
-
             }
         });
-
     } else {
 
         swal({
             title: "Not Valid ?",
             text: "Check Errors, and try again !!!",
             icon: "warning",
-            dangerMode: true,
+            dangerMode: true
         });
-
     }
-
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// end [[ create ]] Playground record for Club before [[ register ]] /////////////////////
@@ -1168,7 +1196,6 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_name]").css({
             border: '2px solid #5cb85c',
@@ -1185,7 +1212,6 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_phone]").css({
             border: '2px solid #5cb85c',
@@ -1202,7 +1228,6 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_p_sport_id]").css({
             border: '2px solid #5cb85c',
@@ -1219,7 +1244,6 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_price_per_hour]").css({
             border: '2px solid #5cb85c',
@@ -1236,7 +1260,6 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_p_city]").css({
             border: '2px solid #5cb85c',
@@ -1253,7 +1276,6 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_p_area]").css({
             border: '2px solid #5cb85c',
@@ -1270,7 +1292,6 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_p_address]").css({
             border: '2px solid #5cb85c',
@@ -1333,37 +1354,33 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
                 c_b_p_area: c_b_p_area,
                 c_b_p_address: c_b_p_address,
                 c_b_p_desc: c_b_p_desc,
-                features: features,
+                features: features
             },
-            success: function (data) {
+            success: function success(data) {
                 console.log(data);
                 //alert(data);
                 swal({
                     title: "Upated",
                     text: "Playground Upated successfuly !!!",
                     icon: "success",
-                    dangerMode: false,
+                    dangerMode: false
                 });
                 //$('#clubUserName').text(data);
                 $('.contentChangable').css('opacity', '1');
                 $('.Loader').fadeOut();
                 //$('#contentChangable').load('club/registerAddBranch').fadeIn('slow');
                 //$('#EventGames').load('http://127.0.0.1:8000/Event/' + MainEvent + '/Games').fadeIn('slow');
-
             }
         });
-
     } else {
 
         swal({
             title: "Not Valid ?",
             text: "Check Errors, and try again !!!",
             icon: "warning",
-            dangerMode: true,
+            dangerMode: true
         });
-
     }
-
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// end [[ update ]] Playground record for Club before [[ register ]] /////////////////////
@@ -1385,19 +1402,19 @@ $(document).on('click', ".DeletePlayground", function () {
 
         data: {
             _token: _token,
-            PlaygroundId: PlaygroundId,
+            PlaygroundId: PlaygroundId
         },
-        success: function (data) {
+        success: function success(data) {
             console.log(data);
             //alert(data);
             swal({
                 title: "Deleted",
                 text: "Playground Deleted successfuly !!!",
                 icon: "success",
-                dangerMode: false,
+                dangerMode: false
             });
             $('.Loader').delay(500).fadeOut();
-            $('#contentChangable').load('/club/registerAddBranch').fadeIn('slow');
+            $('#contentChangable').load('/club/registerAddBranch/ear').fadeIn('slow');
             $('#contentChangable').fadeIn('200');
         }
     });
@@ -1422,19 +1439,19 @@ $(document).on('click', ".DeleteBranch", function () {
 
         data: {
             _token: _token,
-            BranchId: BranchId,
+            BranchId: BranchId
         },
-        success: function (data) {
+        success: function success(data) {
             console.log(data);
             //alert(data);
             swal({
                 title: "Deleted",
                 text: "Branch Deleted successfuly !!!",
                 icon: "success",
-                dangerMode: false,
+                dangerMode: false
             });
             $('.Loader').delay(500).fadeOut();
-            $('#contentChangable').load('/club/registerAddBranch').fadeIn('slow');
+            $('#contentChangable').load('/club/registerAddBranch/ear').fadeIn('slow');
             $('#contentChangable').fadeIn('200');
         }
     });
@@ -1461,7 +1478,6 @@ $(document).on('click', "#updateBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_name]").css({
             border: '2px solid #5cb85c',
@@ -1478,7 +1494,6 @@ $(document).on('click', "#updateBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_phone]").css({
             border: '2px solid #5cb85c',
@@ -1495,7 +1510,6 @@ $(document).on('click', "#updateBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_city]").css({
             border: '2px solid #5cb85c',
@@ -1512,7 +1526,6 @@ $(document).on('click', "#updateBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_area]").css({
             border: '2px solid #5cb85c',
@@ -1529,7 +1542,6 @@ $(document).on('click', "#updateBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_address]").css({
             border: '2px solid #5cb85c',
@@ -1577,36 +1589,32 @@ $(document).on('click', "#updateBranchRegister", function (e) {
                 c_b_city: c_b_city,
                 c_b_area: c_b_area,
                 c_b_address: c_b_address,
-                c_b_desc: c_b_desc,
+                c_b_desc: c_b_desc
             },
-            success: function (data) {
+            success: function success(data) {
                 console.log(data);
                 //alert(data);
                 swal({
                     title: "Updated",
                     text: "Branch Updated successfuly !!!",
                     icon: "success",
-                    dangerMode: false,
+                    dangerMode: false
                 });
                 $('.Loader').delay(500).fadeOut();
 
-                $('#contentChangable').load('/club/' + clubBranch + '/DisplayEditBranchRegister').fadeIn('slow');
+                $('#contentChangable').load('/club/' + clubBranch + '/DisplayEditBranchRegister/ear').fadeIn('slow');
                 $('#contentChangable').fadeIn('200');
-
             }
         });
-
     } else {
 
         swal({
             title: "Not Valid ?",
             text: "Check Errors, and try again !!!",
             icon: "warning",
-            dangerMode: true,
+            dangerMode: true
         });
-
     }
-
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1630,7 +1638,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_name]").css({
             border: '2px solid #5cb85c',
@@ -1647,7 +1654,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_phone]").css({
             border: '2px solid #5cb85c',
@@ -1664,7 +1670,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_city]").css({
             border: '2px solid #5cb85c',
@@ -1681,7 +1686,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("select[name=c_b_area]").css({
             border: '2px solid #5cb85c',
@@ -1698,7 +1702,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
         });
-
     } else {
         $("input[name=c_b_address]").css({
             border: '2px solid #5cb85c',
@@ -1748,39 +1751,35 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
                 c_b_city: c_b_city,
                 c_b_area: c_b_area,
                 c_b_address: c_b_address,
-                c_b_desc: c_b_desc,
+                c_b_desc: c_b_desc
                 //c_b_logo:c_b_logo,
                 //c_b_banner:c_b_banner,
             },
-            success: function (data) {
+            success: function success(data) {
                 console.log(data);
                 //alert(data);
                 swal({
                     title: "Created",
                     text: "Branch Created successfuly !!!",
                     icon: "success",
-                    dangerMode: false,
+                    dangerMode: false
                 });
                 //$('#clubUserName').text(data);
                 $('.contentChangable').css('opacity', '1');
                 $('.Loader').fadeOut();
                 $('#contentChangable').load('club/registerAddBranch').fadeIn('slow');
                 //$('#EventGames').load('http://127.0.0.1:8000/Event/' + MainEvent + '/Games').fadeIn('slow');
-
             }
         });
-
     } else {
 
         swal({
             title: "Not Valid ?",
             text: "Check Errors, and try again !!!",
             icon: "warning",
-            dangerMode: true,
+            dangerMode: true
         });
-
     }
-
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// end [[ create ]] Playground record for Club [[ before register ]] /////////////////////
@@ -1796,10 +1795,9 @@ $(document).on('click', ".AddPlaygroundRegister", function () {
     $('#contentChangable').fadeOut('200');
     $('.Loader').fadeIn();
 
-
     $('.Loader').delay(500).fadeOut();
 
-    $('#contentChangable').load('/club/' + BranchId + '/DisplayAddPlaygroundRegister').fadeIn('slow');
+    $('#contentChangable').load('/club/' + BranchId + '/DisplayAddPlaygroundRegister/ear').fadeIn('slow');
     $('#contentChangable').fadeIn('200');
 });
 
@@ -1816,10 +1814,9 @@ $(document).on('click', ".DisplayEditPlayground", function () {
     $('#contentChangable').fadeOut('200');
     $('.Loader').fadeIn();
 
-
     $('.Loader').delay(500).fadeOut();
 
-    $('#contentChangable').load('/club/' + PlaygroundId + '/DisplayEditPlaygroundRegister').fadeIn('slow');
+    $('#contentChangable').load('/club/' + PlaygroundId + '/DisplayEditPlaygroundRegister/ear').fadeIn('slow');
     $('#contentChangable').fadeIn('200');
 });
 
@@ -1837,17 +1834,15 @@ $(document).on('click', ".DisplayEditBranch", function () {
     $('#contentChangable').fadeOut('200');
     $('.Loader').fadeIn();
 
-
     $('.Loader').delay(500).fadeOut();
 
-    $('#contentChangable').load('/club/' + BranchId + '/DisplayEditBranchRegister').fadeIn('slow');
+    $('#contentChangable').load('/club/' + BranchId + '/DisplayEditBranchRegister/ear').fadeIn('slow');
     $('#contentChangable').fadeIn('200');
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// end display [[ Edit ]] club Branch view by Branch Id [[ before register]]/////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1859,10 +1854,9 @@ $(document).on('click', "#ShowEditPart", function () {
     $('#contentChangable').fadeOut('200');
     $('.Loader').fadeIn();
 
-
     $('.Loader').delay(500).fadeOut();
 
-    $('#contentChangable').load('/club/editMainRegisterInfo/ebr').fadeIn('slow');
+    $('#contentChangable').load('/club/editMainRegisterInfo/ear').fadeIn('slow');
     $('#contentChangable').fadeIn('200');
 });
 
@@ -1875,14 +1869,13 @@ $(document).on('click', "#ShowEditPart", function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).on('click', ".ShowManagePart", function () {
-    alert('done') ;
+    //alert('done') ;
     $('#contentChangable').fadeOut('200');
     $('.Loader').fadeIn();
 
-
     $('.Loader').delay(500).fadeOut();
 
-    $('#contentChangable').load('/club/registerAddBranch/ebr').fadeIn('slow');
+    $('#contentChangable').load('/club/registerAddBranch/ear').fadeIn('slow');
     $('#contentChangable').fadeIn('200');
 });
 
@@ -1890,35 +1883,6 @@ $(document).on('click', ".ShowManagePart", function () {
 //// end [[ display ]] club Manage [[ add edit branches && courts ]] Part [[ before register]]/////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+/***/ })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/******/ });
