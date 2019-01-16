@@ -85,16 +85,13 @@ Route::get('/preregister', function () {
 
 // used to redirect to register page depending on type [ club / player ] // final 
 Route::any('/handlepreregister',function(){
-    //$type = Input::get ( 'type' );
     $type = $_GET['type'];
-
-    //return $type ;
     if ($type == 1) {
-        //return 1 ;
         return redirect('register');
     } elseif ($type == 2) {
+        $countries = \App\Model\Country::get();
         $governorate = \App\Model\governorate::with('areas')->get();
-         return View::make("club.register.reghome", compact('governorate'));
+            return View::make("club.register.reghome", compact('governorate', 'countries'));
     } else {
         return 3 ;
     }

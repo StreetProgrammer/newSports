@@ -51,71 +51,53 @@
               <!---->
 
               <div class="col-lg-5">
-
-                      <select class="form-control input-xs" name="c_b_city" id="governorate">
-
-                          <option value="">{{ trans('club.Select_Governorate') }}</option>
-
-                        @foreach ($governorate as $gov)
-
-                            <option
-                              value="{{ $gov->id }}"
-                              @php
-                                echo ($clubBranch->c_b_city == $gov->id ? ' selected="selected" ' : '');
-                              @endphp
-                            >
-                                @if ( direction() == 'ltr' )
-                                  {{ $gov->g_en_name }}
-                                @else
-                                  {{ $gov->g_ar_name }}
-                                @endif
-                            </option>
-
-                        @endforeach
-
-
-                      </select>
-
-                    </div>
-                    <div class="col-lg-5" style="">
-                        <select class="form-control input-xs" name="c_b_area" id="area">
-                          <option value="">{{ trans('club.Select_Area') }}</option>
-                          @foreach ($governorate as $goov) <!--loop throw each city -->
-
-                                @foreach ($goov->areas as $area) <!--loop throw each city->area -->
-
-                                  <!--check if we are in club city -->
-                                  @if ($area->a_governorate_id == $clubBranch->c_b_city)
-
-                                    <option
-                                      value="{{ $area->id }}"
-                                    @php
-                                      echo ($clubBranch->c_b_area == $area->id ? ' selected="selected" ' : '');
-                                    @endphp
-                                    >
-                                      @if ( direction() == 'ltr' )
-                                        {{ $area->a_en_name }}   
-                                      @else
-                                        {{ $area->a_ar_name }}   
-                                      @endif
-                                    </option>
-
-                                  @endif
-
-
-                                @endforeach
-                          @endforeach
-                        </select>
-                    </div>
-                  <div class="col-lg-2" style="" >
-                      <div id="loader"
-                           class="text-center "
-                           style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                <select class="form-control input-xs" name="c_b_city" id="governorate">
+                  <option value="">{{ trans('club.Select_Governorate') }}</option>
+                    @foreach ($governorate as $gov)
+                      <option
+                        value="{{ $gov->id }}"
+                        {{ ($clubBranch->c_b_city == $gov->id ? ' selected="selected" ' : '') }}
                       >
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                      </div>
+                          @if ( direction() == 'ltr' )
+                            {{ $gov->g_en_name }}
+                          @else
+                            {{ $gov->g_ar_name }}
+                          @endif
+                      </option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="col-lg-5" style="">
+                <select class="form-control input-xs" name="c_b_area" id="area">
+                  <option value="">{{ trans('club.Select_Area') }}</option>
+                    @foreach ($governorate as $goov) <!--loop throw each city -->
+                      @foreach ($goov->areas as $area) <!--loop throw each city->area -->
+                        <!--check if we are in club city -->
+                        @if ($area->a_governorate_id == $clubBranch->c_b_city)
+                          <option
+                            value="{{ $area->id }}"
+                            {{ ($clubBranch->c_b_area == $area->id ? ' selected="selected" ' : '') }}
+                          >
+                            @if ( direction() == 'ltr' )
+                              {{ $area->a_en_name }}   
+                            @else
+                              {{ $area->a_ar_name }}   
+                            @endif
+                          </option>
+                        @endif
+                      @endforeach
+                    @endforeach
+                </select>
+              </div>
+              <div class="col-lg-2" style="" >
+                  <div id="loader"
+                        class="text-center "
+                        style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                  >
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                   </div>
-                  <div class="clearfix"></div>
+              </div>
+              <div class="clearfix"></div>
                     <!---->
                   <br>
                   <strong>
@@ -136,7 +118,7 @@
                     {{$clubBranch->c_b_desc}}
                   </textarea>
                   <br>
-                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-success', 'style' => '', 'id' => 'updateBranchRegister']) !!}
+                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-primary', 'style' => '', 'id' => 'updateBranchRegister']) !!}
             </div>
             <!-- /.box-body -->
           </div>
@@ -171,7 +153,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_editClubProfileImage">Crop</button>
+            <button class="btn btn-primary crop_editClubProfileImage">Crop</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
       </div>

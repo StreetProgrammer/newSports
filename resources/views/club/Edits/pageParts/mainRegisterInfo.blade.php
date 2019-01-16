@@ -108,55 +108,46 @@
               <!---->
 
               <div class="col-lg-5">
-
-                      <select class="form-control input-xs" name="c_city" id="governorate">
-
-                          <option value="">{{ trans('club.Select_Governorate') }}</option>
-
-                        @foreach ($governorate as $gov)
-
-                            <option
-                              value="{{ $gov->id }}"
-                              
-                            >
-                                @if ( direction() == 'ltr' )
-                                  {{ $gov->g_en_name }}
-                                @else
-                                    {{ $gov->g_ar_name }}
-                                @endif
-                            </option>
-
-                        @endforeach
-
-
-                      </select>
-
-                    </div>
-                    <div class="col-lg-5" style="">
-                        <select class="form-control input-xs" name="c_area" id="area">
-                          <option value="">Select Area</option>
-                          @foreach ($governorate as $goov) <!--loop throw each city -->
-                            @foreach ($goov->areas as $area) <!--loop throw each city->area -->
-                              <option value="{{ $area->id }}" >
-                                @if ( direction() == 'ltr' )
-                                  {{ $area->a_en_name }}   
-                                @else
-                                  {{ $area->a_ar_name }}   
-                                @endif 
-                              </option>
-                            @endforeach
-                          @endforeach
-                        </select>
-                    </div>
-                  <div class="col-lg-2" style="" >
-                      <div id="loader"
-                           class="text-center "
-                           style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
-                      >
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                      </div>
+                <select class="form-control input-xs" name="c_city" id="governorate">
+                  <option value="">{{ trans('club.Select_Governorate') }}</option>
+                  @foreach ($governorate as $gov)
+                    <option
+                      value="{{ $gov->id }}" 
+                    >
+                      @if ( direction() == 'ltr' )
+                        {{ $gov->g_en_name }}
+                      @else
+                          {{ $gov->g_ar_name }}
+                      @endif
+                    </option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-lg-5" style="">
+                  <select class="form-control input-xs" name="c_area" id="area">
+                    <option value="">Select Area</option>
+                    @foreach ($governorate as $goov) <!--loop throw each city -->
+                      @foreach ($goov->areas as $area) <!--loop throw each city->area -->
+                        <option value="{{ $area->id }}" >
+                          @if ( direction() == 'ltr' )
+                            {{ $area->a_en_name }}   
+                          @else
+                            {{ $area->a_ar_name }}   
+                          @endif 
+                        </option>
+                      @endforeach
+                    @endforeach
+                  </select>
+              </div>
+              <div class="col-lg-2" style="" >
+                  <div id="loader"
+                        class="text-center "
+                        style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                  >
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                   </div>
-                  <div class="clearfix"></div>
+              </div>
+              <div class="clearfix"></div>
                     <!---->
                   <br>
                   <strong>
@@ -177,7 +168,7 @@
                     
                   </textarea>
                   <br>
-                  {!! Form::submit( trans('club.save')  , ['class' => 'btn btn-success', 'style' => '', 'id' => 'StoreClubMainInfo']) !!}
+                  {!! Form::submit( trans('club.save')  , ['class' => 'btn btn-primary', 'style' => '', 'id' => 'StoreClubMainInfo']) !!}
             </div>
             <!-- /.box-body -->
           </div>
@@ -212,7 +203,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_clubProfileImage">Crop</button>
+            <button class="btn btn-primary crop_clubProfileImage">Crop</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
       </div>

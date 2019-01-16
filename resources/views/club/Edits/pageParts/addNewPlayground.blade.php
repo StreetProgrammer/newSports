@@ -51,7 +51,6 @@
                 <select class="form-control input-xs" name="c_b_p_sport_id" id="sport">
                   <option value="">{{ trans('club.Select_Sport') }}</option>
                   @foreach ($sports as $sport)
-
                     <option
                         value="{{ $sport->id }}"
                     >
@@ -61,7 +60,6 @@
                          {{ $sport->ar_sport_name }}   
                         @endif
                     </option>
-
                   @endforeach
                 </select>
               </p>
@@ -87,64 +85,50 @@
               <!---->
 
               <div class="col-lg-5">
-
-                      <select class="form-control input-xs" name="c_b_p_city" id="governorate">
-
-                          <option value="">{{ trans('club.Select_Governorate') }}</option>
-
-                        @foreach ($governorate as $gov)
-
-                            <option
-                              value="{{ $gov->id }}"
-                            >
-                                @if ( direction() == 'ltr' )
-                                 {{ $gov->g_en_name }}   
-                                @else
-                                 {{ $gov->g_ar_name }}   
-                                @endif
-                            </option>
-
-                        @endforeach
-
-
-                      </select>
-
-                    </div>
-                    <div class="col-lg-5" style="">
-                        <select class="form-control input-xs" name="c_b_p_area" id="area">
-                          <option value="">{{ trans('club.Select_Area') }}</option>
-                          @foreach ($governorate as $goov) <!--loop throw each city -->
-
-                                @foreach ($goov->areas as $area) <!--loop throw each city->area -->
-
-                                  <!--check if we are in club city -->
-                                  @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
-
-                                    <option
-                                      value="{{ $area->id }}"
-                                    >
-                                      @if ( direction() == 'ltr' )
-                                        {{ $area->a_en_name }}   
-                                      @else
-                                        {{ $area->a_ar_name }}   
-                                      @endif
-                                    </option>
-
-                                  @endif
-
-
-                                @endforeach
-                          @endforeach
-                        </select>
-                    </div>
-                  <div class="col-lg-2" style="" >
-                      <div id="loader"
-                           class="text-center "
-                           style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
-                      >
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                      </div>
+                <select class="form-control input-xs" name="c_b_p_city" id="governorate">
+                  <option value="">{{ trans('club.Select_Governorate') }}</option>
+                  @foreach ($governorate as $gov)
+                    <option
+                      value="{{ $gov->id }}"
+                    >
+                        @if ( direction() == 'ltr' )
+                          {{ $gov->g_en_name }}   
+                        @else
+                          {{ $gov->g_ar_name }}   
+                        @endif
+                    </option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-lg-5" style="">
+                <select class="form-control input-xs" name="c_b_p_area" id="area">
+                  <option value="">{{ trans('club.Select_Area') }}</option>
+                  @foreach ($governorate as $goov) <!--loop throw each city -->
+                    @foreach ($goov->areas as $area) <!--loop throw each city->area -->
+                      <!--check if we are in club city -->
+                      @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
+                        <option
+                          value="{{ $area->id }}"
+                        >
+                          @if ( direction() == 'ltr' )
+                            {{ $area->a_en_name }}   
+                          @else
+                            {{ $area->a_ar_name }}   
+                          @endif
+                        </option>
+                      @endif
+                    @endforeach
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-lg-2" style="" >
+                  <div id="loader"
+                        class="text-center "
+                        style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                  >
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                   </div>
+              </div>
                   <div class="clearfix"></div>
                     <!---->
                   <br>
@@ -255,7 +239,7 @@
                   <br>
                   <br>
                   <input type="hidden" name="photos">
-                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-success', 'style' => '', 'id' => 'AddNewPlaygroundRegister']) !!}
+                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-primary', 'style' => '', 'id' => 'AddNewPlaygroundRegister']) !!}
             </div>
             <!-- /.box-body -->
           </div>

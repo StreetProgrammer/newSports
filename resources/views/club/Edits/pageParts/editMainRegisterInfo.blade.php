@@ -39,7 +39,7 @@
                       {!! Form::hidden( 'clubId', Auth::id() ) !!}
                       {!! Form::hidden( 'user_img', '' ) !!}
                       {!! Form::submit('Upload', 
-                                        ['class' => 'btn btn-success btn-block', 
+                                        ['class' => 'btn btn-primary btn-block', 
                                         'id' => 'updateClubProfileImage',
                                         'style' => 'display:none'
                                       ]) 
@@ -83,7 +83,7 @@
                     {{ trans('club.finishMessage') }}
                       {{-- if you finished your club data, please click button below to save it and wait for our response --}}
                     </p>
-                    {!! Form::submit(trans('club.Send_Account_Data'), ['class' => 'btn btn-success btn-block']) !!}
+                    {!! Form::submit(trans('club.Send_Account_Data'), ['class' => 'btn btn-primary btn-block']) !!}
                     {!! Form::close() !!}
                   </div>
                   <!----->
@@ -161,16 +161,13 @@
               <p class="displayDetails text-muted" >
                 
               <!---->
-
               <div class="col-lg-5">
                 <select class="form-control input-xs" name="c_city" id="governorate">
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
                     @foreach ($governorate as $gov)
                     <option
                       value="{{ $gov->id }}"
-                      @php
-                        echo (Auth::user()->clubProfile->c_city == $gov->id ? ' selected="selected" ' : '');
-                      @endphp
+                      {{ (Auth::user()->clubProfile->c_city == $gov->id ? ' selected="selected" ' : '') }}
                     >
                       @if ( direction() == 'ltr' )
                         {{ $gov->g_en_name }}
@@ -178,33 +175,30 @@
                         {{ $gov->g_ar_name }}
                       @endif
                     </option>
-
                     @endforeach
                 </select>
               </div>
               <div class="col-lg-5" style="">
-                  <select class="form-control input-xs" name="c_area" id="area">
-                    <option value="">Select Area</option>
-                    @foreach ($governorate as $goov) <!--loop throw each city -->
-                      @foreach ($goov->areas as $area) <!--loop throw each city->area -->
-                        <!--check if we are in club city -->
-                        @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
-                          <option
-                            value="{{ $area->id }}"
-                            @php
-                              echo (Auth::user()->clubProfile->c_area == $area->id ? ' selected="selected" ' : '');
-                            @endphp
-                          >
-                            @if ( direction() == 'ltr' )
-                              {{ $area->a_en_name }}   
-                            @else
-                              {{ $area->a_ar_name }}   
-                            @endif 
-                          </option>
-                        @endif
-                      @endforeach
+                <select class="form-control input-xs" name="c_area" id="area">
+                  <option value="">Select Area</option>
+                  @foreach ($governorate as $goov) <!--loop throw each city -->
+                    @foreach ($goov->areas as $area) <!--loop throw each city->area -->
+                      <!--check if we are in club city -->
+                      @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
+                        <option
+                          value="{{ $area->id }}"
+                          {{ (Auth::user()->clubProfile->c_area == $area->id ? ' selected="selected" ' : '') }}
+                        >
+                          @if ( direction() == 'ltr' )
+                            {{ $area->a_en_name }}   
+                          @else
+                            {{ $area->a_ar_name }}   
+                          @endif 
+                        </option>
+                      @endif
                     @endforeach
-                  </select>
+                  @endforeach
+                </select>
               </div>
               <div class="col-lg-2" style="" >
                   <div id="loader"
@@ -235,7 +229,7 @@
                     {{Auth::user()->clubprofile->c_desc}}
                   </textarea>
                   <br>
-                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-success', 'style' => '', 'id' => 'UpdateClubMainInfo']) !!}
+                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-primary', 'style' => '', 'id' => 'UpdateClubMainInfo']) !!}
             </div>
             <!-- /.box-body -->
           </div>
@@ -270,7 +264,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_editClubProfileImage">Crop</button>
+            <button class="btn btn-primary crop_editClubProfileImage">Crop</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
       </div>

@@ -60,7 +60,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_newPlaygroundImage">{{ trans('club.save') }}</button>
+            <button class="btn btn-primary crop_newPlaygroundImage">{{ trans('club.save') }}</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('club.close') }}</button>
           </div>
       </div>
@@ -84,7 +84,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_playgroundImage">{{ trans('club.save') }}</button>
+            <button class="btn btn-primary crop_playgroundImage">{{ trans('club.save') }}</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('club.close') }}</button>
           </div>
       </div>

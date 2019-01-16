@@ -51,7 +51,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">{{ trans('club.Add_Photo') }}</h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="height:400px">
             <div class="row">
             <div class="col-md-12 text-center">
               <div id="newPlaygroundImgDiv" style="<!-- width:350px; --> margin-top:30px"></div>
@@ -59,7 +59,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_newPlaygroundImage">{{ trans('club.save') }}</button>
+            <button class="btn btn-primary crop_newPlaygroundImage">{{ trans('club.save') }}</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('club.close') }}</button>
           </div>
       </div>
@@ -83,7 +83,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_playgroundImage">{{ trans('club.save') }}</button>
+            <button class="btn btn-primary crop_playgroundImage">{{ trans('club.save') }}</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('club.close') }}</button>
           </div>
       </div>

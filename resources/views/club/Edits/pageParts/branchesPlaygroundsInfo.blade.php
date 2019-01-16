@@ -131,7 +131,7 @@
                     {{ trans('club.finishMessage') }}
                       {{-- if you finished your club data, please click button below to save it and wait for our response --}}
                     </p>
-                    {!! Form::submit(trans('club.Send_Account_Data'), ['class' => 'btn btn-success btn-block']) !!}
+                    {!! Form::submit(trans('club.Send_Account_Data'), ['class' => 'btn btn-primary btn-block']) !!}
                     {!! Form::close() !!}
                   </div>
                   <!----->

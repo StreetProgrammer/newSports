@@ -31,10 +31,12 @@
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="{{ url('/') }}"><b>Sports </b>Mate</a>
+    <img src="{{ Storage::url(setting()->icon) }}" width="150px ;height:auto">
+    <br>
+    {{-- <a href="{{ url('/') }}"><b>Sports </b>Mate</a> --}}
   </div>
   <!-- User name -->
-  <div class="lockscreen-name">Pending Account</div>
+  <div class="lockscreen-name">Pending Club Account</div>
   
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
@@ -66,14 +68,14 @@
 
   </div>
   <!-- /.lockscreen-item -->
-  <div class="help-block text-center">
-    your Account is now a pending Account
+  <div class="help-block text-center" style="background: #fff;padding: 10px;border: 1px solid;font-size: 15px;font-weight: bold;">
+    your Account is now a pending Account, please wait for our review
   </div>
   <div class="text-center">
     <a href="{{ url('/') }}">Home</a>
   </div>
   <div class="lockscreen-footer text-center">
-    Copyright &copy; 2014-2016 <b><a href="https://adminlte.io" class="text-black">Almsaeed Studio</a></b><br>
+    Copyright © {{\Illuminate\Support\Carbon::now()->year}} <b><a href="{{url('/')}}" class="text-black">SportsMate</a></b><br>
     All rights reserved
   </div>
 </div>

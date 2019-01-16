@@ -372,13 +372,149 @@ $(document).on('click', ".deleteSuggestedGame", function (e) {
 //////////////////////////////////////////////////////// start Club Scripts ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////// start work with select country, city and area ////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+$(document).on('change','#country', function() {
+
+    var city = $.trim($(this).find('option:selected').text()) ;
+    //alert($(this).find('option:selected').text()) ;
+    if ($(this).find('option:selected').val() == '') {
+        $('#governorate').css('display', 'none');
+        $('#governorate').empty() ;
+        $('#area').css('display', 'none');
+        $('#area').empty() ;
+
+    } else {
+        //$('#loader').css('visibility', 'visible');
+        $("#loader").show(300);
+        $.get('/country/'+$(this).val(), function(data) {
+
+            console.log(data) ;
+            if (data.length == 0) {
+                $('#governorate').css('display', 'none');
+                $('#governorate').empty() ;
+                $('#area').css('display', 'none');
+                $('#area').empty() ;
+            }else{
+                $('#governorate').css('display', 'block');
+                $('#governorate').empty() ;
+                $('#area').css('display', 'none');
+                $('#p_address').attr('value','');
+
+                $('#p_address').attr('value',city);
+                $('#governorate').append('<option value="">Select Governorate</option>');
+
+                $.each(data, function(index, element) {
+                    //alert(element.a_en_name);
+                    $('#governorate').append($('<option>').text(element.g_en_name).attr('value', element.id));
+                });
+            } 
+
+        });
+        $('#updateProfile').removeAttr('disabled');
+    }
+//$('#loader').css('visibility', 'hidden');
+$("#loader").fadeOut(2000);
+
+});
+
+$(document).on('change','#governorate', function() {
+
+        var city = $.trim($(this).find('option:selected').text()) ;
+        //alert($(this).find('option:selected').text()) ;
+        if ($(this).find('option:selected').val() == '') {
+
+            $('#area').css('display', 'none');
+            $('#area').empty() ;
+
+        } else {
+            //$('#loader').css('visibility', 'visible');
+            $("#loader").show(300);
+            $.get('/governorate/'+$(this).val(), function(data) {
+
+                console.log(data) ;
+                if (data.length == 0) {
+                    $('#area').css('display', 'none');
+                    $('#area').empty() ;
+                }else{
+                    $('#area').css('display', 'block');
+                    $('#area').empty() ;
+                    //$('#p_address').empty() ;
+                    $('#p_address').attr('value','');
+
+                    $('#p_address').attr('value',city);
+                    $('#area').append('<option value="">Select Area</option>');
+
+                    $.each(data, function(index, element) {
+                        //alert(element.a_en_name);
+                        $('#area').append($('<option>').text(element.a_en_name).attr('value', element.id));
+                    });
+                } 
+
+            });
+            $('#updateProfile').removeAttr('disabled');
+        }
+    //$('#loader').css('visibility', 'hidden');
+    $("#loader").fadeOut(2000);
+
+});
+$(document).on('change','#area', function() {
+
+        if ($(this).find('option:selected').val() == '') {
+
+            swal({
+              title: "Not Valid ?",
+              text: "Area Cannot be Empty !!!",
+              icon: "warning",
+              dangerMode: true,
+            });
+
+            $('#updateProfile').attr({
+                disabled: 'disabled',
+
+            });
+        } else {
+
+                var area = $.trim($(this).find('option:selected').text()) ;
+
+                if ($('#governorate').find('option:selected').val() == '') {
+
+                    swal({
+                      title: "Not Valid ?",
+                      text: "City Cannot be Empty !!!",
+                      icon: "warning",
+                      dangerMode: true,
+                    });
+
+                } else {
+                    $("#loader").show(300);
+
+                    var city = $.trim($('#governorate').find('option:selected').text()) ;
+
+                    $('#p_address').attr('value', '');
+
+                    $('#p_address').attr('value', city + ',' + area);
+
+                    $('#updateProfile').removeAttr('disabled');
+                }
+
+
+        }
+
+        $("#loader").fadeOut(2000);
+
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////// end work with select country, city and area ////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// start fill area select on city change /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-$(document).on('change','#governorate', function() {
+/*$(document).on('change','#governorate', function() {
 
         var city = $.trim($(this).find('option:selected').text()) ;
         //alert($(this).find('option:selected').text()) ;
@@ -466,7 +602,7 @@ $(document).on('change','#governorate', function() {
 
         $("#loader").fadeOut(2000);
 
-});
+});*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// end fill area select on city change /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -8,17 +8,14 @@ Route::get('/newclubregisterview', function () {
 });
 /*/////////////////###############################################///////////////////
 * /////////////////////////// START REGISTER A CLUB /////////////////////////////////
-/////////////////#################################################///////////////////
+/////////////////#################################################//////////////////*/
 
-* start of routs for register a club with all data enterd [profile info, branches, playgrounds] 
-* 
-*/
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//
+	//start of routs for register a club with all data enterd [profile info, branches, playgrounds] 
 
 Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
-//***//  [[[[ important note  ]]]] ==> will use this routes in other place 
-//***// to handle update [ clubprofile - branch - playground ] after complete register
+		/* ## important note ## ====> will use this routes in other place 
+		to handle update [ clubprofile - branch - playground ] after complete register */
 
 	// handle Update main info for the club account in register procces
 	Route::post('/NewClubProfileCreated', 'ClubProfilesController@NewClubProfileCreated');
@@ -56,8 +53,8 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
 	// [[ajaxLoad]] %%%%%%%%%%% partial views %%%%%%%%%%%  [[ajaxLoad]]//
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
-//***//  [[[[ important note  ]]]] ==> will use this routes in other place 
-//***// to handle update [ clubprofile - branch - playground ] after complete register
+		/* ## important note ## ====> will use this routes in other place 
+		to handle update [ clubprofile - branch - playground ] after complete register */
 
 	// Load nav bar [ editMain - manageClub ] view if auth club after register
 	Route::get('club/registerPageTop', 'ClubProfilesController@registerPageTop');
@@ -95,7 +92,7 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
 /*
 * ///////////////// START A CLUB OWENR ROUTES ///////////////////
-* start of routs for a club with all data enterd [profilr info, branches, playgrounds] 
+* start of routs for a club with all data enterd [profile info, branches, playgrounds] 
 * 
 */
 

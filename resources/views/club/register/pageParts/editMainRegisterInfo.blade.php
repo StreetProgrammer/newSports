@@ -39,7 +39,7 @@
                       {!! Form::hidden( 'clubId', Auth::id() ) !!}
                       {!! Form::hidden( 'user_img', '' ) !!}
                       {!! Form::submit('Upload', 
-                                        ['class' => 'btn btn-success btn-block', 
+                                        ['class' => 'btn btn-primary btn-block', 
                                         'id' => 'updateClubProfileImage',
                                         'style' => 'display:none'
                                       ]) 
@@ -83,7 +83,7 @@
                     {{ trans('club.finishMessage') }}
                       {{-- if you finished your club data, please click button below to save it and wait for our response --}}
                     </p>
-                    {!! Form::submit(trans('club.Send_Account_Data'), ['class' => 'btn btn-success btn-block']) !!}
+                    {!! Form::submit(trans('club.Send_Account_Data'), ['class' => 'btn btn-primary btn-block']) !!}
                     {!! Form::close() !!}
                   </div>
                   <!----->
@@ -168,9 +168,7 @@
                     @foreach ($governorate as $gov)
                     <option
                       value="{{ $gov->id }}"
-                      @php
-                        echo (Auth::user()->clubProfile->c_city == $gov->id ? ' selected="selected" ' : '');
-                      @endphp
+                      {{ (Auth::user()->clubProfile->c_city == $gov->id ? ' selected="selected" ' : '') }}
                     >
                       @if ( direction() == 'ltr' )
                         {{ $gov->g_en_name }}
@@ -191,9 +189,7 @@
                         @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
                           <option
                             value="{{ $area->id }}"
-                            @php
-                              echo (Auth::user()->clubProfile->c_area == $area->id ? ' selected="selected" ' : '');
-                            @endphp
+                            {{ (Auth::user()->clubProfile->c_area == $area->id ? ' selected="selected" ' : '') }}
                           >
                             @if ( direction() == 'ltr' )
                               {{ $area->a_en_name }}   
@@ -235,7 +231,7 @@
                     {{Auth::user()->clubprofile->c_desc}}
                   </textarea>
                   <br>
-                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-success', 'style' => '', 'id' => 'UpdateClubMainInfo']) !!}
+                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-primary', 'style' => '', 'id' => 'UpdateClubMainInfo']) !!}
             </div>
             <!-- /.box-body -->
           </div>
@@ -262,7 +258,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Crop Image</h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="height:400px">
             <div class="row">
             <div class="col-md-12 text-center">
               <div id="EditclubProfileImage_crop" style="<!-- width:350px; --> margin-top:30px"></div>
@@ -270,7 +266,7 @@
         </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success crop_editClubProfileImage">Crop</button>
+            <button class="btn btn-primary crop_editClubProfileImage">Crop</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
       </div>

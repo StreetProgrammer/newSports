@@ -51,12 +51,9 @@
                 <select class="form-control input-xs" name="c_b_p_sport_id" id="sport">
                   <option value="">{{ trans('club.Select_Sport') }}</option>
                   @foreach ($sports as $sport)
-
                     <option
                         value="{{ $sport->id }}"
-                        @php
-                          echo ($Playground->c_b_p_sport_id == $sport->id ? ' selected="selected" ' : '');
-                        @endphp
+                        {{ ($Playground->c_b_p_sport_id == $sport->id ? ' selected="selected" ' : '') }}
                     >
                         @if ( direction() == 'ltr' )
                          {{ $sport->en_sport_name }}   
@@ -64,7 +61,6 @@
                          {{ $sport->ar_sport_name }}   
                         @endif
                     </option>
-
                   @endforeach
                 </select>
               </p>
@@ -90,71 +86,53 @@
               <!---->
 
               <div class="col-lg-5">
-
-                      <select class="form-control input-xs" name="c_b_p_city" id="governorate">
-
-                          <option value="">{{ trans('club.Select_Governorate') }}</option>
-
-                        @foreach ($governorate as $gov)
-
-                            <option
-                              value="{{ $gov->id }}"
-                              @php
-                                echo ($Playground->c_b_p_city == $gov->id ? ' selected="selected" ' : '');
-                              @endphp
-                            >
-                                @if ( direction() == 'ltr' )
-                                 {{ $gov->g_en_name }}   
-                                @else
-                                 {{ $gov->g_ar_name }}   
-                                @endif
-                            </option>
-
-                        @endforeach
-
-
-                      </select>
-
-                    </div>
-                    <div class="col-lg-5" style="">
-                        <select class="form-control input-xs" name="c_b_p_area" id="area">
-                          <option value="">{{ trans('club.Select_Area') }}</option>
-                          @foreach ($governorate as $goov) <!--loop throw each city -->
-
-                                @foreach ($goov->areas as $area) <!--loop throw each city->area -->
-
-                                  <!--check if we are in club city -->
-                                  @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
-
-                                    <option
-                                      value="{{ $area->id }}"
-                                      @php
-                                        echo ($Playground->c_b_p_area == $area->id ? ' selected="selected" ' : '');
-                                      @endphp
-                                    >
-                                      @if ( direction() == 'ltr' )
-                                        {{ $area->a_en_name }}   
-                                      @else
-                                        {{ $area->a_ar_name }}   
-                                      @endif
-                                    </option>
-
-                                  @endif
-
-
-                                @endforeach
-                          @endforeach
-                        </select>
-                    </div>
-                  <div class="col-lg-2" style="" >
-                      <div id="loader"
-                           class="text-center "
-                           style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
-                      >
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                      </div>
+                <select class="form-control input-xs" name="c_b_p_city" id="governorate">
+                  <option value="">{{ trans('club.Select_Governorate') }}</option>
+                  @foreach ($governorate as $gov)
+                    <option
+                      value="{{ $gov->id }}"
+                      {{ ($Playground->c_b_p_city == $gov->id ? ' selected="selected" ' : '') }}
+                    >
+                        @if ( direction() == 'ltr' )
+                          {{ $gov->g_en_name }}   
+                        @else
+                          {{ $gov->g_ar_name }}   
+                        @endif
+                    </option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-lg-5" style="">
+                <select class="form-control input-xs" name="c_b_p_area" id="area">
+                  <option value="">{{ trans('club.Select_Area') }}</option>
+                  @foreach ($governorate as $goov) <!--loop throw each city -->
+                    @foreach ($goov->areas as $area) <!--loop throw each city->area -->
+                      <!--check if we are in club city -->
+                      @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
+                        <option
+                          value="{{ $area->id }}"
+                          {{ ($Playground->c_b_p_area == $area->id ? ' selected="selected" ' : '') }}
+                        >
+                          @if ( direction() == 'ltr' )
+                            {{ $area->a_en_name }}   
+                          @else
+                            {{ $area->a_ar_name }}   
+                          @endif
+                        </option>
+                      @endif
+                    @endforeach
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-lg-2" style="" >
+                  <div id="loader"
+                        class="text-center "
+                        style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                  >
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                   </div>
-                  <div class="clearfix"></div>
+              </div>
+              <div class="clearfix"></div>
                     <!---->
                   <br>
                   <strong>
@@ -182,9 +160,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 1">{{ trans('club.feature1') }}</label>
                           <input type="checkbox" name="features[]" value="feature1" id="feature 1"
-                              @php
-                                echo ($Playground->feature1 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                              {{ ($Playground->feature1 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>    
                       </div>
@@ -192,9 +168,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 2">{{ trans('club.feature2') }}</label>
                           <input type="checkbox" name="features[]" value="feature2" id="feature 2"
-                              @php
-                                echo ($Playground->feature2 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                          {{ ($Playground->feature2 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -202,9 +176,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 3">{{ trans('club.feature3') }}</label>
                           <input type="checkbox" name="features[]" value="feature3" id="feature 3"
-                              @php
-                                echo ($Playground->feature3 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                          {{ ($Playground->feature3 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -212,9 +184,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 4">{{ trans('club.feature4') }}</label>
                           <input type="checkbox" name="features[]" value="feature4" id="feature 4"
-                              @php
-                                echo ($Playground->feature4 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                            {{ ($Playground->feature4 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -222,9 +192,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 5">{{ trans('club.feature5') }}</label>
                           <input type="checkbox" name="features[]" value="feature5" id="feature 5"
-                              @php
-                                echo ($Playground->feature5 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                            {{ ($Playground->feature5 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -232,9 +200,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 6">{{ trans('club.feature6') }}</label>
                           <input type="checkbox" name="features[]" value="feature6" id="feature 6"
-                              @php
-                                echo ($Playground->feature6 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                            {{ ($Playground->feature6 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -242,9 +208,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 7">{{ trans('club.feature7') }}</label>
                           <input type="checkbox" name="features[]" value="feature7" id="feature 7"
-                              @php
-                                echo ($Playground->feature7 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                            {{ ($Playground->feature7 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -252,9 +216,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 8">{{ trans('club.feature8') }}</label>
                           <input type="checkbox" name="features[]" value="feature8" id="feature 8"
-                              @php
-                                echo ($Playground->feature8 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                            {{ ($Playground->feature8 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -262,9 +224,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 9">{{ trans('club.feature9') }}</label>
                           <input type="checkbox" name="features[]" value="feature9" id="feature 1"
-                              @php
-                                echo ($Playground->feature9 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                          {{ ($Playground->feature9 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -272,9 +232,7 @@
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 10">{{ trans('club.feature10') }}</label>
                           <input type="checkbox" name="features[]" value="feature10" id="feature 10"
-                              @php
-                                echo ($Playground->feature10 == 1 ? ' checked="checked" ' : '');
-                              @endphp
+                            {{ ($Playground->feature10 == 1 ? ' checked="checked" ' : '') }}
                           >
                         </div>
                       </div>
@@ -290,9 +248,7 @@
                         -ms-transform:translate(-50%, 110%);
                         font-size:16px;border:none;
                         cursor:pointer;font-size:16px;color:#3c8dbc;
-                        @php
-                          echo ($Playground->Photos->count() > 4 ? ' display: none; ' : '');
-                        @endphp
+                        {{ ($Playground->Photos->count() > 4 ? ' display: none; ' : '') }}
                         "
                       >
                         {{ trans('club.Add_Photos') }}
@@ -323,7 +279,7 @@
                   <br>
                   <br>
                   <input type="hidden" name="photos">
-                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-success', 'style' => '', 'id' => 'updatePlaygroundRegister']) !!}
+                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-primary', 'style' => '', 'id' => 'updatePlaygroundRegister']) !!}
             </div>
             <!-- /.box-body -->
           </div>
