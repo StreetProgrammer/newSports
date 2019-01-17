@@ -58,14 +58,9 @@
         
                                 <option
                                     value="{{ $country->id }}"
-                                    {{ ($user->playerProfile->p_country == $country->id ? ' selected="selected" ' : '') }}
-                                    
+                                    {{ ($user->playerProfile->p_country == $country->id ? ' selected="selected" ' : '') }}     
                                 >
-                                    @if (direction() == 'ltr')
-                                    {{ $country->c_en_name }}
-                                    @else
-                                    {{ $country->c_ar_name }}
-                                    @endif
+                                    {{ (direction() == 'ltr' ? $country->c_en_name : $country->c_ar_name) }}
                                 </option>
         
                             @endforeach
@@ -96,11 +91,7 @@
                                     {{ ($user->playerProfile->p_city == $gov->id ? ' selected="selected" ' : '') }}
                                     
                                 >
-                                    @if (direction() == 'ltr')
-                                    {{ $gov->g_en_name }}
-                                    @else
-                                    {{ $gov->g_ar_name }}
-                                    @endif
+                                    {{ (direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
                                 </option>
         
                             @endforeach
@@ -129,13 +120,8 @@
                                         value="{{ $area->id }}"
                                         {{ ($user->playerProfile->p_area == $area->id ? ' selected="selected" ' : '') }}
                                     >
-                                        @if (direction() == 'ltr')
-                                        {{ $area->a_en_name }}
-                                        @else
-                                        {{ $area->a_ar_name }}
-                                        @endif
+                                        {{ (direction() == 'ltr' ? $area->a_en_name : $area->a_ar_name) }}
                                     </option>
-        
                                     @endif
                                 @endforeach
                             @endforeach

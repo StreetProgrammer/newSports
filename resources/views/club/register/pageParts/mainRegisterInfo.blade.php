@@ -104,22 +104,29 @@
               </strong>
 
               <p class="displayDetails text-muted" >
-                
               <!---->
-
+              <div class="col-lg-12" style="margin:10px auto">
+                <select class="form-control input-xs" name="c_country" id="country" >
+                  <option value="">{{ trans('player.Select_Country') }}</option>
+                    @foreach ($countries as $country)
+                      <option
+                          value="{{ $country->id }}"
+                      >
+                        {{ (direction() == 'ltr' ? $country->c_en_name : $country->c_ar_name) }}
+                      </option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <!---->
               <div class="col-lg-5">
                 <select class="form-control input-xs" name="c_city" id="governorate">
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
                   @foreach ($governorate as $gov)
                     <option
                       value="{{ $gov->id }}"
-                      
                     >
-                      @if ( direction() == 'ltr' )
-                        {{ $gov->g_en_name }}
-                      @else
-                        {{ $gov->g_ar_name }}
-                      @endif
+                    {{ ( direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
                     </option>
                   @endforeach
                 </select>
@@ -130,27 +137,23 @@
                   @foreach ($governorate as $goov) <!--loop throw each city -->
                     @foreach ($goov->areas as $area) <!--loop throw each city->area -->
                       <option value="{{ $area->id }}" >
-                        @if ( direction() == 'ltr' )
-                          {{ $area->a_en_name }}   
-                        @else
-                          {{ $area->a_ar_name }}   
-                        @endif 
+                        {{ ( direction() == 'ltr' ? $area->a_en_name : $area->a_ar_name) }}
                       </option>
                     @endforeach
                   @endforeach
                 </select>
               </div>
-                  <div class="col-lg-2" style="" >
-                      <div id="loader"
-                           class="text-center "
-                           style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
-                      >
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                      </div>
+              <div class="col-lg-2" style="" >
+                  <div id="loader"
+                        class="text-center "
+                        style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                  >
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                   </div>
-                  <div class="clearfix"></div>
-                    <!---->
-                  <br>
+              </div>
+              <div class="clearfix"></div>
+                <!---->
+              <br>
                   <strong>
                     <i class="fa fa-map-marker margin-r-5" style="color: #3c8dbc;"></i> 
                     {{ trans('club.clubDetailed_Address') }}

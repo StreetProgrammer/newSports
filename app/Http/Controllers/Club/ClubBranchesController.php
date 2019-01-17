@@ -7,6 +7,7 @@ use Storage ;
 use App\Model\User ;
 use App\Model\clubBranche ;
 use App\Model\Playground ;
+use App\Model\Country ;
 use App\Model\Governorate ;
 use App\Model\Sport ;
 use App\Model\Photo ;
@@ -119,11 +120,10 @@ class ClubBranchesController extends Controller
     {
         $club = User::where('users.id', '=', Auth::user()->id)
                     ->firstOrFail();
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
-        return view('club.Branches.Pages.create', ['title' => 'Create New Branche', 
-                                                    'club' => $club, 
-                                                    'governorate' => $governorate
-                    ]);
+        $title = 'Create New Branche' ;
+        return view('club.Branches.Pages.create', compact('title', 'club', 'governorate', 'countries'));
     }
 
     public function store(Request $request)
@@ -198,6 +198,7 @@ class ClubBranchesController extends Controller
     public function show(clubBranche $clubBranche)
     {
         //return $clubBranche ;
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $lang = session()->get('lang');
         //return $lang ;
@@ -211,8 +212,6 @@ class ClubBranchesController extends Controller
         }elseif(setting()->main_lang == 'en' ){
             $sports = Sport::select(['id','en_sport_name'])->get();
         }
-        
-        $governorate = Governorate::with('areas')->get();
 
         $clubBranche = clubBranche::with('user.clubProfile')
                         ->with('branchPlaygrounds.sport')
@@ -222,7 +221,7 @@ class ClubBranchesController extends Controller
         //dd($user);
         //return $clubBranche ;
 
-        return view('club.Branches.Pages.BranchDisplayEdit', compact('clubBranche', 'governorate','sports'));
+        return view('club.Branches.Pages.BranchDisplayEdit', compact('clubBranche', 'governorate', 'countries', 'sports'));
     
     }
 
@@ -306,14 +305,15 @@ class ClubBranchesController extends Controller
     */
     public function DisplayEditBranchRegister($clubBranch, $when = '')
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $clubBranch = clubBranche::where('id', $clubBranch)
                         ->firstOrFail();
         // ear => edit after register
         if ($when == 'ear') {
-            return view('club.Edits.pageParts.editBranch', compact('clubBranch', 'governorate')) ;
+            return view('club.Edits.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries')) ;
         } else {
-            return view('club.register.pageParts.editBranch', compact('clubBranch', 'governorate')) ;
+            return view('club.register.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries')) ;
         }
     }
 
@@ -322,6 +322,7 @@ class ClubBranchesController extends Controller
     */
     public function mainInfoDivLoad($clubBranche)
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $clubBranche = clubBranche::with('user.clubProfile')
                         ->with('branchPlaygrounds.sport')
@@ -329,7 +330,7 @@ class ClubBranchesController extends Controller
                         ->where('id', $clubBranche)
                         ->firstOrFail();
 
-        return view('club.Branches.pageParts.branchdisplay.mainBranchInfo', compact('clubBranche', 'governorate')) ;
+        return view('club.Branches.pageParts.branchdisplay.mainBranchInfo', compact('clubBranche', 'governorate', 'countries')) ;
     }
     
     /*

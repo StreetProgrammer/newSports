@@ -7,6 +7,7 @@ use Storage ;
 
 use App\Model\Playground;
 use App\Model\clubBranche;
+use App\Model\Country ;
 use App\Model\Governorate ;
 use App\Model\Sport;
 use App\Model\Photo;
@@ -27,6 +28,7 @@ class PlaygroundsController extends Controller
 
     public function show($Playground)
     {
+      $countries = Country::get();
       $governorate = Governorate::with('areas')->get();
       $sports = Sport::all();
       $Playground = Playground::find($Playground) ;
@@ -35,7 +37,7 @@ class PlaygroundsController extends Controller
       
       //return $Playground ;
 
-      return view('club.Playgrounds.Pages.displayEditPlayground', compact('Playground', 'governorate', 'sports'));
+      return view('club.Playgrounds.Pages.displayEditPlayground', compact('Playground', 'governorate', 'countries', 'sports'));
     }
 
     public function StoreRegisterClubPlayground(Request $request)
@@ -257,6 +259,7 @@ class PlaygroundsController extends Controller
       $photo->delete() ;
     }
 
+    //////////////////////////// start i think it's old, check before delete //////////////////////////////////////////
      public function create()
     {
 
@@ -306,6 +309,7 @@ class PlaygroundsController extends Controller
         return view('playground.playgroundEdit', compact('Playground'));
     }
 
+    //////////////////////////// start i think it's old, check before delete //////////////////////////////////////////
 
 
 
@@ -317,14 +321,15 @@ class PlaygroundsController extends Controller
     */
     public function DisplayAddPlaygroundRegister($clubBranch, $when = '')
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $sports = Sport::all();
         $clubBranch = clubBranche::where('id', $clubBranch)
                         ->firstOrFail();
         if ($when == 'ear') {
-          return view('club.Edits.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'sports')) ;
+          return view('club.Edits.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'countries', 'sports')) ;
         } else {
-          return view('club.register.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'sports')) ;
+          return view('club.register.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'countries', 'sports')) ;
         }
     }
 
@@ -333,13 +338,14 @@ class PlaygroundsController extends Controller
     */
     public function DisplayEditPlaygroundRegister($Playground)
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $sports = Sport::all();
         $Playground = Playground::where('id', $Playground)
                         ->firstOrFail();
         $clubBranch = clubBranche::where('id', $Playground->c_branch_id)
                       ->firstOrFail();
-        return view('club.register.pageParts.editPlayground', compact('Playground', 'governorate', 'sports', 'clubBranch')) ;
+        return view('club.register.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch')) ;
     }
 
     

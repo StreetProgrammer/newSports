@@ -13,6 +13,7 @@ use App\Model\Admin;
 use App\Model\Sport;
 use App\Model\User;
 use App\Model\clubProfile;
+use App\Model\Country;
 use App\Model\Governorate;
 use App\Model\PendingEdit ;
 
@@ -224,26 +225,22 @@ class ClubProfilesController extends Controller
     public function index($id)
     {
         //return $id ;
+        $countries = Country::get();
+        $governorate = Governorate::with('areas')->get();
+        $Sports = Sport::get();
+
         if (Gate::allows('Owner-Admin-only', Auth::user())) {
-            $governorate = Governorate::with('areas')->get();
-
-            $Sports = Sport::get();
-
             $club = User::where('users.id', '=', $id)
                     //->where('users.id', '=', Auth::user()->id)
                     ->firstOrFail();
 
-            return view('club.home', compact('club', 'Sports', 'governorate'));
+            return view('club.home', compact('club', 'Sports', 'governorate', 'countries'));
         }elseif(Gate::allows('Manager-only', Auth::user())){
-            $governorate = Governorate::with('areas')->get();
-
-            $Sports = Sport::get();
-
             $club = User::where('users.id', '=', $id)
                     //->where('users.id', '=', Auth::user()->id)
                     ->firstOrFail();
 
-            return view('club.home', compact('club', 'Sports', 'governorate'));
+            return view('club.home', compact('club', 'Sports', 'governorate', 'countries'));
         }
 
     }
@@ -251,15 +248,13 @@ class ClubProfilesController extends Controller
      //display club profile
     public function profile($slug)
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
-
         $Sports = Sport::get();
 
         $eventsCount = 0 ;
-
         $expectedEventsCount = 0 ;
         //return $Sports ;
-
         $club = User::where('users.slug', '=', $slug)
                     ->where('users.id', '=', Auth::user()->id)
                     ->where('users.type', '=', 2)
@@ -269,7 +264,7 @@ class ClubProfilesController extends Controller
             $expectedEventsCount = $expectedEventsCount + $playground->expectedEvents->count() ;
         }
         //return $expectedEventsCount ;
-        return view('club.Profile.Pages.userProfile', compact('club', 'Sports', 'governorate'));
+        return view('club.Profile.Pages.userProfile', compact('club', 'Sports', 'governorate', 'countries'));
     }
 
     // update activate status
@@ -284,8 +279,6 @@ class ClubProfilesController extends Controller
         } else {
              return 'failed' ;
         }
-
-
     	return 2;
     }
 
@@ -403,10 +396,8 @@ class ClubProfilesController extends Controller
 
         $data = $request->image;
 
-
         list($type, $data) = explode(';', $data);
         list(, $data)      = explode(',', $data);
-
 
         $data = base64_decode($data);
         $image_name = Auth::id() . '-' . Auth::user()->slug . '-' . time() . '.png';
@@ -435,92 +426,93 @@ class ClubProfilesController extends Controller
     // to get page where club can update [ profile - branches - playgrounds ]
      public function updateAllData()
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
 ;
-        return view('club.Edits.Edits',  compact( 'governorate'));
+        return view('club.Edits.Edits',  compact( 'governorate', 'countries'));
 
     }
     //%%%%%%%%%%%%%%%%%%% ajax functions for load partial views %%%%%%%%%%%%%%%%%%//
 
     public function registerPageTop()
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
-        //$club = json_encode($Event) ;
         //return $club ;
 
-        return view('club.register.pageParts.rejectedMessage', compact('club', 'governorate')) ;
+        return view('club.register.pageParts.rejectedMessage', compact('club', 'governorate', 'countries')) ;
 
     }
 
     public function editMainRegisterInfo($when = '')
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
         //$club = json_encode($Event) ;
         //return $club ;
         if ($when == 'ear') {
-            return view('club.Edits.pageParts.editMainRegisterInfo', compact('club', 'governorate')) ;
+            return view('club.Edits.pageParts.editMainRegisterInfo', compact('club', 'governorate', 'countries')) ;
         } else {
-            return view('club.register.pageParts.editMainRegisterInfo', compact('club', 'governorate')) ;
+            return view('club.register.pageParts.editMainRegisterInfo', compact('club', 'governorate', 'countries')) ;
         }
-        
-        
 
     }
 
     public function registerAddBranch($when = '')
     {
-        //return $when ;
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
         //ear => edit after register 
         if ($when == 'ear') {
             //return 2 ;
-            return view('club.Edits.pageParts.addNewBranch', compact('club', 'governorate')) ;
+            return view('club.Edits.pageParts.addNewBranch', compact('club', 'governorate', 'countries')) ;
         } else {
             //return 1;
-            return view('club.register.pageParts.addNewBranch', compact('club', 'governorate')) ;
+            return view('club.register.pageParts.addNewBranch', compact('club', 'governorate', 'countries')) ;
         }
-
     }
 
     public function registerAddPlayground()
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
-        //$club = json_encode($Event) ;
         //return $club ;
 
-        return view('club.register.pageParts.addNewPlayground', compact('club', 'governorate')) ;
+        return view('club.register.pageParts.addNewPlayground', compact('club', 'governorate', 'countries')) ;
     }
     /*
     * function to load patrial view after A club update main profile info
     */
     public function mainInfoDivLoad()
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
         //$club = json_encode($Event) ;
         //return $club ;
 
-        return view('club.Profile.pageParts.userProfile.mainUserProfileInfo', compact('club', 'governorate')) ;
+        return view('club.Profile.pageParts.userProfile.mainUserProfileInfo', compact('club', 'governorate', 'countries')) ;
     }
 
     public function imageinfodivload()
     {
+        $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
         //$club = json_encode($Event) ;
         //return $club ;
 
-        return view('club.Profile.pageParts.userProfile.userProfileImageDiv', compact('club', 'governorate')) ;
+        return view('club.Profile.pageParts.userProfile.userProfileImageDiv', compact('club', 'governorate', 'countries')) ;
     }
 
 
