@@ -11,7 +11,7 @@ use App\Model\Country ;
 use App\Model\Governorate ;
 use App\Model\Sport ;
 use App\Model\Photo ;
-use App\DataTables\ClubBranchesDatatable ;
+use App\DataTables\Club\ClubBranchesDatatable ;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -112,7 +112,7 @@ class ClubBranchesController extends Controller
 
     public function index(ClubBranchesDatatable $branches)
     {
-       
+       $title = direction() == 'ltr' ?  'Branches' : 'الفروع' ;
         return $branches->render('club.Branches.index', ['title' => 'Branches']) ;
     }
 
@@ -309,11 +309,12 @@ class ClubBranchesController extends Controller
         $governorate = Governorate::with('areas')->get();
         $clubBranch = clubBranche::where('id', $clubBranch)
                         ->firstOrFail();
+        $title = direction() == 'ltr' ? 'Edit' : 'تعديل';
         // ear => edit after register
         if ($when == 'ear') {
-            return view('club.Edits.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries')) ;
+            return view('club.Edits.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries', 'title')) ;
         } else {
-            return view('club.register.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries')) ;
+            return view('club.register.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries', 'title')) ;
         }
     }
 

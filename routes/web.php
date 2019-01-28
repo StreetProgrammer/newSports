@@ -4,42 +4,31 @@ Route::get('/themeHome', function (){
     symlink('/home4/mind/public_html/sports-mate.net/SportsMate/storage/app/public', '/home4/mind/public_html/sports-mate.net/storage') ;
 });
 Route::get('/try', function (){
-    function trygetCountry() {
-        function get_client_ip() {
-        $ipaddress = '';
-        if (isset($_SERVER['HTTP_CLIENT_IP']))
-            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-        else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        else if(isset($_SERVER['HTTP_X_FORWARDED']))
-            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-        else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
-            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-        else if(isset($_SERVER['HTTP_FORWARDED']))
-            $ipaddress = $_SERVER['HTTP_FORWARDED'];
-        else if(isset($_SERVER['REMOTE_ADDR']))
-            $ipaddress = $_SERVER['REMOTE_ADDR'];
-        else
-            $ipaddress = 'UNKNOWN';
-        return $ipaddress;
+    $reservations = App\Model\Reservation::where('R_playground_owner_id', Auth::id())->get();
+    $dates = App\Model\Reservation::where('R_playground_owner_id', Auth::id())->orderBy('created_at', 'ASC')->pluck('created_at');
+    $dates = json_decode($dates);
+    if (!empty($dates)) {
+        $dateArr = array();
+        $total = array();
+        $your_total = array();
+        $mind_total = array();
+        foreach ($dates as $unformatted_date) {
+            $date = new \DateTime($unformatted_date->date);
+            $date_y_m = $date->format('Y-m');
+            $date_Y_M = $date->format('Y M');
+            $dateArr[$date_y_m] = $date_Y_M ;
+            
         }
-        $PublicIP = get_client_ip(); 
-        $json  = file_get_contents("http://ipinfo.io/$PublicIP/geo");
-        $json  =  json_decode($json ,true);
-        //$country =  $json['country'];
-        //$region= $json['region'];
-        //$city = $json['city'];
-        if( isset( $json['country'] ) ){
-            $country =  strtolower($json['country']);
-            $country_0 = App\Model\Country::where('c_code', $country)->first() ;
-            return $country_0->id ;
-        }else{
-            return 59 ;
+        foreach ($dateArr as $key => $date) {
+            $total[$key] = App\Model\Reservation::where('R_playground_owner_id', Auth::id())->where('created_at', 'LIKE', '%' . $key .'%')->sum('R_total_price');
+            $your_total[$key] = ($total[$key] / 100) * 80 ;
+            $mind_total[$key] = ($total[$key] / 100) * 20 ;
         }
-        
     }
-   return trygetCountry();
-
+    foreach ($reservations as $key => $res) {
+        # code...
+    }
+    return $your_total ;
 }); 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +42,10 @@ Route::get('/', 'HomeController@index'); // final
 Route::get('/privacy_policy', 'HomeController@privacy_policy'); // final
 Route::get('/social_media_disclosure', 'HomeController@social_media_disclosure'); // final
 Route::get('/terms_of_service', 'HomeController@terms_of_service'); // final
+
+Route::get('/faq', 'HomeController@faq'); // final
+Route::get('/videos', 'HomeController@videos'); // final
+Route::get('/contactus', 'HomeController@contactus'); // final
 
 //************************ start routes for [ Home - static pages ]********************//
 

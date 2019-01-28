@@ -48,22 +48,36 @@
               </strong>
 
               <p class="displayDetails text-muted" >
-                
               <!---->
-
+              <!---->
+              <div class="col-lg-12" style="margin:10px auto">
+                <select class="form-control input-xs" name="c_b_country" id="country" disabled>
+                  <option value="">{{ trans('player.Select_Country') }}</option>
+                    @foreach ($countries as $country)
+                      @if ($country->id == Auth::user()->clubProfile->c_country)
+                        <option
+                            value="{{ $country->id }}"
+                            {{ ($country->id == $club->clubProfile->country->id ? 'selected' : '') }}
+                        >
+                          {{ (direction() == 'ltr' ? $country->c_en_name : $country->c_ar_name) }}
+                        </option>
+                      @endif
+                    @endforeach
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <!---->
               <div class="col-lg-5">
                 <select class="form-control input-xs" name="c_b_city" id="governorate">
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
                   @foreach ($governorate as $gov)
-                    <option
-                      value="{{ $gov->id }}"
-                    >
-                      @if ( direction() == 'ltr' )
-                        {{ $gov->g_en_name }}
-                      @else
-                        {{ $gov->g_ar_name }}
-                      @endif
-                    </option>
+                    @if ($gov->g_country_id == Auth::user()->clubProfile->c_country)
+                      <option
+                        value="{{ $gov->id }}"
+                      >
+                        {{ ( direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
+                      </option>
+                    @endif
                   @endforeach
                 </select>
               </div>
@@ -77,56 +91,47 @@
                           <option
                             value="{{ $area->id }}"
                           >
-                            @if ( direction() == 'ltr' )
-                              {{ $area->a_en_name }}   
-                            @else
-                              {{ $area->a_ar_name }}   
-                            @endif
+                            {{ ( direction() == 'ltr' ? $area->a_en_name : $area->a_ar_name) }}
                           </option>
                         @endif
                       @endforeach
                     @endforeach
                   </select>
               </div>
-                  <div class="col-lg-2" style="" >
-                      <div id="loader"
-                           class="text-center "
-                           style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
-                      >
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                      </div>
+              <div class="col-lg-2" style="" >
+                  <div id="loader"
+                        class="text-center "
+                        style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                  >
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                   </div>
-                  <div class="clearfix"></div>
-                    <!---->
-                  <br>
-                  <strong>
-                    <i class="fa fa-map-marker margin-r-5" style="color: #3c8dbc;"></i> 
-                    {{ trans('club.Detailed_Address') }}
-                  </strong>
-                  <p class="text-muted">
-                    <input type="text" name="c_b_address" class="form-control" value="">
-                  </p>
-                  <hr>
-
-                  <strong>
-                    <i class="fa fa-file-text-o margin-r-5" style="color: #3c8dbc;"></i> 
-                    {{ trans('club.Description') }}
-                  </strong>
-                  <textarea class="form-control" name="c_b_desc" id="c_b_desc" cols="30" rows="8">
-                    
-                  </textarea>
-                  <br>
-                  {!! Form::submit(trans('club.save'), ['class' => 'btn btn-primary', 'style' => '', 'id' => 'AddNewBranchRegister']) !!}
+              </div>
+              <div class="clearfix"></div>
+                <!---->
+              <br>
+              <strong>
+                <i class="fa fa-map-marker margin-r-5" style="color: #3c8dbc;"></i> 
+                {{ trans('club.Detailed_Address') }}
+              </strong>
+              <p class="text-muted">
+                <input type="text" name="c_b_address" class="form-control" value="">
+              </p>
+              <hr>
+              <strong>
+                <i class="fa fa-file-text-o margin-r-5" style="color: #3c8dbc;"></i> 
+                {{ trans('club.Description') }}
+              </strong>
+              <textarea class="form-control" name="c_b_desc" id="c_b_desc" cols="30" rows="8"></textarea>
+              <br>
+              {!! Form::submit(trans('club.save'), ['class' => 'btn btn-primary', 'style' => '', 'id' => 'AddNewBranchRegister']) !!}
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         {!! Form::close() !!}
               </div>
-
             </div>
             <!-- /.col -->
-            
           </div>
           <!-- /.row -->
         </div>

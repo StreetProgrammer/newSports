@@ -18,6 +18,7 @@ class Reservation extends Model
         'R_playground_id',
         'R_creator_id',
         'R_event_id',
+        'code',
         'R_date',
         'R_day',
         'R_from',
@@ -28,8 +29,9 @@ class Reservation extends Model
         'R_hour_count',
         'R_total_price',
         'R_payment_status',
+        'clubPaid',
         'resOwner',
-        'integer_to_be_use',
+        'reservedBy',
     ];
 
     /**

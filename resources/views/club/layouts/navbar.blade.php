@@ -1,6 +1,6 @@
   <header class="main-header">
     <!-- Logo -->
-    <a href="{{ url('club') }}/{{Auth::user()->slug}}" class="logo">
+    <a href="{{ url('club') }}/{{Auth::user()->id}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>M</span>
       <!-- logo for regular state and mobile devices -->
@@ -39,6 +39,7 @@
         </div>
       </div>
       <!-- search form -->
+      {{--
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="{!! trans('club.navSearch') !!}">
@@ -49,7 +50,9 @@
           </span>
         </div>
       </form>
+      --}}
       <!-- /.search form -->
+      <hr style="border-top: 10px dotted #3c8dbc;margin: 5px 15px">
       <!-- sidebar menu: : style can be found in sidebar.less -->
     @can('Owner-only', Auth::user())
       <ul class="sidebar-menu" data-widget="tree">
@@ -63,7 +66,7 @@
         <!------->
         <!------->
         <li class="  {{ makeActiveLinkActive()[0] }}">
-          <a href="{{url('club')}}/updateAllData" style="{{ makeActiveLinkActive()[2] }}">
+          <a href="{{url('/')}}/updateAllData" style="{{ makeActiveLinkActive()[1] }}">
             <i class="fa fa-edit"></i> <span>{!! trans('club.updateAllData') !!}</span>
           </a>
         </li>
@@ -108,7 +111,7 @@
               </a>
             </li>
             <li>
-              <a href="{{ url('branches/club/create') }}">
+              <a href="{{url('/')}}/updateAllData">
                 <i class="fa fa-plus"></i> {!! trans('club.addBranch') !!}
               </a>
             </li>
@@ -131,7 +134,7 @@
               </a>
             </li>
             <li>
-              <a href="{{ url('playground/club/create') }}">
+              <a href="{{url('/')}}/updateAllData">
                 <i class="fa fa-plus"></i> {!! trans('club.addPlayground') !!}
               </a>
             </li>

@@ -170,7 +170,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         willvincent\Rateable\RateableServiceProvider::class,
-        
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
 
 
@@ -233,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Up' => App\Http\Controllers\UploadController::class,
+        'Charts' => consoletVs\charts\Charts::class,
 
 
 

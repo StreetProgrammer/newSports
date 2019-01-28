@@ -64,6 +64,7 @@
             <a href="{{ url('/reservations/club') }}" class="small-box-footer">{{ trans('club.moreInfo') }} <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        {{--
         <!-- ./col -->
          <div class="col-lg-3 col-xs-6">
           <!-- small box -->
@@ -125,7 +126,104 @@
           </div>          
         </div>
         <!-- ./col -->
+        --}}
       </div>
+      {{-------------}}
+      <section class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- AREA CHART -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Area Chart</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="chart">
+                  <!--<canvas id="areaChart" style="height: 108px; width: 342px;" width="342" height="108"></canvas>-->
+                  {!! $allReservationByYear->render() !!}
+                </div>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+  
+            <!-- DONUT CHART -->
+            <div class="box box-danger">
+              <div class="box-header with-border">
+                <h3 class="box-title">Donut Chart</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                {{-- <canvas id="pieChart" style="height: 181px; width: 362px;" width="362" height="181"></canvas> --}}
+                {!! $reservationPercentage->render() !!}
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+  
+          </div>
+          <!-- /.col (LEFT) -->
+          <div class="col-md-6">
+            <!-- LINE CHART -->
+            <div class="box box-info">
+              <div class="box-header with-border">
+                <h3 class="box-title">Line Chart</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="chart">
+                  <!--<canvas id="lineChart" style="height: 108px; width: 342px;" width="342" height="108"></canvas>-->
+                  {!! $allReservationByMonth->render() !!}
+                </div>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+  
+            <!-- BAR CHART -->
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <h3 class="box-title">Bar Chart</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="chart">
+                  <!--<canvas id="barChart" style="height: 99px; width: 342px;" width="342" height="99"></canvas>-->
+                  {!! $allReservation->render() !!}
+                </div>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+  
+          </div>
+          <!-- /.col (RIGHT) -->
+        </div>
+        <!-- /.row -->
+  
+      </section>
+      {{-------------}}
     @elsecan('Manager-only', Auth::user())
       <div class="row">
         <div class="col-md-6">
@@ -207,9 +305,8 @@
                                     id="{{$playground->id}}_date" 
                                     type="date" class="date" 
                                     name="{{$playground->id}}_date" 
-                                    min="@php
-                                          echo date("Y-m-d") ;
-                                        @endphp" class="date form-control input-xs">
+                                    min="{{ date("Y-m-d") }}" 
+                                    class="date form-control input-xs">
                                 </div>
                               </div>
                               <div class="hours" style="">
@@ -303,5 +400,4 @@
           </div>
 
     @endcan
-
 @endsection

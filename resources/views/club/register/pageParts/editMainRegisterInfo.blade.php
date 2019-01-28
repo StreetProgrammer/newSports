@@ -159,9 +159,23 @@
               </strong>
 
               <p class="displayDetails text-muted" >
-                
               <!---->
-
+              <div class="col-lg-12" style="margin:10px auto">
+                <select class="form-control input-xs" name="c_b_country" id="country" disabled>
+                  <option value="">{{ trans('player.Select_Country') }}</option>
+                    @foreach ($countries as $country)
+                      <option
+                          value="{{ $country->id }}"
+                          {{ (Auth::user()->clubProfile->c_country == $country->id ? 'selected' : '') }}
+                      >
+                        {{ (direction() == 'ltr' ? $country->c_en_name : $country->c_ar_name) }}
+                      </option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <!---->
+              <!---->
               <div class="col-lg-5">
                 <select class="form-control input-xs" name="c_city" id="governorate">
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
@@ -170,11 +184,7 @@
                       value="{{ $gov->id }}"
                       {{ (Auth::user()->clubProfile->c_city == $gov->id ? ' selected="selected" ' : '') }}
                     >
-                      @if ( direction() == 'ltr' )
-                        {{ $gov->g_en_name }}
-                      @else
-                        {{ $gov->g_ar_name }}
-                      @endif
+                    {{ (direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
                     </option>
 
                     @endforeach
@@ -191,11 +201,7 @@
                             value="{{ $area->id }}"
                             {{ (Auth::user()->clubProfile->c_area == $area->id ? ' selected="selected" ' : '') }}
                           >
-                            @if ( direction() == 'ltr' )
-                              {{ $area->a_en_name }}   
-                            @else
-                              {{ $area->a_ar_name }}   
-                            @endif 
+                            {{ (direction() == 'ltr' ? $area->a_en_name :  $area->a_ar_name) }}
                           </option>
                         @endif
                       @endforeach

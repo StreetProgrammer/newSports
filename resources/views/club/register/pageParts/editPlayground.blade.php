@@ -51,18 +51,12 @@
                 <select class="form-control input-xs" name="c_b_p_sport_id" id="sport">
                   <option value="">{{ trans('club.Select_Sport') }}</option>
                   @foreach ($sports as $sport)
-
                     <option
-                        value="{{ $sport->id }}"
-                        {{ ($Playground->c_b_p_sport_id == $sport->id ? ' selected="selected" ' : '') }}
+                      value="{{ $sport->id }}"
+                      {{ ($Playground->c_b_p_sport_id == $sport->id ? ' selected="selected" ' : '') }}
                     >
-                        @if ( direction() == 'ltr' )
-                         {{ $sport->en_sport_name }}   
-                        @else
-                         {{ $sport->ar_sport_name }}   
-                        @endif
+                     {{ (direction() == 'ltr' ? $sport->en_sport_name : $sport->ar_sport_name) }}
                     </option>
-
                   @endforeach
                 </select>
               </p>
@@ -86,26 +80,37 @@
               <p class="displayDetails text-muted" >
                 
               <!---->
-
+              <!---->
+              <div class="col-lg-12" style="margin:10px auto">
+                <select class="form-control input-xs" name="c_b_p_country" id="country" disabled>
+                  <option value="">{{ trans('player.Select_Country') }}</option>
+                    @foreach ($countries as $country)
+                      <option
+                        value="{{ $country->id }}"
+                        {{ $clubBranch->c_b_Country->id == $country->id ? 'selected' : '' }}
+                      >
+                        {{ (direction() == 'ltr' ? $country->c_en_name : $country->c_ar_name) }}
+                      </option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <!---->
               <div class="col-lg-5">
-                <select class="form-control input-xs" name="c_b_p_city" id="governorate">
+                <select class="form-control input-xs" name="c_b_p_city" id="governorate" disabled>
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
                     @foreach ($governorate as $gov)
-                        <option
-                          value="{{ $gov->id }}"
-                          {{ ($Playground->c_b_p_city == $gov->id ? ' selected="selected" ' : '') }}
-                        >
-                          @if ( direction() == 'ltr' )
-                            {{ $gov->g_en_name }}   
-                          @else
-                            {{ $gov->g_ar_name }}   
-                          @endif
-                        </option>
+                      <option
+                        value="{{ $gov->id }}"
+                        {{ ($clubBranch->c_b_city == $gov->id ? ' selected="selected" ' : '') }}
+                      >
+                        {{ (direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
+                      </option>
                     @endforeach
                 </select>
               </div>
               <div class="col-lg-5" style="">
-                <select class="form-control input-xs" name="c_b_p_area" id="area">
+                <select class="form-control input-xs" name="c_b_p_area" id="area" disabled>
                   <option value="">{{ trans('club.Select_Area') }}</option>
                   @foreach ($governorate as $goov) <!--loop throw each city -->
                     @foreach ($goov->areas as $area) <!--loop throw each city->area -->
@@ -113,13 +118,9 @@
                       @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
                         <option
                           value="{{ $area->id }}"
-                          {{ ($Playground->c_b_p_area == $area->id ? ' selected="selected" ' : '') }}
+                          {{ ($clubBranch->c_b_area == $area->id ? ' selected="selected" ' : '') }}
                         >
-                          @if ( direction() == 'ltr' )
-                            {{ $area->a_en_name }}   
-                          @else
-                            {{ $area->a_ar_name }}   
-                          @endif
+                          {{ (direction() == 'ltr' ? $area->a_en_name : $area->a_ar_name) }}
                         </option>
                       @endif
                     @endforeach
@@ -127,24 +128,24 @@
                 </select>
               </div>
               <div class="col-lg-2" style="" >
-                  <div id="loader"
-                        class="text-center "
-                        style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
-                  >
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                  </div>
+                <div id="loader"
+                      class="text-center "
+                      style="display: none;z-index: 99999;font-size: 10px;color: #3c8dbc;"
+                >
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                </div>
               </div>
               <div class="clearfix"></div>
                     <!---->
-                  <br>
-                  <strong>
-                    <i class="fa fa-map-marker margin-r-5" style="color: #3c8dbc;"></i> 
-                    {{ trans('club.Detailed_Address') }}
-                  </strong>
-                  <p class="text-muted">
-                    <input type="text" name="c_b_p_address" class="form-control" value="{{ $Playground->c_b_p_address }}">
-                  </p>
-                  <hr>
+              <br>
+              <strong>
+                <i class="fa fa-map-marker margin-r-5" style="color: #3c8dbc;"></i> 
+                {{ trans('club.Detailed_Address') }}
+              </strong>
+              <p class="text-muted">
+                <input type="text" name="c_b_p_address" class="form-control" value="{{ $clubBranch->c_b_address }}" disabled>
+              </p>
+              <hr>
 
                   <strong>
                     <i class="fa fa-file-text-o margin-r-5" style="color: #3c8dbc;"></i> 

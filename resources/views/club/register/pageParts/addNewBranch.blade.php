@@ -52,11 +52,12 @@
               <!---->
               <!---->
               <div class="col-lg-12" style="margin:10px auto">
-                <select class="form-control input-xs" name="c_b_country" id="country" >
+                <select class="form-control input-xs" name="c_b_country" id="country" disabled>
                   <option value="">{{ trans('player.Select_Country') }}</option>
                     @foreach ($countries as $country)
                       <option
                           value="{{ $country->id }}"
+                          {{ ($country->id == $club->clubProfile->country->id ? 'selected' : '') }}
                       >
                         {{ (direction() == 'ltr' ? $country->c_en_name : $country->c_ar_name) }}
                       </option>
@@ -69,11 +70,13 @@
                 <select class="form-control input-xs" name="c_b_city" id="governorate">
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
                   @foreach ($governorate as $gov)
-                    <option
-                      value="{{ $gov->id }}"
-                    >
-                      {{(direction() == 'ltr') ? $gov->g_en_name : $gov->g_ar_name }}
-                    </option>
+                    @if ($gov->g_country_id == Auth::user()->clubProfile->c_country)
+                      <option
+                        value="{{ $gov->id }}"
+                      >
+                        {{(direction() == 'ltr') ? $gov->g_en_name : $gov->g_ar_name }}
+                      </option>
+                    @endif
                   @endforeach
                 </select>
               </div>

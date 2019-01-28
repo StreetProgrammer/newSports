@@ -12,7 +12,7 @@ use App\Model\Governorate ;
 use App\Model\Sport;
 use App\Model\Photo;
 
-use App\DataTables\ClubPlaygroundsDatatable;
+use App\DataTables\Club\ClubPlaygroundsDatatable;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -23,7 +23,8 @@ class PlaygroundsController extends Controller
 
     public function index(ClubPlaygroundsDatatable $playgrounds)
     {
-        return $playgrounds->render('club.Playgrounds.index', ['title' => 'Playground Control']);
+      $title = direction() == 'ltr' ?  'Courts' : 'الملاعب' ;
+      return $playgrounds->render('club.Playgrounds.index', ['title' => $title]);
     }
 
     public function show($Playground)
@@ -32,8 +33,7 @@ class PlaygroundsController extends Controller
       $governorate = Governorate::with('areas')->get();
       $sports = Sport::all();
       $Playground = Playground::find($Playground) ;
-      $clubBranch = clubBranche::where('id', $Playground->c_branch_id)
-                    ->firstOrFail();
+      $clubBranch = clubBranche::where('id', $Playground->c_branch_id)->firstOrFail();
       
       //return $Playground ;
 
@@ -336,7 +336,7 @@ class PlaygroundsController extends Controller
      /*
     * function to load patrial view for A playground update main info [[ register proccess ]]
     */
-    public function DisplayEditPlaygroundRegister($Playground)
+    public function DisplayEditPlaygroundRegister($Playground, $when = '')
     {
         $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
@@ -345,7 +345,12 @@ class PlaygroundsController extends Controller
                         ->firstOrFail();
         $clubBranch = clubBranche::where('id', $Playground->c_branch_id)
                       ->firstOrFail();
-        return view('club.register.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch')) ;
+        if ($when == 'ear') {
+          return view('club.Edits.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch')) ;
+        } else {
+          return view('club.register.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch')) ;;
+        }
+        
     }
 
     

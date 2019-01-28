@@ -12,7 +12,7 @@ use App\Model\Playground ;
 use App\Model\Reservation ;
 use App\Model\Event ;
 
-use App\DataTables\ClubReservationsDatatable;
+use App\DataTables\Club\ClubReservationsDatatable;
 
 use DB ;
 
@@ -23,7 +23,8 @@ class ReservationController extends Controller
     
     public function index(ClubReservationsDatatable $reservation)
     {
-        return $reservation->render('club.Reservations.index', ['title' => 'Reservations Control']);
+        $title = direction() == 'ltr' ?  'Courts' : 'الملاعب' ;
+        return $reservation->render('club.Reservations.index', ['title' => $title]);
     }
 
     public function Save(Playground $Playground)

@@ -19,6 +19,7 @@ class CreateReservationsTable extends Migration
             $table->integer('R_playground_id')->nullable();
             $table->integer('R_creator_id')->nullable();
             $table->integer('R_event_id')->nullable();
+            $table->integer('code')->nullable();
             $table->date('R_date')->nullable();
             $table->integer('R_day')->nullable();
             $table->integer('R_from')->nullable();
@@ -29,8 +30,9 @@ class CreateReservationsTable extends Migration
             $table->integer('R_hour_count')->nullable();
             $table->integer('R_total_price')->nullable();
             $table->integer('R_payment_status')->nullable();
+            $table->integer('clubPaid')->nullable();
             $table->string('resOwner')->nullable();
-            $table->integer('integer_to_be_use')->nullable();
+            $table->integer('reservedBy')->nullable();
             $table->timestamps();
         });
     }

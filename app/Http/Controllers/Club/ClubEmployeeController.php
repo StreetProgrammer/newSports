@@ -17,7 +17,7 @@ use App\Model\Country;
 use App\Model\Governorate;
 use App\Model\PendingEdit ;
 
-use App\DataTables\ClubUsersDatatable;
+use App\DataTables\Club\ClubUsersDatatable;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

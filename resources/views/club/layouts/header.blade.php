@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="{{ url('/') }}/design/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="{{ url('/') }}/design/AdminLTE/dist/css/adminMainStyle.css">
   <link rel="stylesheet" href="{{ url('/') }}/css/club.css">
-
+  {!! Charts::assets() !!}
   <!-- Theme style -->
   @if (direction() == 'ltr')
       <style>

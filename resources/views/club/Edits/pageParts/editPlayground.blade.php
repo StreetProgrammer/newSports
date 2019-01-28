@@ -84,26 +84,37 @@
               <p class="displayDetails text-muted" >
                 
               <!---->
-
+              <!---->
+              <div class="col-lg-12" style="margin:10px auto">
+                <select class="form-control input-xs" name="c_b_p_country" id="country" disabled>
+                  <option value="">{{ trans('player.Select_Country') }}</option>
+                    @foreach ($countries as $country)
+                      <option
+                        value="{{ $country->id }}"
+                        {{ $clubBranch->c_b_Country->id == $country->id ? 'selected' : '' }}
+                      >
+                        {{ (direction() == 'ltr' ? $country->c_en_name : $country->c_ar_name) }}
+                      </option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <!---->
               <div class="col-lg-5">
-                <select class="form-control input-xs" name="c_b_p_city" id="governorate">
+                <select class="form-control input-xs" name="c_b_p_city" id="governorate" disabled>
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
                   @foreach ($governorate as $gov)
                     <option
                       value="{{ $gov->id }}"
-                      {{ ($Playground->c_b_p_city == $gov->id ? ' selected="selected" ' : '') }}
-                    >
-                        @if ( direction() == 'ltr' )
-                          {{ $gov->g_en_name }}   
-                        @else
-                          {{ $gov->g_ar_name }}   
-                        @endif
+                      {{ ($clubBranch->c_b_city == $gov->id ? ' selected="selected" ' : '') }}
+                      >
+                        {{ (direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
                     </option>
                   @endforeach
                 </select>
               </div>
               <div class="col-lg-5" style="">
-                <select class="form-control input-xs" name="c_b_p_area" id="area">
+                <select class="form-control input-xs" name="c_b_p_area" id="area" disabled>
                   <option value="">{{ trans('club.Select_Area') }}</option>
                   @foreach ($governorate as $goov) <!--loop throw each city -->
                     @foreach ($goov->areas as $area) <!--loop throw each city->area -->
@@ -113,11 +124,7 @@
                           value="{{ $area->id }}"
                           {{ ($Playground->c_b_p_area == $area->id ? ' selected="selected" ' : '') }}
                         >
-                          @if ( direction() == 'ltr' )
-                            {{ $area->a_en_name }}   
-                          @else
-                            {{ $area->a_ar_name }}   
-                          @endif
+                          {{ (direction() == 'ltr' ? $area->a_en_name : $area->a_ar_name) }}
                         </option>
                       @endif
                     @endforeach
@@ -140,7 +147,7 @@
                     {{ trans('club.Detailed_Address') }}
                   </strong>
                   <p class="text-muted">
-                    <input type="text" name="c_b_p_address" class="form-control" value="{{ $Playground->c_b_p_address }}">
+                    <input type="text" name="c_b_p_address" class="form-control" value="{{ $clubBranch->c_b_address }}" disabled>
                   </p>
                   <hr>
 

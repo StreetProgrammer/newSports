@@ -3,18 +3,18 @@
 
 <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+        {{$title}}
+        {{-- <small>Control panel</small> --}}
       </h1>
-      <ol class="breadcrumb">
+      {{--<ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
-      </ol>
+      </ol>--}}
 </section>
 
 <div class="box">
   <div class="box-header">
-    <h3 class="box-title">{{ $title }}</h3>
+    {{-- <h3 class="box-title">{{ $title }}</h3> --}}
   </div>
     <!--box-header-->
   <div class="box-body">
@@ -22,7 +22,7 @@
 
           {!! Form::open(['id' => 'form_data', 'url' => url('club/user/multiDelete')]) !!}
           {!! $dataTable->table(['class' => 'dataTable text-center table table-striped table-hover table-bordered '],true) !!}
-          {!! Form::close()  !!}
+          {!! Form::close() !!}
       </div>
   </div>
   <!-- box-body -->

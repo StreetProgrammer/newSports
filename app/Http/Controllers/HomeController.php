@@ -13,7 +13,14 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'privacy_policy', 'social_media_disclosure', 'terms_of_service');
+        $this->middleware('auth')->except('index', 
+                                            'privacy_policy', 
+                                            'social_media_disclosure',
+                                            'terms_of_service',
+                                            'faq', 
+                                            'videos',
+                                            'contactus'
+                                        );
     }
 
     /**
@@ -47,5 +54,26 @@ class HomeController extends Controller
         session()->put('lang', 'en');
         $title = 'Terms Of Service' ;
         return view('site.pages.static_pages.terms_of_service', compact('title') );
+    }
+
+    public function faq()
+    {
+        session()->put('lang', 'en');
+        $title = 'FAQ' ;
+        return view('site.pages.static_pages.faq', compact('title') );
+    }
+
+    public function contactus()
+    {
+        session()->put('lang', 'en');
+        $title = 'Contact Us' ;
+        return view('site.pages.static_pages.contactus', compact('title') );
+    }
+
+    public function videos()
+    {
+        session()->put('lang', 'en');
+        $title = 'Videos' ;
+        return view('site.pages.static_pages.videos', compact('title') );
     }
 }

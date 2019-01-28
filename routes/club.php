@@ -17,7 +17,7 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 		/* ## important note ## ====> will use this routes in other place 
 		to handle update [ clubprofile - branch - playground ] after complete register */
 
-	// handle Update main info for the club account in register procces
+	// handle send data to the app admin to accept or reject club profile
 	Route::post('/NewClubProfileCreated', 'ClubProfilesController@NewClubProfileCreated');
 
 	// handle Update main info for the club account in register procces
@@ -72,7 +72,7 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 	Route::get('club/{clubBranch}/DisplayAddPlaygroundRegister/{when?}', 'PlaygroundsController@DisplayAddPlaygroundRegister');
 	
 	// Load Editable branch record for the club account in register procces
-	Route::get('club/{Playground}/DisplayEditPlaygroundRegister', 'PlaygroundsController@DisplayEditPlaygroundRegister');
+	Route::get('club/{Playground}/DisplayEditPlaygroundRegister/{when?}', 'PlaygroundsController@DisplayEditPlaygroundRegister');
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
 	// [[ajaxLoad]] %%%%%%%%%%% partial views %%%%%%%%%%%  [[ajaxLoad]]//
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
@@ -85,19 +85,21 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
 	Route::get('/registerAddBranchPlayground', 'Club\ClubProfilesController@registerAddBranchPlayground');
 
-/*/////////////////################################################///////////////////
-* /////////////////////////// END REGISTER A CLUB /////////////////////////////////
+/////////////////################################################////////////////////
+/////////////////////////// END REGISTER A CLUB /////////////////////////////////////
 /////////////////#################################################///////////////////
 
+//=================================================================================================================================================
+//===================================================================================================================================================
+//====================================================================================================================================================
 
-/*
-* ///////////////// START A CLUB OWENR ROUTES ///////////////////
-* start of routs for a club with all data enterd [profile info, branches, playgrounds] 
-* 
-*/
+/////////////////################################################///////////////////
+/////////////////////////// START A CLUB OWENR ROUTES /////////////////////////////////
+/////////////////#################################################///////////////////
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//
-	Route::group([ 'middleware' => ['isActive', 'isClub', 'web'], 'namespace' => 'Club' ], function(){ // login as admin for this links
+	// start of routs for a club with all data enterd [profile info, branches, playgrounds]
+	Route::group([ 'middleware' => ['isActive', 'isClub', 'web'], 'namespace' => 'Club' ], function(){ // login as club for this links
 
 		// display main info for the club account
 		Route::get('club/{id}', 'ClubProfilesController@index');
@@ -120,25 +122,25 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 		// Users Routes %%%%%%%%%%% START %%%%%%%%%%%  Users Routes//
 
 		// club users datatable route
-		Route::get('club/users/all', 'ClubProfilesController@allUsers');
+		Route::get('club/users/all', 'ClubEmployeeController@allUsers');
 
 		// club user create route
-		Route::get('club/users/create', 'ClubProfilesController@createUser');
+		Route::get('club/users/create', 'ClubEmployeeController@createUser');
 
 		// club user store route
-		Route::post('club/users/store', 'ClubProfilesController@storeUser');
+		Route::post('club/users/store', 'ClubEmployeeController@storeUser');
 
 		// club user edit route
-		Route::get('club/user/{User}', 'ClubProfilesController@editUser');
+		Route::get('club/user/{User}', 'ClubEmployeeController@editUser');
 
 		// club user update route
-		Route::post('club/user/update/{User}', 'ClubProfilesController@updateUser');
+		Route::post('club/user/update/{User}', 'ClubEmployeeController@updateUser');
 
 		// club user delete route
-		Route::post('club/user/delete/{User}', 'ClubProfilesController@destroyUser');
+		Route::post('club/user/delete/{User}', 'ClubEmployeeController@destroyUser');
 
 		// club users multiDelete route
-		Route::post('club/user/multiDelete', 'ClubProfilesController@multipleDestroyUsers');
+		Route::post('club/user/multiDelete', 'ClubEmployeeController@multipleDestroyUsers');
 
 		// Users Routes %%%%%%%%%%% END %%%%%%%%%%%  Users Routes//
 
@@ -223,6 +225,11 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
 		//for check if that time is avalible or not in playground
 		Route::post('/checkVacantTime/', 'ReservationController@checkVacantTime');
+
+		//================================================================
+		//for check if that time is avalible or not in playground
+		Route::get('/clubHomeReservations/', 'ClubChartsController@clubHomeReservations');
+		//================================================================
 		
 		
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
@@ -234,6 +241,9 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//
 
+/////////////////################################################///////////////////
+/////////////////////////// END A CLUB OWENR ROUTES /////////////////////////////////
+/////////////////#################################################///////////////////
 /*
 * ///////////////// START A CLUB ADMIN ROUTES ///////////////////
 * start of routs for register a club with all data enterd [profilr info, branches, playgrounds] 
