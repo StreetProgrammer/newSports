@@ -46,36 +46,36 @@
             </div>
             <div class="box-body">
                 <div class="row">
-                <div class="col-sm-4 col-md-6">
-                    <h4 class="text-center" style="color:#3c8dbc;">
-                    {{ trans('club.mainAccountInfo') }} 
-                    <span id="ShowEditPart" style="cursor: pointer;">
-                        <i class="fa fa-edit"></i>
-                    </span>
-                    </h4>
-
-                    <!-- <div class="color-palette-set">
-                    <div class="bg-light-blue disabled color-palette"><span>Disabled</span></div>
-                    <div class="bg-light-blue color-palette"><span>#3c8dbc</span></div>
-                    <div class="bg-light-blue-active color-palette"><span>Active</span></div>
-                    </div> -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 col-md-6">
-                    <h4 class="text-center" style="color:#3c8dbc;">
-                    {{ trans('club.mainAccountBranchesPlaygroundsInfo') }}
-                    <span class="ShowManagePart" style="cursor: pointer;">
-                        <i class="fa fa-tasks"></i>
-                    </span>
-                    </h4>
-
-                    <!-- <div class="color-palette-set">
-                    <div class="bg-aqua disabled color-palette"><span>Disabled</span></div>
-                    <div class="bg-aqua color-palette"><span>#00c0ef</span></div>
-                    <div class="bg-aqua-active color-palette"><span>Active</span></div>
-                    </div> -->
-                </div>
-                <!-- /.col -->
+                    <div class="col-md-6 col-sm-offset-3 text-center">
+                        <div class="alert" style="background-color: #fff !important;border: 2px solid #3c8dbc;">
+                            <p style="color: #3c8dbc;
+                            font-size: 100%;
+                            font-weight: bold;
+                            font-family: sans-serif;"   
+                            >
+                                {{ trans('club.finishEditMessage') }}
+                                <span style="color:#ff0505">{{ trans('club.untillreview') }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-6">
+                        <h4 class="text-center" style="color:#3c8dbc;">
+                        {{ trans('club.mainAccountInfo') }} 
+                        <span id="ShowEditPart" style="cursor: pointer;">
+                            <i class="fa fa-edit"></i>
+                        </span>
+                        </h4>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 col-md-6">
+                        <h4 class="text-center" style="color:#3c8dbc;">
+                        {{ trans('club.mainAccountBranchesPlaygroundsInfo') }}
+                        <span class="ShowManagePart" style="cursor: pointer;">
+                            <i class="fa fa-tasks"></i>
+                        </span>
+                        </h4>
+                    </div>
+                    <!-- /.col -->
                 </div>
                 <!-- /.row -->
             </div>

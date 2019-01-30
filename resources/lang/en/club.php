@@ -35,8 +35,8 @@ return [
 
      /////start club.register.pageparts.addNewBranch - addNewPlayground - editBranch - editPlayground ////////////////////////////
     'Branches'                                              => 'Branches' ,
-    'mainAccountBranchesPlaygroundsInfo'                    => 'main Club Account Branches Courts Informations' ,
-    'mainAccountInfo'                                       => 'Main Club Account Informations',
+    'mainAccountBranchesPlaygroundsInfo'                    => 'Edit Branches Courts Informations' ,
+    'mainAccountInfo'                                       => 'Edit Main Club Account Informations',
     'Name'                                                  => 'Name' ,
     'Phone'                                                 => 'Phone' ,
     'Location'                                              => 'Location' ,
@@ -49,6 +49,8 @@ return [
     'Add_New_Playground'                                    => 'Add New Playground' ,
     'No_Playgrounds'                                        => 'No Playgrounds' ,
     'finishMessage'                                         => 'If you have completed your club data, please press the button below to submit the data for review' ,
+    'finishEditMessage'                                     => 'If you have completed your club data edits, please press the button below to submit the data for review.' ,
+    'untillreview'                                          => 'Untill approval all updated items will be disabled' ,
     'Send_Account_Data'                                     => 'Send Account Data' ,
     'Sport'                                                 => 'Sport' ,
     'Select_Sport'                                          => 'Select Sport' ,

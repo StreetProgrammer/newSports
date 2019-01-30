@@ -9,7 +9,7 @@
             <div class=" col-md-12">
 
               <div class="imageInfo col-md-4">       
-                @include('club.register.pageParts.branchesPlaygroundsInfo')
+                @include('club.Edits.pageParts.branchesPlaygroundsInfo')
               </div>
 
         <div class="mainInfo col-md-8">
@@ -17,9 +17,9 @@
           {!! Form::open(['url' => aurl(''), 'method' => 'POST']) !!}
           {!! Form::hidden( 'clubId', Auth::id() ) !!}
           <div class="box box-primary">
-            <div class="box-header with-border">
-              
-            </div>
+              <div class="box-header">
+                <h3 class="box-title">{{ $title }}</h3>
+              </div>
             <!-- /.box-header -->
             <div class="box-body">
               <!-- <p class="text-center">hggh</p> -->

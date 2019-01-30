@@ -9,7 +9,7 @@
             <div class=" col-md-12">
 
           <div class="imageInfo col-md-4">       
-            @include('club.register.pageParts.branchesPlaygroundsInfo')
+            @include('club.Edits.pageParts.branchesPlaygroundsInfo')
           </div>
         <div class="mainInfo col-md-8">
           <!-- About Me Box -->

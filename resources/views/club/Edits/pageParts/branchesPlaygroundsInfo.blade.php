@@ -128,7 +128,8 @@
                             font-weight: bold;
                             font-family: sans-serif;"   
                     >
-                    {{ trans('club.finishMessage') }}
+                    {{ trans('club.finishEditMessage') }}
+                    <span style="color:#ff0505">{{ trans('club.untillreview') }}</span>
                       {{-- if you finished your club data, please click button below to save it and wait for our response --}}
                     </p>
                     {!! Form::submit(trans('club.Send_Account_Data'), ['class' => 'btn btn-primary btn-block']) !!}
