@@ -55,7 +55,7 @@
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    {{direction() == 'ltr' ? 'How To..' : 'كيف يمكن ...'}}
+                    {{direction() == 'ltr' ? 'Help Center' : 'المساعدة'}}
                   <b class="caret"></b>
                 </a>   
 

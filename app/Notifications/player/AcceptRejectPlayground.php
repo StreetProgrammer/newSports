@@ -54,8 +54,8 @@ class AcceptRejectPlayground extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
-        //return ['mail', 'database'];
+        // return ['database'];
+        return ['mail', 'database'];
     }
 
     /**

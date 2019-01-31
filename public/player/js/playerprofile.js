@@ -789,7 +789,7 @@ $(document).on('click', "#addNewChallenge", function () {
 
 
   if (date == null || date == "" || date < dateString ) {
-    err = 1 ;
+    //err = 1 ;
   }
   var from  =  $("select[name=C_from]").val();
   if (from == null || from == "" ) {

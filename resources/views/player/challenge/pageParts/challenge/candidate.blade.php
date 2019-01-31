@@ -34,7 +34,7 @@
       </h4>
       {{--start candidate desien part--}}
 
-      @if ( $challenge->creator->id != Auth::id() )
+      @if ( $challenge->creator->id != Auth::id() && $challenge->candidate->id == Auth::id() )
         <p>
            @if ($challenge->C_YesOrNo == 0)
 

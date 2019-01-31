@@ -117,8 +117,8 @@
     {{------------------------------------------------------------------------}}
 
         {{----------------------------- chat part---------------------------------------}}
-
-@if ($challenge->C_YesOrNo == 1)
+@if (Auth::id() == $challenge->C_candidate_id || Auth::id() == $challenge->C_creator_id)
+  @if ($challenge->C_YesOrNo == 1)
   <div class="chat-widget-wrapper">
     <div class="chat-widget-container">
       <div class="chat-widget-text">
@@ -157,13 +157,12 @@
             @endif
         >
         </iframe>
-        {{-- <form action="" class="chat-box-form">
-          kmtkhmthkmktmhk kehmkelh kermhkmkler hklremlhmek
-        </form> --}}
       </div>
     </div>
   </div>
+  @endif
 @endif
+
 
 
     {{----------------------------- chat part---------------------------------------}}

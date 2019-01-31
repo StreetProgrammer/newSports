@@ -140,9 +140,9 @@ class EventController extends Controller
 			$users = User::where('id', '!=', Auth::id())
                         ->whereHas('playerProfile',function($query){
                                     $query->where('p_country', '=', Auth::user()->playerProfile->p_country)
-                                    ->where('p_city', '=', Auth::user()->playerProfile->p_city)
+                                    //->where('p_city', '=', Auth::user()->playerProfile->p_city)
 									//->where('p_area', '=', Auth::user()->playerProfile->p_area)
-									->whereIn('p_preferred_gender', [null, 3, Auth::user()->playerProfile->p_gender]);
+									->whereIn('p_preferred_gender', [0, 3, Auth::user()->playerProfile->p_gender]);
 								}) 
                         ->whereHas('sports',function($query) use($sport){
                             $query->where('sports.id', '=', $sport);

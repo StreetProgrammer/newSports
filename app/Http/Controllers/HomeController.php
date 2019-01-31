@@ -58,8 +58,8 @@ class HomeController extends Controller
 
     public function faq()
     {
-        session()->put('lang', 'en');
-        $title = 'FAQ' ;
+        // session()->put('lang', 'en');
+        $title = direction() == 'ltr' ? 'FAQ' : 'الأسئله الشائعه';
         return view('site.pages.static_pages.faq', compact('title') );
     }
 

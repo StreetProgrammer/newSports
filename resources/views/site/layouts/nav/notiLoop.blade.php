@@ -44,8 +44,9 @@
             @else
                 {{$notification->data['ar']}}
             @endif
-            <a href="{{url('/')}}{{$notification->data['taraget_url']}}">
-                more
+            <a href="{{url('/')}}{{$notification->data['taraget_url']}}" style="
+    font-size: 15px;">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
             </a> 
             {{-- <a href="" class="{{$notification->id}}_as-read a-holding-divs rIcon">
                 <i class="fa fa-dot-circle-o"></i>

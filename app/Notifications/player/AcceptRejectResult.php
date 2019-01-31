@@ -52,8 +52,8 @@ class AcceptRejectResult extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
-        //return ['mail', 'database'];
+        // return ['database', 'broadcast'];
+        return ['mail', 'database'];
     }
 
     /**

@@ -284,5 +284,27 @@ return [
     'Location'                                  => 'Location' ,
     'SignOut'                                   => 'SignOut ' ,
     //////////////////////////// end player.search.pages.search /////////////////////
+
+    ///////////////////////////// start site.pages.static_pages.faq ///////////////////
+    'q1'                                        => 'Is SportsMate an online game ?' , 
+    'a1'                                        => 'No. SportsMate is a website that you can join to help you find friends who play the same sports as you. ' ,
+    'q2'                                        => 'Is SportsMate a club ?',
+    'a2'                                        => 'No. SportsMate is an online website for you to make new friends to play your favorite sports' ,
+    'q3'                                        => 'How do I sign up ?' ,
+    'a3'                                        => 'Its free . You sign in online through the link on the main page. ' ,
+    'q4'                                        => 'Is there any membership fees ?' , 
+    'a4'                                        => 'No. SportsMate is free.' ,
+    'q5'                                        => 'Is SportsMate a tournament ?',
+    'a5'                                        => 'no SportsMate is an online website to help you make friends to play tournaments in real life'  ,
+    'q6'                                        => 'How do I make friends/add friends ?' ,
+    'a6'                                        => 'Once you have filled out your profile the next step is to search Players. 
+                                                    Click on the Players icon you will get a list of all Players. 
+                                                    When you click on a name, you will see their profile. 
+                                                    Under their name and picture is the icon for Create challenge. 
+                                                    This will show that person that you are inviting them to play a match. 
+                                                    You will then get diverted to a screen where you can chose the date and time. 
+                                                    Your new friend will receive this invitation in their inbox and can accept or decline this Challenge (Match).
+                                                    Once accepted , a chat box will appear where you can communicate further any details .  ' ,
+    //////////////////////////// end site.pages.static_pages.faq /////////////////////
     
 ];
