@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Socialite ;
 use App\Model\User;
 use App\Model\playerProfile;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -131,6 +132,18 @@ class LoginController extends Controller
                                 ]) ;
             return 1;
         }
+        
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->type == 1) { // make sure the user is a player 
+            if ($user->our_is_active == 0) { // check if user is verified or not
+                auth()->logout();
+                return back()->with('warning', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+            }
+        }
+        return redirect()->intended($this->redirectPath());
         
     }
 }

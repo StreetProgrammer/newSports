@@ -8,8 +8,10 @@ use App\Model\User;
 use App\Model\playerProfile;
 use App\Model\ClubProfile;
 use App\Model\clubBranche;
+use App\Mail\palyer\VerifyMail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 use Auth ;
 class RegisterController extends Controller
@@ -103,9 +105,10 @@ class RegisterController extends Controller
                 'slug'              => $slug,
                 'type'              => $data['type'],
                 'user_is_active'    => 1,
-                'our_is_active'     => 1,
+                'our_is_active'     => 0,
                 'active_code'       => $activateCode,
                 'password'          => bcrypt($data['password']),
+                'verify'            => str_random(40),
                 ]);
 
             playerProfile::create(['p_user_id'              => $user->id,
@@ -114,11 +117,44 @@ class RegisterController extends Controller
                                    'p_gender'               => 0,
                                 ]) ;
 
-            
-            //$redirectTo = $user->type == 1 ? '/home' : '/club/'.$user->slug;
+            Mail::to($user->email)->send(new VerifyMail($user));
             $redirectTo = $user->type == 1 ? '/home' : 'club/' .$user->slug . '/complete_profile';
             return $user ;
-            //return Auth::user()->type == 1 ? '/home' : '/club/'.Auth::user()->slug;
         }
     }
+
+    public function verifyUser($token)
+    {
+        $User = User::where('verify ', $token)->first() ;
+        $verifyUser = $User->verify ;
+        if( $verifyUser != 0 ){
+            $user = User::where('verify ', $token)->first();
+            if($user->our_is_active == 0) {
+                $user->our_is_active = 1;
+                $user->our_is_active->save();
+                $status = "Your e-mail is verified. You can now login.";
+            }else{
+                $status = "Your e-mail is already verified. You can now login.";
+            }
+        }else{
+            return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
+        }
+
+        return redirect('/login')->with('status', $status);
+    }
+
+
+    /**
+     * The user has been registered. overrided function itis exist in ( RegistersUsers )
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+        return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
+    }
+
 }

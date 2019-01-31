@@ -58,9 +58,32 @@
       <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30" style="padding-top: 20px;">
         <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
           {!! csrf_field() !!}
-          <span class="login100-form-title p-b-55">
+          <span class="login100-form-title">
             {{ trans('player.loginTitle') }}
           </span>
+
+          <div class="alert">
+            @if (session('status'))
+              <div class="alert alert-success text-center">
+                  {{ session('status') }}
+              </div>
+            @endif
+            @if (session('warning'))
+              <div class="alert alert-danger text-center">
+                  {{ session('warning') }}
+              </div>
+            @endif
+            @if ($errors->has('email'))
+              <div class="alert alert-danger text-center">
+                  {{ $errors->first('email') }}
+              </div>
+            @endif
+            @if ($errors->has('password'))
+              <div class="alert alert-danger text-center">
+                  {{ $errors->first('email') }}
+              </div>
+            @endif
+          </div>
 
           <div class="wrap-input100 validate-input m-b-16 @if ($errors->has('email')) alert-validate @endif" 
                 data-validate = "{{------------------------}}

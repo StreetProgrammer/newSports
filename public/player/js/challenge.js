@@ -399,7 +399,7 @@ $(document).on('click', "#RatePlayer", function (e) {
 		data['OpinionBy'] = OpinionBy;
 		$.ajax({
 			type: 'POST',
-			url: '/AddPlayerRate/',
+			url: '/AddPlayerRate',
 			data: data,
 			success: function (data) {
 				if (data == 'true') {
