@@ -72,7 +72,6 @@ class HomeController extends Controller
 
     public function videos()
     {
-        session()->put('lang', 'en');
         $title = 'Videos' ;
         return view('site.pages.static_pages.videos', compact('title') );
     }

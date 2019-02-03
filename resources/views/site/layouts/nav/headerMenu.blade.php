@@ -28,7 +28,7 @@
 
                 <div class="row dropdown-menu mega-menu" ">
                   @php
-                    $sports = \App\Model\Sport::all() ;
+                    $sports = direction() == 'ltr' ? \App\Model\Sport::orderBy('en_sport_name')->get() : \App\Model\Sport::orderBy('ar_sport_name')->get() ;
                   @endphp
                   
                   @foreach ($sports as $sport)
@@ -74,15 +74,15 @@
                       </div>
                     </div>
                   </a>
-                  {{--
-                  <a class="a-holding-divs" href="{{ url('/') }}/Sport/{{ sm_crypt($sport->id) }}" style="color:#fff;">
+                  
+                  <a class="a-holding-divs" href="{{ url('/') }}/videos" style="color:#fff;">
                     <div class="col-xs-12 text-center">
                       <div class="sport-menu" style="padding: 5px 0px;">
                         {{direction() == 'ltr' ? 'Videos' : 'فيديو'}}
                       </div>
                     </div>
                   </a>
-                  --}}
+                
               </li>
             </ul>
     

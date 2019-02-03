@@ -59,10 +59,7 @@ return [
     'home_se3_subtit6'                          => 'أضمن المنافسة مع محترفين' ,
     'Follow_us'                                 => 'تابعنا' ,
     'About_SportsMate'                          => 'عن SportsMate' ,
-    'about_sm'                                  => 'The ultimate online sports world where you can search for players in your community,
-                                     find a partner to play your favourite sport and make new friends!
-                                    Join challenges, compete with professionals, 
-                                    acquire points and know your rank amongst your competitors' ,
+    'about_sm'                                  => 'أفضل عالم للرياضة على الإنترنت حيث يمكنك البحث عن لاعبين في مجتمعك ، والعثور على شريك للعب معك الرياضة المفضلة لديك وتكوين صداقات جديدة! انضم إلى التحديات ، وتنافس مع المحترفين، واحصل على النقاط واعرف تقييمك بين منافسيك' ,
                                     
     'Contact_Us'                                => 'اتصل بنا' ,
     'subject'                                   => 'الموضوع' ,
@@ -293,6 +290,13 @@ return [
     
      ' ,
     //////////////////////////// end player.search.pages.search /////////////////////
+
+    ///////////////////////////// start site.pages.static_pages.videos ///////////////////
+
+    'Visual_Information'                        => 'معلومات مرئية' , 
+    'how_to_register'                           => 'كيفية التسجيل' ,
+    
+    //////////////////////////// end site.pages.static_pages.videos /////////////////////
 
     /* //////////////////// start navbar file ///////////////////
     'navSearch'                    => 'البحث',

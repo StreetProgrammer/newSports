@@ -307,4 +307,10 @@ return [
                                                     Once accepted , a chat box will appear where you can communicate further any details .  ' ,
     //////////////////////////// end site.pages.static_pages.faq /////////////////////
     
+    ///////////////////////////// start site.pages.static_pages.videos ///////////////////
+    'Visual_Information'                        => 'Visual Information' , 
+    'how_to_register'                           => 'How To Register' ,
+    
+    //////////////////////////// end site.pages.static_pages.videos /////////////////////
+    
 ];

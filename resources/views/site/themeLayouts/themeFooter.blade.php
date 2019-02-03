@@ -84,7 +84,7 @@
 													rows="5"
 													placeholder="{{ trans('player.message') }}" 
 													value=""
-										></textarea>
+											></textarea>
 										</div>
 									</div>
 								</div>
