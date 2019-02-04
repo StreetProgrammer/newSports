@@ -163,7 +163,7 @@
               <!---->
               <!---->
               <div class="col-lg-12" style="margin:10px auto">
-                <select class="form-control input-xs" name="c_b_country" id="country">
+                <select class="form-control input-xs" name="c_country" id="country">
                   <option value="">{{ trans('player.Select_Country') }}</option>
                     @foreach ($countries as $country)
                       <option

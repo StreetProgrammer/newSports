@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller ;
 use Storage ;
 use Charts ;
 use App\Traits\ChartsGenrator ;
-// use Charts ;
+use App\Traits\Olddatakepper ;
 
 use App\Notifications\admin\NewClubRegistered ;
 use App\Notifications\admin\NewClubFixedErr ;
@@ -32,7 +32,8 @@ use Illuminate\Support\Facades\Gate ;
 
 class ClubProfilesController extends Controller
 {
-    use ChartsGenrator;
+    use ChartsGenrator ;
+    use Olddatakepper ;
     /*
     *function to handle send data to the app admin to accept or reject club profile
     */
@@ -45,6 +46,8 @@ class ClubProfilesController extends Controller
             \Notification::send($admins, new NewClubRegistered($club));
         } elseif ($club->our_is_active == 3) {
             \Notification::send($admins, new NewClubFixedErr($club));
+        }elseif($club->our_is_active == 1){
+            \Notification::send($admins, new NewClubEditRequest($club));
         }
         $club->our_is_active = 2 ;
         $club->save();
@@ -283,112 +286,87 @@ class ClubProfilesController extends Controller
     	return 2;
     }
 
+    public function OldUpdateProfile(Request $request)
+    {
+        return $request ;
+
+
+        if ( !empty($request->password) ) {
+            User::where('id', '=', $clubUser->id)->update(array(
+                            'name'              => $request->name,
+                            'email'             => $request->email,
+                            'password'          => bcrypt($request->password),
+                        ));
+        } else {
+            User::where('id', '=', $clubUser->id)->update(array(
+                            'name'              => $request->name,
+                            'email'             => $request->email,
+                        ));
+        }
+
+        if (Auth::user()->id == $request->clubId) {
+            clubProfile::where('c_user_id', '=', $clubUser->id)
+                        ->update(array(
+                            'c_phone' => $request->c_phone,
+                            'c_city' => $request->c_country,
+                            'c_city' => $request->c_city,
+                            'c_area' => $request->c_area,
+                            'c_address' => $request->c_address,
+                            'c_desc' => $request->c_desc,
+                        ));
+            return $request->name ;
+        } else {
+            return 'failed' ;
+        }
+    }
+
     // update profile info
     public function updateProfile(Request $request)
     {
-        $clubUser    = User::find(Auth::user()->id) ;
-        $clubProfile = clubProfile::where('c_user_id', '=', Auth::user()->id)
-                        ->first();
-        $display = [] ;
-        $oldData = [] ;
-        $newData = [] ;
+        $clubUser    = User::find($request->clubId) ;
+        $clubProfile = clubProfile::where('c_user_id', '=', $request->clubId)->first();
 
-        foreach ($clubUser->toArray() as $CUkey => $CUvalue) {
-            if ($request[$CUkey] != $CUvalue && $request->has($CUkey)) {
-                $oldData[$CUkey] = $CUvalue ;
-                $newData[$CUkey] = $request[$CUkey] ;
-            }
+        $PendingEdit = self::prepare('\App\Model\User', $request->clubId, $clubUser, $request) ;
+        
+        self::prepare('App\Model\clubProfile', $clubProfile->id, $clubProfile, $request) ;
+        // strat update here 
+        if ( !empty($request->password) ) {
+            User::where('id', '=', $clubUser->id)->update(array(
+                            'name'              => $request->name,
+                            'email'             => $request->email,
+                            'password'          => bcrypt($request->password),
+                        ));
+        } else {
+            User::where('id', '=', $clubUser->id)->update(array(
+                            'name'              => $request->name,
+                            'email'             => $request->email,
+                        ));
         }
 
-        foreach ($clubProfile->toArray() as $CPkey => $CPvalue) {
-            if ($request[$CPkey] != $CPvalue && $request->has($CPkey)) {
-                $oldData[$CPkey] = $CPvalue ;
-                $newData[$CPkey] = $request[$CPkey] ;
-            }
+        if (Auth::user()->id == $request->clubId) {
+            clubProfile::where('c_user_id', '=', $clubUser->id)->update(array(
+                            'c_phone' => $request->c_phone, 'c_country' => $request->c_country,
+                            'c_city' => $request->c_city, 'c_area' => $request->c_area,
+                            'c_address' => $request->c_address, 'c_desc' => $request->c_desc,
+                        ));
+            //return $request->name ;
+        } else {
+            return 'failed' ;
         }
-        $namesArr = ['name'         => 'name',
-                    'c_phone'       => 'phone',
-                    'c_city'        => 'city',
-                    'c_area'        => 'area',
-                    'c_address'     => 'address',
-                    'c_desc'        => 'description'
-                    ] ;
-        $models = ['city'   => ['table' => 'governorates',
-                                 'DBname' => 'g_en_name'
-                             ],
-                    'area'  => ['table' => 'areas',
-                                'DBname' => 'a_en_name'
-                            ],
-                    'sport' => ['table' => '\App\Model\Sport',
-                                'DBname' => 'en_sport_name'
-                            ]
-                ] ;
+        if ($PendingEdit) {
 
-        $i = 0 ;
-        foreach ($oldData as $oldkey => $oldvalue) {
-
-            $display[$i] = array(
-                                'name' => $namesArr[$oldkey],
-                                'old' => $oldvalue,
-                                'new' => $newData[$oldkey]
-                            );
-            if (array_key_exists($display[$i]['name'],$models)) {
-                /*print_r($models[$display[$i]['name']]['table']) ;
-                echo "<br>";*/
-                //return implode('',$models[$display[$i]['name']]['DBname']) ;
-                $display[$i]['old'] = DB::table($models[$display[$i]['name']]['table'])
-                                       ->select($models[$display[$i]['name']]['DBname'])
-                                       ->where('id', '=', $display[$i]['old'] )
-                                       ->first();
-                //$display[$i]['old'] = $display[$i]['old']->$models[ $display[$i]['name'] ]['DBname'] ;
-                //$display[$i]['old'] = $display[$i]['old'][ $models[$display[$i]['name']]['DBname'] ] ;
-                /*$display[$i]['old'] = $models[$display[$i]['name']]['modelPath']::find($oldvalue) ;
-
-                $display[$i]['old'] = $display[$i]['old']->$models[ $display[$i]['name'] ]['DBname'] ;*/
-            }
-
-
-            $i++ ;
-        }
-        /*for ($i = 0; $i < count($oldData); ++$i) {
-            $display[$i] = array($i + 1 => $i + 1, $i + 2 => $i + 2, $i + 3 => $i + 3);
-        }*/
-
-
-        return $display ;
-        // create new pending_data record
-        $PendingEdit = new PendingEdit;
-
-        $PendingEdit->taraget_model_type = '\App\Model\User';
-        $PendingEdit->taraget_model_id   = Auth::id();
-        $PendingEdit->user_id            = Auth::id();
-        $PendingEdit->old_data           = json_encode($oldData);
-        $PendingEdit->new_data           = json_encode($newData);
-
-        $PendingEdit->save();
-    	/*$PendingEdit = PendingEdit::create([
-                    'taraget_model_type'    => '\App\Model\User',
-                    'taraget_model_id'      => Auth::id(),
-                    'user_id'               => Auth::id(),
-                    'old_data'              => json_encode($oldData) ,
-                    'new_data'              => json_encode($newData) ,
-            ]);*/
-         // send notification to the admins
-         if ($PendingEdit) {
             $PendingEdit = PendingEdit::find($PendingEdit->id) ;
             $admins = Admin::all() ;
-            //return $admins ;
             \Notification::send($admins, new NewClubEditRequest($clubUser, $PendingEdit));
             return 'done' ;
-         } else {
-             # code...
          }
-
-         // return result to user
 
     }
 
-    // update Club Profile Photo
+    /* 
+    * update Club Profile Photo Post for update Club Profile Photo
+    *  return response('done', 'imgUrl' or 'false')
+    */
     public function updateClubProfilePhoto(Request $request)
     {
         if (Auth::id() == $request->clubId) {
@@ -425,14 +403,21 @@ class ClubProfilesController extends Controller
     }
 
     // to get page where club can update [ profile - branches - playgrounds ]
-     public function updateAllData()
+
+    /* 
+    * Final Simple Get Route
+    *  return view('club.Edits.Edits')
+    */
+     public function updateAllData() 
     {
         $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
 
         return view('club.Edits.Edits',  compact( 'governorate', 'countries'));
     }
-    //%%%%%%%%%%%%%%%%%%% ajax functions for load partial views %%%%%%%%%%%%%%%%%%//
+
+
+    //%%%%%%%%%%%%%%%%%%% Start ajax functions for load partial views %%%%%%%%%%%%%%%%%%//
 
     public function registerPageTop()
     {
@@ -515,6 +500,7 @@ class ClubProfilesController extends Controller
         return view('club.Profile.pageParts.userProfile.userProfileImageDiv', compact('club', 'governorate', 'countries')) ;
     }
 
+    //%%%%%%%%%%%%%%%%%%% End ajax functions for load partial views %%%%%%%%%%%%%%%%%%//
 
     public function logout(Request $request) {
       Auth::logout();

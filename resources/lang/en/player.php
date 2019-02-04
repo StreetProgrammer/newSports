@@ -308,7 +308,7 @@ return [
     //////////////////////////// end site.pages.static_pages.faq /////////////////////
     
     ///////////////////////////// start site.pages.static_pages.videos ///////////////////
-    'Visual_Information'                        => 'Visual Information' , 
+    'Visual_Information'                        => 'Tutorials' , 
     'how_to_register'                           => 'How To Register' ,
     
     //////////////////////////// end site.pages.static_pages.videos /////////////////////

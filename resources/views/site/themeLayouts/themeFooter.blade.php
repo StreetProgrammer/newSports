@@ -14,9 +14,9 @@
 									{{--<a href="#" class="float-shadow">
 										<img src="{{ url('/') }}/themeFiles/images/icon/icon-tw.png" alt="">
 									</a>--}}
-									{{--<a href="#" class="float-shadow">
+									<a href="https://www.instagram.com/sports.mate/" class="float-shadow">
 										<img src="{{ url('/') }}/themeFiles/images/icon/icon-ig.png" alt="">
-									</a>--}}
+									</a>
 									{{-- <a href="#" class="float-shadow"><img src="{{ url('/') }}/themeFiles/images/icon/icon-gp.png" alt=""></a>
 									<a href="#" class="float-shadow"><img src="{{ url('/') }}/themeFiles/images/icon/icon-pt.png" alt=""></a> --}}
 								</div>

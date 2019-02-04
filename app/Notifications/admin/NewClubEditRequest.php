@@ -59,8 +59,8 @@ class NewClubEditRequest extends Notification
      */
     public function via($notifiable)
     {
-        //return ['mail', 'database'];
-        return ['database'];
+        return ['mail', 'database'];
+        //return ['database'];
     }
 
     /**
@@ -87,7 +87,7 @@ class NewClubEditRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            'ar'        => 'اطلب تعديل بيانلت',
+            'ar'        => 'طلب تعديل بيانات',
             'en'        => 'Club Request Edit Data',
             'url'       => $this->link . '' .  $this->pendingEdit->taraget_model_id,
             'clubId'    => $this->club->id,

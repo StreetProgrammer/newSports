@@ -14,8 +14,8 @@ Route::get('/newclubregisterview', function () {
 
 Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
-		/* ## important note ## ====> will use this routes in other place 
-		to handle update [ clubprofile - branch - playground ] after complete register */
+	/* ## important note ## ====> will use this routes in other place
+	to handle update [ clubprofile - branch - playground ] after complete register */ 
 
 	// handle send data to the app admin to accept or reject club profile
 	Route::post('/NewClubProfileCreated', 'ClubProfilesController@NewClubProfileCreated');

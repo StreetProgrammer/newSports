@@ -659,22 +659,17 @@ $(document).on('click', "#showHidePlaygrounds", function () {
 $(document).on('click', "#UpdateClubMainInfo", function (e) {
     e.preventDefault();
     var errors = 0;
+    //alert('nice');
 
     var name = $("input[name=name]").val();
 
     if (name.replace(/\s/g, "") === "") {
 
         errors = 1;
-        $("input[name=name]").css({
-            border: '2px solid #e80f0f',
-            background: '#f7e7e7'
-        });
+        $("input[name=name]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
 
     } else {
-        $("input[name=name]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
+        $("input[name=name]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
     }
 
     var c_phone = $("input[name=c_phone]").val();
@@ -682,16 +677,10 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
     if (c_phone.replace(/\s/g, "") === "") {
 
         errors = 1;
-        $("input[name=c_phone]").css({
-            border: '2px solid #e80f0f',
-            background: '#f7e7e7'
-        });
+        $("input[name=c_phone]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
 
     } else {
-        $("input[name=c_phone]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
+        $("input[name=c_phone]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
     }
 
     var email = $("input[name=email]").val();
@@ -699,16 +688,21 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
     if (email.replace(/\s/g, "") === "") {
 
         errors = 1;
-        $("input[name=email]").css({
-            border: '2px solid #e80f0f',
-            background: '#f7e7e7'
-        });
+        $("input[name=email]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
 
     } else {
-        $("input[name=email]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
+        $("input[name=email]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+    }
+
+    var c_country = $("select[name=c_country]").val();
+
+    if (c_country.replace(/\s/g, "") === "") {
+
+        errors = 1;
+        $("select[name=c_country]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
+
+    } else {
+        $("select[name=c_country]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
     }
 
     var c_city = $("select[name=c_city]").val();
@@ -716,33 +710,20 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
     if (c_city.replace(/\s/g, "") === "") {
 
         errors = 1;
-        $("select[name=c_city]").css({
-            border: '2px solid #e80f0f',
-            background: '#f7e7e7'
-        });
+        $("select[name=c_city]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
 
     } else {
-        $("select[name=c_city]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
+        $("select[name=c_city]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
     }
 
     var c_area = $("select[name=c_area]").val();
 
     if (c_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
-        $("select[name=c_area]").css({
-            border: '2px solid #e80f0f',
-            background: '#f7e7e7'
-        });
+        $("select[name=c_area]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
 
     } else {
-        $("select[name=c_area]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
+        $("select[name=c_area]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
     }
 
     var c_address = $("input[name=c_address]").val();
@@ -750,61 +731,27 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
     if (c_address.replace(/\s/g, "") === "") {
 
         errors = 1;
-        $("input[name=c_address]").css({
-            border: '2px solid #e80f0f',
-            background: '#f7e7e7'
-        });
+        $("input[name=c_address]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
 
     } else {
-        $("input[name=c_address]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
+        $("input[name=c_address]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
     }
 
     var password = $("input[name=password]").val();
 
-    /*if(password.replace(/\s/g,"") === ""){
-
-          errors = 1;
-        $("input[name=password]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
-
-    }else{
-        $("input[name=password]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
-    }*/
 
     if (errors === 0) {
         $('#contentChangable').css('opacity', '0.6');
         $('.Loader').fadeIn();
 
-        $("input[name=name]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
-        $("input[name=c_phone]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
-        $("input[name=email]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
-        $("select[name=c_area]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
-        $("select[name=c_city]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
-        $("select[name=c_address]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
-        $("select[name=password]").css({
-            border: '2px solid #5cb85c',
-            background: '#b2e8b2'
-        });
+        $("input[name=name]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+        $("input[name=c_phone]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+        $("input[name=email]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+        $("select[name=c_country]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+        $("select[name=c_city]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+        $("select[name=c_area]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+        $("select[name=c_address]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
+        $("select[name=password]").css({border: '2px solid #5cb85c',background: '#b2e8b2'});
         var _token = $("input[name=_token]").val();
         var user_img = $("input[name=user_img]").val();
         var type = $("input[name=type]").val();
@@ -812,20 +759,13 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
         var c_desc = $('textarea#c_desc').val();
         $.ajax({
             type: 'POST',
-            url: '/updateRegisterClubMainInfo',
+            url: '/club/clubProfileEdit',
 
             data: {
-                _token: _token,
-                type: type,
-                clubId: clubId,
-                name: name,
-                c_phone: c_phone,
-                email: email,
-                c_city: c_city,
-                c_area: c_area,
-                c_address: c_address,
-                password: password,
-                c_desc: c_desc,
+                _token: _token, type: type,
+                clubId: clubId, name: name, c_phone: c_phone, email: email,
+                c_country: c_country, c_city: c_city, c_area: c_area,
+                c_address: c_address, password: password, c_desc: c_desc,
             },
             success: function (data) {
                 //alert(data);
@@ -839,8 +779,6 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
                 $('#contentChangable').css('opacity', '1');
                 $('.Loader').fadeOut();
                 $('#contentChangable').load('/club/editMainRegisterInfo/ear').fadeIn('slow');
-                //$('#EventGames').load('http://127.0.0.1:8000/Event/' + MainEvent + '/Games').fadeIn('slow');
-
             }
         });
 
@@ -934,10 +872,7 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
     if (c_b_p_name.replace(/\s/g, "") === "") {
 
         errors = 1;
-        $("input[name=c_b_p_name]").css({
-            border: '2px solid #e80f0f',
-            background: '#f7e7e7'
-        });
+        $("input[name=c_b_p_name]").css({border: '2px solid #e80f0f',background: '#f7e7e7'});
 
     } else {
         $("input[name=c_b_p_name]").css({
