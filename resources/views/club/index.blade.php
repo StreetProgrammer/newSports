@@ -1,5 +1,5 @@
-@include('club.layouts.header')
-@include('club.layouts.navbar')
+@include('club.layouts.after.header')
+@include('club.layouts.after.navbar')
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -18,7 +18,7 @@
 
     <!-- Main content -->
     <section class="content">
-    	@include('club.layouts.messages')
+    	@include('club.layouts.after.messages')
     	@yield('content')
       <!-- Small boxes (Stat box) -->
       
@@ -32,4 +32,4 @@
 
 
 
-@include('club.layouts.footer')
+@include('club.layouts.after.footer')

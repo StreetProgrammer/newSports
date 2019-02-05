@@ -145,7 +145,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Pre-header for the newsletter template
+                    The ultimate online sports world
                 </div>
             </td>
         </tr>
@@ -174,7 +174,7 @@
                                         >
                                             <img width="100" border="0" 
                                                  style="display: block; width: 100px;" 
-                                                 src="http://sports-mate.net/images/icons/logo.png" alt="" 
+                                                 src="https://sports-mate.net/storage/settings/s9w4Z2xbKKM7UGjvpUeph2Bnz9oUseiacJxEg1FY.png" alt="" 
                                             />
                                         </a>
                                     </td>

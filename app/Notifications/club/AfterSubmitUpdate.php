@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\admin;
+namespace App\Notifications\club;
 
 use App\Model\User ;
 use App\Model\PendingEdit;
@@ -13,42 +13,26 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewClubEditRequest extends Notification
+class AfterSubmitUpdate extends Notification
 {
-    use Queueable;
+    use Queueable ;
 
     protected $club ;
 
-    public $pendingEdit ;
+    public $name ;
 
-    protected $link ;
-
-    //protected $id ;
-
-    public $linksArr = [
-            '\App\Model\User'               => '/clubs/',
-            '\App\Model\clubBranche'        => '/branches/',
-            '\App\Model\Playground'         => '/playgrounds/',
-
-    ] ;
+    protected $case ;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $club, PendingEdit $pendingEdit)
-    {
-        //$this->id = $id ;
-
-        
-
+    public function __construct(User $club, $case)
+    {   
         $this->club = $club ;
-
-        $this->pendingEdit = $pendingEdit ;
-
-        $this->link = $this->linksArr[$pendingEdit->taraget_model_type] ;
-
+        $this->name = $club->name ;
+        $this->case = $case ;
     }
 
     /**
@@ -59,8 +43,9 @@ class NewClubEditRequest extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        //return ['mail', 'database'];
         //return ['database'];
+        return ['mail'];
     }
 
     /**
@@ -71,10 +56,9 @@ class NewClubEditRequest extends Notification
      */
     public function toMail($notifiable)
     {
-       return (new MailMessage)->view('admin.emails.pages.ClubEditRequest', 
+       return (new MailMessage)->view('club.emails.pages.AfterSubmitUpdate', 
                                     ['club'         => $this->club, 
-                                     'pendingEdit'  => $this->pendingEdit,
-                                     'link'         => $this->link . '' .  $this->pendingEdit->taraget_model_id,
+                                     'case'         => $this->case,
                                     ]) ;
     }
 

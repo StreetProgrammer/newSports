@@ -326,10 +326,12 @@ class PlaygroundsController extends Controller
         $sports = Sport::all();
         $clubBranch = clubBranche::where('id', $clubBranch)
                         ->firstOrFail();
+
+        $title = direction() == 'ltr' ? 'Add New Court' : 'أضف ملعب جديد' ;
         if ($when == 'ear') {
-          return view('club.Edits.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'countries', 'sports')) ;
+          return view('club.Edits.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'countries', 'sports', 'title')) ;
         } else {
-          return view('club.register.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'countries', 'sports')) ;
+          return view('club.register.pageParts.addNewPlayground', compact('clubBranch', 'governorate', 'countries', 'sports', 'title')) ;
         }
     }
 
@@ -345,10 +347,11 @@ class PlaygroundsController extends Controller
                         ->firstOrFail();
         $clubBranch = clubBranche::where('id', $Playground->c_branch_id)
                       ->firstOrFail();
+        $title = direction() == 'ltr' ? 'Edit ' . $Playground->c_b_p_name . ' Court' : 'تعديل ' . $Playground->c_b_p_name ;
         if ($when == 'ear') {
-          return view('club.Edits.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch')) ;
+          return view('club.Edits.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch', 'title')) ;
         } else {
-          return view('club.register.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch')) ;;
+          return view('club.register.pageParts.editPlayground', compact('Playground', 'governorate', 'countries', 'sports', 'clubBranch', 'title')) ;;
         }
         
     }

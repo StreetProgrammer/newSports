@@ -13,7 +13,8 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
 
-      @include('club.layouts.menu')
+      @include('club.layouts.after.menu')
+      
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->

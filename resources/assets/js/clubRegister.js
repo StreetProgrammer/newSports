@@ -277,7 +277,7 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
 
     if (c_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -616,8 +616,6 @@ $(document).on('click', ".completelyDelImg", function () {
  //end proccess of playground images crop and prepare input value in [[ register Proccess ]] to [[ store ]]
 
 
-
-
 ////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// i think it's for register /////////////////////////////////////
 
@@ -652,7 +650,6 @@ $(document).on('click', "#showHidePlaygrounds", function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// end change from display playgrounds details to Add new play ground form //////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -735,7 +732,7 @@ $(document).on('click', "#UpdateClubMainInfo", function (e) {
 
     if (c_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -1021,7 +1018,7 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
 
     if (c_b_p_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_b_p_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -1507,7 +1504,7 @@ $(document).on('click', "#updateBranchRegister", function (e) {
 
     if (c_b_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        //errors = 1;
         $("select[name=c_b_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -1676,7 +1673,7 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
 
     if (c_b_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_b_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'

@@ -20,7 +20,7 @@ class clubBranche extends Model
         'c_b_address', 
         'c_b_lat',
         'c_b_lng',
-        'c_b_logo',
+        'our_is_active',
         'c_b_banner',
     ];
 

@@ -346,7 +346,7 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
 
     if (c_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -991,7 +991,7 @@ $(document).on('click', "#AddNewPlaygroundRegister", function (e) {
 
     if (c_b_p_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_b_p_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -1207,7 +1207,7 @@ $(document).on('click', "#updatePlaygroundRegister", function (e) {
 
     if (c_b_p_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_b_p_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -1457,7 +1457,7 @@ $(document).on('click', "#updateBranchRegister", function (e) {
 
     if (c_b_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_b_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -1617,7 +1617,7 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
 
     if (c_b_area.replace(/\s/g, "") === "") {
 
-        errors = 1;
+        // errors = 1;
         $("select[name=c_b_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'

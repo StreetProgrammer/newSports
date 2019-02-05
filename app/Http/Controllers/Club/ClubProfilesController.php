@@ -11,6 +11,7 @@ use App\Traits\Olddatakepper ;
 use App\Notifications\admin\NewClubRegistered ;
 use App\Notifications\admin\NewClubFixedErr ;
 use App\Notifications\admin\NewClubEditRequest ;
+use App\Notifications\club\AfterSubmitUpdate ;
 
 use App\Model\Admin;
 use App\Model\Sport;
@@ -227,7 +228,6 @@ class ClubProfilesController extends Controller
         $allReservationByYear = self::prepareChart('club', 'home', 'allReservationByYear', $id) ;
         $allReservationByMonth = self::prepareChart('club', 'home', 'allReservationByMonth', $id) ;
         $allReservation =  self::prepareChart('club', 'home', 'allReservation', $id) ;
-        //$reservations = Reservation::where('R_playground_owner_id', Auth::id())->get();
         
         $countries = Country::get();
         $governorate = Governorate::with('areas')->get();
@@ -286,44 +286,13 @@ class ClubProfilesController extends Controller
     	return 2;
     }
 
-    public function OldUpdateProfile(Request $request)
-    {
-        return $request ;
 
-
-        if ( !empty($request->password) ) {
-            User::where('id', '=', $clubUser->id)->update(array(
-                            'name'              => $request->name,
-                            'email'             => $request->email,
-                            'password'          => bcrypt($request->password),
-                        ));
-        } else {
-            User::where('id', '=', $clubUser->id)->update(array(
-                            'name'              => $request->name,
-                            'email'             => $request->email,
-                        ));
-        }
-
-        if (Auth::user()->id == $request->clubId) {
-            clubProfile::where('c_user_id', '=', $clubUser->id)
-                        ->update(array(
-                            'c_phone' => $request->c_phone,
-                            'c_city' => $request->c_country,
-                            'c_city' => $request->c_city,
-                            'c_area' => $request->c_area,
-                            'c_address' => $request->c_address,
-                            'c_desc' => $request->c_desc,
-                        ));
-            return $request->name ;
-        } else {
-            return 'failed' ;
-        }
-    }
-
-    // update profile info
+    // update profile info after complete club profile [ in simple club life cycle ]
     public function updateProfile(Request $request)
     {
-        $clubUser    = User::find($request->clubId) ;
+        $notiUser    = User::where('id', $request->clubId)->get() ;
+        $clubUser    = User::find($request->clubId);
+        // return $notiUser ;
         $clubProfile = clubProfile::where('c_user_id', '=', $request->clubId)->first();
 
         $PendingEdit = self::prepare('\App\Model\User', $request->clubId, $clubUser, $request) ;
@@ -358,6 +327,7 @@ class ClubProfilesController extends Controller
             $PendingEdit = PendingEdit::find($PendingEdit->id) ;
             $admins = Admin::all() ;
             \Notification::send($admins, new NewClubEditRequest($clubUser, $PendingEdit));
+            \Notification::send($notiUser, new AfterSubmitUpdate($clubUser, 'Profile Main Information'));
             return 'done' ;
          }
 
@@ -453,13 +423,14 @@ class ClubProfilesController extends Controller
         $governorate = Governorate::with('areas')->get();
         $id = Auth::user()->id ;
         $club = User::find($id) ;
+        $title = direction() == 'ltr' ? 'Add New Branch' : 'أضف فرع جديد' ;
         //ear => edit after register 
         if ($when == 'ear') {
             //return 2 ;
-            return view('club.Edits.pageParts.addNewBranch', compact('club', 'governorate', 'countries')) ;
+            return view('club.Edits.pageParts.addNewBranch', compact('club', 'governorate', 'countries', 'title')) ;
         } else {
             //return 1;
-            return view('club.register.pageParts.addNewBranch', compact('club', 'governorate', 'countries')) ;
+            return view('club.register.pageParts.addNewBranch', compact('club', 'governorate', 'countries', 'title')) ;
         }
     }
 

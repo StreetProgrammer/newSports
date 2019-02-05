@@ -3,45 +3,67 @@
 namespace App\Http\Controllers\Club;
 use App\Http\Controllers\Controller ;
 use Storage ;
+use Charts ;
+use App\Traits\ChartsGenrator ;
+use App\Traits\Olddatakepper ;
 
 use App\Model\User ;
+use App\Model\Admin ;
 use App\Model\clubBranche ;
 use App\Model\Playground ;
 use App\Model\Country ;
 use App\Model\Governorate ;
 use App\Model\Sport ;
 use App\Model\Photo ;
+use App\Model\PendingEdit ;
 use App\DataTables\Club\ClubBranchesDatatable ;
+
+use App\Notifications\admin\NewClubEditRequest ;
+use App\Notifications\club\AfterSubmitUpdate ;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ClubBranchesController extends Controller
 {
+    use ChartsGenrator ;
+    use Olddatakepper ;
+
     /*
-    * this function for create branch record in [[ register proccess ]]
+    * this function for create branch record in [[ register proccess or after register ]] but send noti only in after register mode
     */
     public function StoreRegisterClubBranch(Request $request)
     {
-
-        //return $request ;
-        if (Auth::id() == $request->clubId) {
+        if (Auth::id() == $request->clubId) { // must update it if want make club admins add also
 
             $newBranch = new clubBranche;
 
-            $newBranch->c_b_user_id   =   $request->clubId;
-            $newBranch->c_b_name      =   $request->c_b_name;
-            $newBranch->c_b_phone     =   $request->c_b_phone;
-            $newBranch->c_b_country   =   Auth::user()->clubProfile->c_country;
-            $newBranch->c_b_city      =   $request->c_b_city;
-            $newBranch->c_b_area      =   $request->c_b_area;
-            $newBranch->c_b_address   =   $request->c_b_address;
-            $newBranch->c_b_desc      =   $request->c_b_desc;
+            $newBranch->c_b_user_id         =   $request->clubId;
+            $newBranch->c_b_name            =   $request->c_b_name;
+            $newBranch->c_b_phone           =   $request->c_b_phone;
+            $newBranch->c_b_country         =   Auth::user()->clubProfile->c_country;
+            $newBranch->c_b_city            =   $request->c_b_city;
+            $newBranch->c_b_area            =   $request->c_b_area;
+            $newBranch->c_b_address         =   $request->c_b_address;
+            $newBranch->c_b_desc            =   $request->c_b_desc;
+            $newBranch->our_is_active       =   0 ;
 
             $newBranch->save();
         }
 
         if ($newBranch) {
+            $clubUser    = User::find($request->clubId);
+            if ($clubUser->our_is_active == 1) { // here check if the club is active so we send an update request notification to [club, admins]
+                $notiUser    = User::where('id', $request->clubId)->get() ;
+                $clubUser    = User::find($request->clubId);
+        
+                $PendingEdit = self::prepare('\App\Model\clubBranche', $request->clubId, $clubUser, $request) ;
+
+                $PendingEdit = PendingEdit::find($PendingEdit->id) ;
+                $admins = Admin::all() ;
+                \Notification::send($admins, new NewClubEditRequest($clubUser, $PendingEdit));
+                \Notification::send($notiUser, new AfterSubmitUpdate($clubUser, 'Add A New Branch'));
+            }
               return response()->json(['success'=>'done']);         
         } else {
             return 'failed' ;
@@ -92,18 +114,42 @@ class ClubBranchesController extends Controller
         //return $request ;
         $Branch = clubBranche::find( $request->clubBranch );
 
-        if (Auth::user()->id == $Branch->c_b_user_id) {
-            clubBranche::where('c_b_user_id', '=', Auth::user()->id)
+        if (Auth::user()->id == $Branch->c_b_user_id) { // must update it if want make club admins update also
+            $clubBranche = clubBranche::where('c_b_user_id', '=', Auth::user()->id)
                         ->where('id', '=', $request->clubBranch)
-                        ->update(array(
-                            'c_b_name'      => $request->c_b_name,
-                            'c_b_phone'     => $request->c_b_phone,
-                            'c_b_city'      => $request->c_b_city,
-                            'c_b_area'      => $request->c_b_area,
-                            'c_b_address'   => $request->c_b_address,
-                            'c_b_desc'      => $request->c_b_desc,
-                            //'p_date' => $request->p_born_date,
-                        ));
+                        ->firstorfail();
+
+            $clubBranche->c_b_name          =   $request->c_b_name ;
+            $clubBranche->c_b_phone         =   $request->c_b_phone ;
+            $clubBranche->c_b_city          =   $request->c_b_city ;
+            $clubBranche->c_b_area          =   $request->c_b_area ;
+            $clubBranche->c_b_address       =   $request->c_b_address ;
+            $clubBranche->c_b_desc          =   $request->c_b_desc ;
+            $clubBranche->our_is_active     =   0 ;
+
+            $clubBranche->save();
+            if ($clubBranche->branchPlaygrounds->count() > 0) {
+                // used to de activate all club branch courts
+                foreach ($Branch->branchPlaygrounds as $Playground) {
+                    $Playground->our_is_active  =   0 ;
+                    $Playground->save();
+                }
+            }
+            /////////////////////////////////////////////
+            $clubUser    = User::find($clubBranche->c_b_user_id);
+
+            if ($clubUser->our_is_active == 1) { // here check if the club is active so we send an update request notification to [club, admins]
+                $notiUser    = User::where('id', $clubUser->id)->get() ;
+                $clubUser    = User::find($clubUser->id);
+        
+                $PendingEdit = self::prepare('\App\Model\clubBranche', $clubBranche->id, $clubBranche, $request) ;
+
+                $PendingEdit = PendingEdit::find($PendingEdit->id) ;
+                $admins = Admin::all() ;
+                \Notification::send($admins, new NewClubEditRequest($clubUser, $PendingEdit));
+                \Notification::send($notiUser, new AfterSubmitUpdate($clubUser, 'Update A Branch'));
+            }
+            /////////////////////////////////////////////
             return $request->name ;
         } else {
             return 'failed' ;

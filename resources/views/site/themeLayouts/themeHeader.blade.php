@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 
-<!-- Mirrored from demo.7uptheme.com/html/fruitshop/home-03.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Nov 2018 12:42:13 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" type="image/png" href="{{ Storage::url(setting()->icon) }}"/>
