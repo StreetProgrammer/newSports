@@ -18,6 +18,7 @@
           <!-- About Me Box -->
 
           <div class="row" style="margin: auto">
+
             <div class="col-md-8">
               {!! Form::open(['url' => url('club/users/store'), 'method' => 'POST']) !!}
               <div id="addClubAdminForm">
@@ -29,6 +30,7 @@
                {!! Form::submit(trans('admin.saveCountryBtn'),['class'=>'btn btn-primary', 'id' => 'createAdmin']) !!}
                {!! Form::close() !!}
             </div><!-- col-md-8 -->
+
             <div class="col-md-4 text-center" style="background: #fff">
                 <div class="form-group">
                   <label style="cursor: pointer;">
@@ -43,16 +45,56 @@
                   </label>
                 </div>
             </div><!-- col-md-4 -->
-          </div>
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
+
+
+          </div><!-- /.row -->
+        </div><!-- /.box-body -->
+        
+      </div><!-- /.box -->
+      
     <br>
   </div>
-<!-- /.box -->
-</div>
 
 <!--  end upload branch logo Model -->
 
 @endsection
+
+@section('page_specific_scripts')
+<script>
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////// start change between forms to [ add / edit ] club users [ admin, manager ]//////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+$('input[type=radio][name=changeForm]').on('change', function() {
+    switch($(this).val()) {
+        case 'addClubAdminForm':
+            //alert("addClubAdminForm");
+            $('#addClubManagerForm').hide() ;
+            $('#formTitle').text('{!! trans('club.adminName') !!}') ;
+            $('input[type=hidden][name=type]').val(3) ;
+            break;
+        case 'addClubManagerForm':
+            //alert("addClubManagerForm");
+            //$('#addClubAdminForm').hide() ;
+            $('#addClubManagerForm').fadeIn() ;
+            $('#formTitle').text('{!! trans('club.managerName') !!}') ;
+            $('input[type=hidden][name=type]').val(4) ;
+            break;
+          case 'editClubAdminForm':
+            //alert("editClubAdminForm");
+            $('#editClubManagerForm').hide() ;
+            $('#editClubAdminForm').fadeIn() ;
+            break;
+        case 'editClubManagerForm':
+            //alert("editClubManagerForm");
+            $('#editClubAdminForm').hide() ;
+            $('#editClubManagerForm').fadeIn() ;
+            break;
+    }
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////// end change between forms to [ add / edit ] club users [ admin, manager ]//////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+</script>
+    
+@stop

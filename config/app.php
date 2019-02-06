@@ -171,6 +171,7 @@ return [
         Yajra\DataTables\ButtonsServiceProvider::class,
         willvincent\Rateable\RateableServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Jimmyjs\ReportGenerator\ServiceProvider::class,
 
 
 
@@ -234,6 +235,12 @@ return [
 
         'Up' => App\Http\Controllers\UploadController::class,
         'Charts' => consoletVs\charts\Charts::class,
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        
+        'PdfReport' => Jimmyjs\ReportGenerator\Facades\PdfReportFacade::class,
+        'ExcelReport' => Jimmyjs\ReportGenerator\Facades\ExcelReportFacade::class,
+        'CSVReport' => Jimmyjs\ReportGenerator\Facades\CSVReportFacade::class,
 
 
 

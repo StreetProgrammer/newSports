@@ -70,7 +70,7 @@
                 <a class="a-holding-divs" href="{{ url('/') }}/videos" style="color:#fff;">
                   <div class="col-xs-12 text-center">
                     <div class="sport-menu" style="padding: 5px 0px;">
-                      {{direction() == 'ltr' ? 'tutorials' : 'توضيحات'}}
+                      {{direction() == 'ltr' ? 'Tutorials' : 'توضيحات'}}
                     </div>
                   </div>
                 </a>

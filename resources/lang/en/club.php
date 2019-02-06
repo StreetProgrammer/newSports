@@ -121,6 +121,7 @@ return [
     'home'                                                  => 'Home',
     'sports'                                                => 'Sports' ,
     'updateAllData'                                         => 'Update All Data',
+    'Reports'                                               => 'Reports',
     'users'                                                 => 'Users',
     'allUsers'					                            => 'All Users' ,
     'addUser'					                            => 'Add User' ,

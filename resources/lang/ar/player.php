@@ -8,6 +8,7 @@ return [
     //////////////// start notification part ///////////////////////////
     //////////////// start pages titles ///////////////////////////
     'loginTitle'                                => 'تسجيل الدخول' ,
+    'RegisterTitle'                             => 'التسجيل' ,
     //////////////// end pages titles ///////////////////////////
     //////////////// start auth.login ///////////////////////////
     'Remember_me'                              => 'تذكرني',

@@ -8,6 +8,7 @@ return [
     //////////////// end notification part ///////////////////////////
     //////////////// start pages titles ///////////////////////////
     'loginTitle'                                => 'Login' ,
+    'RegisterTitle'                             => 'Register' ,
     //////////////// end pages titles ///////////////////////////
     //////////////// start auth.login ///////////////////////////
     'Remember_me'                              => 'Remember me',
@@ -308,6 +309,7 @@ return [
     //////////////////////////// end site.pages.static_pages.faq /////////////////////
     
     ///////////////////////////// start site.pages.static_pages.videos ///////////////////
+    
     'Visual_Information'                        => 'Tutorials' , 
     'how_to_register'                           => 'How To Register' ,
     

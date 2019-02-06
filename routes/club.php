@@ -105,10 +105,11 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 		Route::get('club/{id}', 'ClubProfilesController@index');
 
 		Route::get('updateAllData', 'ClubProfilesController@updateAllData');
-		/* Route::get('club/updateAllData', function () {
-			$governorate  = \App\Model\Governorate::all() ;
-			return view('club.Edits.Edits',  compact('governorate'));
-		}); */
+
+		// display main page for creat reports
+		Route::get('reports', 'ReportsController@index');
+		// display main page for creat reports
+		Route::post('displayReport', 'ReportsController@displayReport');
 
 		// display specific info for the club account
 		Route::get('club/{slug}/profile', 'ClubProfilesController@profile');

@@ -41,7 +41,6 @@ class ClubEmployeeController extends Controller
     */
     public function createUser()
     {
-        //echo "nice";
         $title = trans('club.add_new_user') ;
         $governorate = Governorate::with('areas')->get();
         $id = (Auth::user()->type == 2) ? Auth::id() : Auth::user()->club_id ;
