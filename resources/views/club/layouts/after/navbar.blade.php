@@ -1,6 +1,6 @@
   <header class="main-header">
     <!-- Logo -->
-    <a href="{{ url('club') }}/{{Auth::user()->id}}" class="logo">
+    <a href="{{ Auth::user()->type == 2 ? url('/club/' . Auth::user()->id) : url('/club/' . Auth::user()->club_id) }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>M</span>
       <!-- logo for regular state and mobile devices -->
@@ -33,7 +33,7 @@
              class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <a href="{{ url('/club/' . Auth::user()->slug . '/profile' ) }}">
+          <a href="{{ Auth::user()->type == 2 ? url('/club/' . Auth::user()->id) : url('/club/' . Auth::user()->club_id) }}">
             <p>{{ Auth::user()->name }}</p>
           </a>
           <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
@@ -54,7 +54,7 @@
 
     <!-- start this links will appear only for club Manager -->
     @elsecan('Manager-only', Auth::user())
-      @include('club.layouts.after.menuLinks.mangerMenu')
+      @include('club.layouts.after.menuLinks.managerMenu')
     @endcan
     <!-- Ends this links will appear only for club Admin -->
       

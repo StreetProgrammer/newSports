@@ -9,11 +9,11 @@
         <!------->
 
         <!------->
-        <li class="  {{ makeActiveLinkActive()[0] }}">
+        {{--<li class="  {{ makeActiveLinkActive()[0] }}">
             <a href="{{url('/')}}/reports" style="{{ makeActiveLinkActive()[1] }}">
                 <i class="fa fa-file"></i> <span>{!! trans('club.Reports') !!}</span>
             </a>
-        </li>
+        </li>--}}
         <!------->
 
         <!------->
@@ -108,17 +108,17 @@
                   <i class="fa fa-circle-o"></i> {!! trans('club.allReservations') !!}
                 </a>
               </li>
-              <li>
+              {{--<li>
                 <a href="{{ url('reservations/club/create') }}">
                   <i class="fa fa-plus"></i> {!! trans('club.addReservation') !!}
                 </a>
-              </li>
+              </li>--}}
             </ul>
           </li>
         <!------->
 
         <!------->
-        <li class="treeview {{ makeActiveLinkActive(['settings','countries', 'governorates'])[0] }}">
+        {{--<li class="treeview {{ makeActiveLinkActive(['settings','countries', 'governorates'])[0] }}">
           <a href="#" style="{{ makeActiveLinkActive(['settings','countries', 'governorates'])[2] }}">
             <i class="fa fa-cogs"></i>
             <span>{!! trans('club.settings') !!}</span>
@@ -153,6 +153,6 @@
               </a>
             </li>
            </ul>
-        </li>
+        </li>--}}
         <!------>
       </ul>

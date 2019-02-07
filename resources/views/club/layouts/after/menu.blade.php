@@ -41,7 +41,7 @@
         <li class="user-header">
           <img id="updateable-3"
               @if (empty(Auth::user()->user_img))
-                src="{{ url('/') }}/design/AdminLTE/dist/img/user4-128x128.jpg"
+                src="{{ url('/') }}/design/AdminLTE/dist/img/user.png"
               @else
                 src="{{ Storage::url(Auth::user()->user_img) }}"
               @endif class="img-circle" alt="User Image">
@@ -69,7 +69,7 @@
         <!-- Menu Footer-->
         <li class="user-footer">
           <div class="pull-left">
-            <a href="{{ url('/club/' . Auth::user()->slug . '/profile' ) }}" class="btn btn-default btn-flat">
+            <a href="{{ Auth::user()->type == 2 ? url('/club/' . Auth::user()->id ) : url('/club/' . Auth::user()->club_id ) }}" class="btn btn-default btn-flat">
               {{ trans('admin.Profile') }}
             </a>
           </div>

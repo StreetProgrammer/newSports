@@ -43,11 +43,11 @@
             <i class="fa fa-circle-o"></i> {!! trans('club.allBranches') !!}
           </a>
         </li>
-        <li>
-          <a href="{{ url('branches/club/create') }}">
+        {{--<li>
+          <a href="{{ url('/updateAllData') }}">
             <i class="fa fa-plus"></i> {!! trans('club.addBranch') !!}
           </a>
-        </li>
+        </li>--}}
       </ul>
     </li>
     <!------->
@@ -66,10 +66,10 @@
             <i class="fa fa-circle-o"></i> {!! trans('club.allPlaygrounds') !!}
           </a>
         </li>
-        <li>
-          <a href="{{ url('playground/club/create') }}">
+        {{--<li>
+          <a href="{{ url('/updateAllData') }}">
             <i class="fa fa-plus"></i> {!! trans('club.addPlayground') !!}
-          </a>
+          </a>--}}
         </li>
       </ul>
     </li>
@@ -89,17 +89,19 @@
               <i class="fa fa-circle-o"></i> {!! trans('club.allReservations') !!}
             </a>
           </li>
+          {{--
           <li>
             <a href="{{ url('reservations/club/create') }}">
               <i class="fa fa-plus"></i> {!! trans('club.addReservation') !!}
             </a>
           </li>
+          --}}
         </ul>
       </li>
     <!------->
 
     <!------->
-    <li class="treeview {{ makeActiveLinkActive(['settings','countries', 'governorates'])[0] }}">
+    {{--<li class="treeview {{ makeActiveLinkActive(['settings','countries', 'governorates'])[0] }}">
       <a href="#" style="{{ makeActiveLinkActive(['settings','countries', 'governorates'])[2] }}">
         <i class="fa fa-cogs"></i>
         <span>{!! trans('club.settings') !!}</span>
@@ -134,6 +136,6 @@
           </a>
         </li>
        </ul>
-    </li>
+    </li>--}}
     <!------>
   </ul>

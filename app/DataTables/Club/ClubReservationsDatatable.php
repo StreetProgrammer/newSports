@@ -125,10 +125,10 @@ class ClubReservationsDatatable extends DataTable
                                     window.location.href = '" . \URL::current() . "/create'
                                 }"
                             ],*/
-                            [   
+                            /*[   
                                 'className' => 'btn bg-orange btn-flat margin delBtn', 
                                 'text' => '<i class="fa fa-plus"></i> Add New'
-                            ],
+                            ],*/
                             [   
                                 'extend' => 'print', 
                                 'className' => 'btn btn-flat margin btn-info', 

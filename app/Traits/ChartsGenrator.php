@@ -103,10 +103,11 @@ trait ChartsGenrator
             $chart = Charts::multi('bar', 'highcharts')
                             ->responsive(false)
                             ->elementLabel('What You Gain')
+                            ->title('Split Money')
                             ->labels(array_keys($total))
                             ->dataset('Total', $total)
                             ->dataset('your Total', $your_total)
-                            ->dataset('mind Total', $mind_total);
+                            ->dataset('SportsMate Total', $mind_total);
             break;
             
             default:

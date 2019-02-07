@@ -57,7 +57,7 @@
                 {{ trans('club.reservations') }}
               </span>
 
-              {!! Form::open(['url' => aurl('Playground/changeActivationStatus/'), 'method' => 'POST']) !!}
+              {!! Form::open(['url' => url('playground/changeActivationStatus'), 'method' => 'POST']) !!}
               {!! Form::hidden( 'target', $Playground->id ) !!}
                 @if($Playground->is_active == 1)
                   {!! Form::hidden( 'status', 0 ) !!}

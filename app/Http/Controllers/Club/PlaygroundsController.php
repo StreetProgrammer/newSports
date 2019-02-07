@@ -27,7 +27,7 @@ class PlaygroundsController extends Controller
       return $playgrounds->render('club.Playgrounds.index', ['title' => $title]);
     }
 
-    public function show($Playground)
+    public function show($Playground) // may be deleted review
     {
       $countries = Country::get();
       $governorate = Governorate::with('areas')->get();
@@ -307,6 +307,22 @@ class PlaygroundsController extends Controller
     {
         //return $Playground ;
         return view('playground.playgroundEdit', compact('Playground'));
+    }
+
+    public function changeActivationStatus(Request $request)
+    {
+        $Playground = Playground::find($request->target);
+
+        Playground::where('id', request()->target)
+              ->update(['is_active' => request()->status]);
+
+        //$club->notify(new ClubAccountAccepted($club->name));
+
+        
+        $message = direction() == 'ltr' ? 'record updated' : 'تم التعديل بنجاح';
+        //session()->flash('Success', trans('admin.updated_record'));
+        session()->flash('Success', $message);
+        return back() ;
     }
 
     //////////////////////////// start i think it's old, check before delete //////////////////////////////////////////

@@ -66,8 +66,6 @@ return [
     'Add_Photo'                                             => 'Add Photo' ,
     'close'                                                 => 'Close' ,
     /////end club.register.pageparts.addNewBranch - addNewPlayground - editBranch - editPlayground ////////////////////////////
-
-
     /////////////////////start club panel home ////////////////////////////
     ///////////////////// end club panel home //////////////////////
     'UserClub'                                              => 'User - Club' ,
@@ -83,18 +81,6 @@ return [
     'sportsCount'                                           => 'Sports Count' ,
     'mostActivePlayes'                                      => 'Most Active Players' ,
     'TopSinglePlayer'                                       => 'Top Single Player ..' ,
-    /*'TopTenEvent'                                             => 'أكثر عشرة إنشاء للأحداث' ,*/
-    'mostActiveTenPlayes'                                   => 'أكثر عشرة لاعبين نشاطا' ,
-    'mostActiveClubs'                                       => 'الأندية الأكثر نشاطا' ,
-    'topEventCreator'                                       => 'أكثر اللاعبين إنشاء للأحداث' ,
-    'topChallengeCreator'                                   => 'أكثر اللاعبين إنشاء للتحديات' ,
-    'topappliedEvents'                                      => 'أكثر اللاعبين تقديما على الأحداث' ,
-    'tpochallenged'                                         => 'أكثر اللاعبين تم تحديه' ,
-    'topcandidatedEvents'                                   => 'أكثر اللاعبين قبولا في الأحداث' ,
-    'topPlayerReservations'                                 => 'أكثر اللاعبين حجزا للملاعب' ,
-    'topclubBranches'                                       => 'أكثر الأندية إمتلاكا للفروع' ,
-    'topclubPlaygrounds'                                    => 'أكثر الأندية إمتلاكا للملاعب' ,
-    'topclubReservation'                                    => 'أكثر نادي تم حجزه' ,
     'deactivate'                                            => 'Deactivate' ,
     'activate'                                              => 'Activate' ,
     'Name'                                                  => 'Name' ,
@@ -102,11 +88,8 @@ return [
     'Email'                                                 => 'Email'  ,
     'MemberSince'                                           => 'Member Since' ,
     'ViewProfile'                                           => 'View Profile' ,
-    'EventCount'                                            => 'عدد الأحداث' ,
-    'ChallengeCount'                                        => 'عدد التحديات' ,
-    'TopSingleClub'                                         => 'أكثر نادي في ...' ,
-    'topBranchOwner'                                        => 'أكثر الأندية إمتلاكا للفروع' ,
-    'topClubsReservation'                                   => 'أكثر الأندية التي تم حجزها' ,
+    'EventCount'                                            => 'Matches Count' ,
+    'ChallengeCount'                                        => 'ChallengeCount',
     'Count'                                                 => 'Count' ,
     ///////////////////////////// start menu file ///////////////////
     'adminLevel'                                            => 'Club' ,
@@ -116,7 +99,7 @@ return [
     //////////////////////////// end menu file /////////////////////
     //////////////////// start navbar file ///////////////////
     'navSearch'                                             => 'Search',
-    'mainNavigation'                                        => 'الروابط الرئيسية',
+    'mainNavigation'                                        => 'Main Navigation',
     'adminpanel'                                            => 'Dashboard',
     'home'                                                  => 'Home',
     'sports'                                                => 'Sports' ,
@@ -135,34 +118,31 @@ return [
     'allReservations'                                       => 'All Reservations' ,
     'addReservation' 			                            => 'Add Reservation' ,
     'admins'                                                => 'Admins',
-    'clubs'                                                 => 'الأنديه',
-    'players'                                               => 'اللاعبين',
+    'clubs'                                                 => 'clubs',
+    'players'                                               => 'players',
     'mainelements'                                          => 'Main Elements',
-    'events'                                                => 'الأحداث',
-    'challenges'                                            => 'التحديات',
-    'match'                                                 => 'المباريات',
+    'events'                                                => 'Matches',
+    'challenges'                                            => 'Challenges',
+    'match'                                                 => 'Matches',
     'settings'                                              => 'الإعدادات',
-    'siteSettings'                                          => 'إعدادات الموقع' ,
-    'countries'                                             => 'الدول',
-    'addCountry'                                            => 'إضافة دولة' ,
-    'governoratesControl'                                   => 'المحافظات' ,
-    'areasControl'                                          => 'المناطق' ,
+    'countries'                                             => 'Countries',
+    'addCountry'                                            => 'Add Country' ,
     //////////////////// start login file ///////////////////
     'inccorrect_information_login'                          => 'Email or password incorrect Please try again',
     'forgot_password'                                       => 'Forgot Password',
     'the_link_reset_sent'                                   => 'Send Reset Account Link',
     ////////////////////////start club datatable//////////////
-    'admin'                                                 => 'حسابات المشرفين',
-    'dashboard'                                             => 'الرئيسية',
-    'create_admin'                                          => 'اضف مشرف جديد',
-    'ex_excel'                                              => 'تصدير ك Excel',
-    'ex_csv'                                                => 'تصدير ك CSV',
-    'ex_print'                                              => 'طباعه',
-    'all_record'                                            => 'كل السجلات',
-    'sProcessing'                                           => 'تحميل',
+    'admin'                                                 => 'Admins Account',
+    'dashboard'                                             => 'Dashboard',
+    'create_admin'                                          => 'Create Admin',
+    'ex_excel'                                              => 'Export Excel',
+    'ex_csv'                                                => 'Export CSV',
+    'ex_print'                                              => 'Print',
+    'all_record'                                            => 'All Record',
+    'sProcessing'                                           => 'Processing',
     'sLengthMenu'                                           => 'اظهار _MENU_ سجل',
-    'sZeroRecords'                                          => 'صفر سجل',
-    'sEmptyTable'                                           => 'جدول خالى',
+    'sZeroRecords'                                          => 'Zero Records',
+    'sEmptyTable'                                           => 'Empty Table',
     'sInfo'                                                 => 'اظهار _START_ الى  _END_ من _TOTAL_ سجل',
     'sInfoEmpty'                                            => 'معلومات خالية',
     'sInfoFiltered'                                         => 'معلومات منتقاه',
@@ -335,4 +315,6 @@ return [
     'C_delete'                                                  => 'مسح',
     //////////////////////////club branches datatable////////////////////////////////
 
+
+    
 ];

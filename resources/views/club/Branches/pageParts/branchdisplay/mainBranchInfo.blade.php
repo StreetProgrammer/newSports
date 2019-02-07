@@ -20,9 +20,9 @@
                 </span> 
                 clubBranche
               </h3>
-              <span id="showHideEdit" class="hoverAble pull-right" style="font-size: 15px; color: #3c8dbc;cursor: pointer;position: relative;">
+              {{--<span id="showHideEdit" class="hoverAble pull-right" style="font-size: 15px; color: #3c8dbc;cursor: pointer;position: relative;">
               	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              </span>
+              </span>--}}
               <div class="displayAble" style="display:none;font-size: 15px; color: #fff;position: absolute;left: 25px;bottom: 25px; background: #0e0e0e82;border-radius: 5px;padding: 1px 5px;">
               		Update
               		<span style="font-size: 10px;">last update {{$clubBranche->updated_at}}</span>
@@ -32,14 +32,11 @@
             <div class="box-body">
               <ul class="list-group list-group-unbordered displayDetails">
                 <li class="list-group-item">
-                  <b>Branches</b> <a class="pull-right">{{ $clubBranche->branchPlaygrounds()->count() }}</a>
-                </li>
-                <li class="list-group-item">
                   <b>Playgrounds</b> <a class="pull-right">{{ $clubBranche->branchPlaygrounds()->count() }}</a>
                 </li>
-                <li class="list-group-item">
+                {{--<li class="list-group-item">
                   <b>Reservations</b> <a class="pull-right">{{ $clubBranche->branchPlaygrounds()->count() }}</a>
-                </li>
+                </li>--}}
               </ul>
               <strong class="editDetails" style="display:none;">
                 <i class="fa fa-building custom" style="color: #3c8dbc;"></i>  
@@ -100,7 +97,7 @@
 
 	                    @foreach ($goov->areas as $area) <!--loop throw each city->area -->
 
-	                      <!--check if we are in clubBranche city -->
+	                      <!--check if we are in clubBranch city -->
 	                      @if ($area->a_governorate_id == $clubBranche->c_b_city)
 
 	                        <option

@@ -429,13 +429,14 @@ $( document ).ready(function() {
              },
 		    	success:function(data){
 		    		console.log(data)
-		    		if (data == 'true') {
+		    		if (data != 'false') {
 		    			$("#" + id + "_err").removeClass( 'alert-danger' );
 		    			$("#" + id + "_err").addClass( 'alert-success' );
 		    			$("#" + id + "_err").text("Reservation Added Successfully ");
 		    			$("#" + id + "_nameDiv").show() ;
 		    			$("input[name=" + id + "_add]").show() ;
-		    			//$( "#" + playgroundId + "_add" ).removeClass( 'disabled' );
+		    			var win = window.open('/reservations/invoice/' + data, '_blank');
+  						win.focus();
 
 		    		} else {
 		    			$("#" + id + "_err").removeClass( 'alert-success' );

@@ -129,7 +129,7 @@ class ReservationController extends Controller
     */
     public function create()
     {
-        
+        // return view('club.Reservations.Pages.create');
     }
 
     /*
@@ -168,6 +168,7 @@ class ReservationController extends Controller
             $manager      = User::find($id) ;
             foreach ($manager->playgrounds as $playground){
                 if ($playground->is_active == 1 && $playground->our_is_active == 1){
+                    
                     foreach ($playground->PlaygroudReservations as $reservation){
                         $CreatorType = $reservation->creator->type ; $Color = '' ;
                         if ($CreatorType == 1){ 
@@ -244,7 +245,7 @@ class ReservationController extends Controller
                                     'resOwner'                => $request->name, 
                                     ]);
                     if ($reservation) {
-                        return 'true' ;
+                        return $reservation->id ;
                     }else{
                         return 'false' ;
                     }
@@ -305,6 +306,16 @@ class ReservationController extends Controller
         }
          
     }
+
+    public function invoice($id)
+    {
+        //return $request ;
+        $Reservation = Reservation::find($id) ;
+
+        return view('club.Invoice.Invoice', compact('Reservation'));
+         
+    }
+    
 
 
 }

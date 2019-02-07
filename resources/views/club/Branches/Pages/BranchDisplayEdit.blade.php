@@ -32,14 +32,14 @@
       </div>
 
         <div class="row">
-	        <div class="BranchPlaygroundsDiv col-md-8">
+	        <div class="BranchPlaygroundsDiv col-md-12">
 				@include('club.Branches.pageParts.branchdisplay.BranchPlaygroundsDiv')
 	        </div>
 
-			<div class="mainInfo col-md-4">
+			{{--<div class="mainInfo col-md-4">
 				@include('club.Branches.pageParts.branchdisplay.BranchImageDiv')
 	        </div>
-        </div>
+        </div>--}}
 
     </section>
 

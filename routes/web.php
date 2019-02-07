@@ -4,31 +4,7 @@ Route::get('/themeHome', function (){
     symlink('/home4/mind/public_html/sports-mate.net/SportsMate/storage/app/public', '/home4/mind/public_html/sports-mate.net/storage') ;
 });
 Route::get('/try', function (){
-    $reservations = App\Model\Reservation::where('R_playground_owner_id', Auth::id())->get();
-    $dates = App\Model\Reservation::where('R_playground_owner_id', Auth::id())->orderBy('created_at', 'ASC')->pluck('created_at');
-    $dates = json_decode($dates);
-    if (!empty($dates)) {
-        $dateArr = array();
-        $total = array();
-        $your_total = array();
-        $mind_total = array();
-        foreach ($dates as $unformatted_date) {
-            $date = new \DateTime($unformatted_date->date);
-            $date_y_m = $date->format('Y-m');
-            $date_Y_M = $date->format('Y M');
-            $dateArr[$date_y_m] = $date_Y_M ;
-            
-        }
-        foreach ($dateArr as $key => $date) {
-            $total[$key] = App\Model\Reservation::where('R_playground_owner_id', Auth::id())->where('created_at', 'LIKE', '%' . $key .'%')->sum('R_total_price');
-            $your_total[$key] = ($total[$key] / 100) * 80 ;
-            $mind_total[$key] = ($total[$key] / 100) * 20 ;
-        }
-    }
-    foreach ($reservations as $key => $res) {
-        # code...
-    }
-    return $your_total ;
+    return view('club.Invoice.Invoice');
 }); 
 /*
 |--------------------------------------------------------------------------

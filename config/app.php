@@ -172,6 +172,7 @@ return [
         willvincent\Rateable\RateableServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Jimmyjs\ReportGenerator\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
 

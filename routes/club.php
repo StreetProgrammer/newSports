@@ -181,6 +181,9 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 		// club Playgrounds update route
 		Route::post('playgrounds/club/update', 'PlaygroundsController@update');
 
+		// club Playgrounds update route
+		Route::post('playground/changeActivationStatus', 'PlaygroundsController@changeActivationStatus');
+
 		// Playgrounds Routes %%%%%%%%%%% END %%%%%%%%%%%  Playgrounds Routes//
 
 		// Reservations Routes %%%%%%%%%%% START %%%%%%%%%%%  Reservations Routes//
@@ -202,6 +205,8 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
 		// club Reservations update route
 		Route::post('reservations/club/delete', 'ReservationController@delete');
+
+		Route::get('reservations/invoice/{id}', 'ReservationController@invoice');
 
 		// Reservations Routes %%%%%%%%%%% END %%%%%%%%%%%  Reservations Routes//
 
