@@ -224,6 +224,9 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 		//for load all {{ Playground / manager playgrounds }} reservations
 		Route::get('/getplaygroundReservation/{id}/{type}', 'ReservationController@getPlaygroundReservations');
 
+		//for load report view by youser choise {{ users - branches - courts - reservations }} 
+		Route::get('/getReportOf/{model}', 'ReportsController@getReportOf');
+
 		//for check if that time is avalible or not in playground
 		Route::post('/checkVacantTime/', 'ReservationController@checkVacantTime');
 

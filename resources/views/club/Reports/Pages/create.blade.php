@@ -20,47 +20,58 @@
           <div class="row" style="margin: auto">
             <div class="col-md-8">
               {!! Form::open(['url' => url('displayReport'), 'method' => 'POST']) !!}
-              <div id="Users">
+              <div id="changable">
                 @include('club.Reports.pageParts.createReportOf.Users')
-              </div>
-              <div id="Branches" style="display: none">
-                @include('club.Reports.pageParts.createReportOf.Branches')
-              </div>
-              <div id="Courts">
-                @include('club.Reports.pageParts.createReportOf.Courts')
-              </div>
-              <div id="Reservations" style="display: none">
-                @include('club.Reports.pageParts.createReportOf.Reservations')
               </div>
                {!! Form::submit(trans('admin.saveCountryBtn'),['class'=>'btn btn-primary', 'id' => 'createAdmin']) !!}
                {!! Form::close() !!}
             </div><!-- col-md-8 -->
 
             <div class="col-md-4 text-center" style="background: #fff">
+              
               <div class="form-group">
-                <label style="cursor: pointer;">
-                  <input type="radio" name="changeForm" value="Users" class="flat-red" checked>
-                  {{trans('club.Users')}}
-                </label>
+                <div class="radio">
+                  <label>
+                    <div class="col-md-4 pull-left">
+                      <input type="radio" name="changeForm" id="optionsRadios1" value="Reservations" checked="checked">
+                    </div>
+                    <div class="col-md-8">
+                      <span >{{trans('club.Reservations')}}</span>
+                    </div>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <div class="col-md-4 pull-left">
+                      <input type="radio" name="changeForm" id="optionsRadios1" value="Courts">
+                    </div>
+                    <div class="col-md-8">
+                      <span >{{trans('club.Courts')}}</span>
+                    </div>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <div class="col-md-4 pull-left">
+                      <input type="radio" name="changeForm" id="optionsRadios1" value="Branches" checked="checked">
+                    </div>
+                    <div class="col-md-8">
+                      <span >{{trans('club.Branches')}}</span>
+                    </div>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <div class="col-md-4 pull-left">
+                      <input type="radio" name="changeForm" id="optionsRadios1" value="Users" checked="checked">
+                    </div>
+                    <div class="col-md-8">
+                      <span >{{trans('club.Users')}}</span>
+                    </div>
+                  </label>
+                </div>
               </div>
-              <div class="form-group">
-                <label style="cursor: pointer;">
-                  <input type="radio" name="changeForm" value="Branches" class="flat-red" checked>
-                  {{trans('club.Branches')}}
-                </label>
-              </div>
-              <div class="form-group">
-                <label style="cursor: pointer;">
-                  <input type="radio" name="changeForm" value="Courts" class="flat-red" checked>
-                  {{trans('club.Courts')}}
-                </label>
-              </div>
-              <div class="form-group">
-                <label style="cursor: pointer;">
-                  <input type="radio" name="changeForm" value="Reservations" class="flat-red" >
-                  {{trans('club.Reservations')}}
-                </label>
-              </div>
+              
             </div><!-- col-md-4 -->
 
           </div>
@@ -82,34 +93,24 @@
 ////////// start change between forms to [ add / edit ] club users [ admin, manager ]//////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $('input[type=radio][name=changeForm]').on('change', function() {
-    switch($(this).val()) {
-        case 'Users':
 
-            //$('#addClubManagerForm').hide() ;
-            //$('#formTitle').text('{!! trans('club.adminName') !!}') ;
-            //$('input[type=hidden][name=type]').val(3) ;
-            $('#expected-playgrounds').load('/challenge/suggestedPlaygrounds/' + challengeId).fadeIn('slow');
+    var model = $(this).val()
+    $('.mainInfoLoader').show();
+    switch(model) {
+        case 'Users':
+            $('#changable').load('/getReportOf/users').fadeIn('slow');
             break;
         case 'Branches':
-
-            //$('#addClubManagerForm').fadeIn() ;
-            //$('#formTitle').text('{!! trans('club.managerName') !!}') ;
-            //$('input[type=hidden][name=type]').val(4) ;
-            $('#expected-playgrounds').load('/challenge/suggestedPlaygrounds/' + challengeId).fadeIn('slow');
+            $('#changable').load('/getReportOf/branches').fadeIn('slow');
             break;
-          case 'Courts':
-
-            //$('#editClubManagerForm').hide() ;
-            //$('#editClubAdminForm').fadeIn() ;
-            $('#expected-playgrounds').load('/challenge/suggestedPlaygrounds/' + challengeId).fadeIn('slow');
+        case 'Courts':
+            $('#changable').load('/getReportOf/courts').fadeIn('slow');
             break;
         case 'Reservations':
-
-            //$('#editClubAdminForm').hide() ;
-            //$('#editClubManagerForm').fadeIn() ;
-            $('#expected-playgrounds').load('/challenge/suggestedPlaygrounds/' + challengeId).fadeIn('slow');
+            $('#changable').load('/getReportOf/reservations').fadeIn('slow');
             break;
     }
+    $('.mainInfoLoader').hide();
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////// end change between forms to [ add / edit ] club users [ admin, manager ]///////////////

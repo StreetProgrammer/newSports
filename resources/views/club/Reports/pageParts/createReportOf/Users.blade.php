@@ -1,4 +1,5 @@
 
+              <h1>Users</h1>
               {!! Form::hidden( 'clubId', $club->id ) !!}
               {!! Form::hidden( 'type', 'users' ) !!}
               <div class="row">
