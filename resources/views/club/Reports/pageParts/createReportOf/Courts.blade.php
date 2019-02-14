@@ -1,5 +1,5 @@
 
-              <h1>Courts</h1>
+              <h3>{{ $part_title }}</h3>
               {!! Form::hidden( 'clubId', $club->id ) !!}
               {!! Form::hidden( 'type', 'users' ) !!}
               <div class="row">

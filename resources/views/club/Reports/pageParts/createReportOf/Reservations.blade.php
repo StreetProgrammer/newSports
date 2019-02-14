@@ -1,11 +1,11 @@
 
-              <h1>Reservations</h1>
+              <h3>{{ $part_title }}</h3>
               {!! Form::hidden( 'clubId', $club->id ) !!}
               {!! Form::hidden( 'type', 'reservations' ) !!}
               <div class="row">
                 <div class="col-md-6">
                   <p style="font-weight:bold" id="formTitle">
-                    <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                    <i class="fa fa-calendar custom" style="color: #3c8dbc;"></i>
                     {{ trans('club.From') }}
                   </p>
                   <p class="text-muted">
@@ -15,7 +15,7 @@
 
                 <div class="col-md-6">
                   <p style="font-weight:bold" id="formTitle">
-                    <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                    <i class="fa fa-calendar custom" style="color: #3c8dbc;"></i>
                     {{ trans('club.To') }}
                   </p>
                   <p class="text-muted">
@@ -49,21 +49,5 @@
                   </div><!--/.col-md-6--->
               </div><!--/.row--->
               
-              
-              <div class="col-md-10">
-                <p class="text-muted">
-                  <input type="password" name="password" class="form-control" value="">
-                </p>
-              </div>
-              <div class="col-md-2 text-center">
-                <strong class="showHidePass" style="font-size: 120%;
-                                        border: 2px solid #3c8dbc;
-                                        padding: 3px 5px;
-                                        border-radius: 15px;
-                                        cursor: pointer;"
-                >
-                  <i class="fa fa-eye" style="color: #3c8dbc;"aria-hidden="true"></i>
-                </strong>
-              </div>
               <br><br><br><br><br>
               <!----->

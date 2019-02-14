@@ -23,6 +23,7 @@ class User extends Authenticatable
         'user_img',
         'password',
         'verify',
+        'verified',
         'type',
         'club_id',
         'user_is_active',

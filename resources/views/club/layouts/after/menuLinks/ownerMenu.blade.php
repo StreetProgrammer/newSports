@@ -9,11 +9,11 @@
         <!------->
 
         <!------->
-        {{--<li class="  {{ makeActiveLinkActive()[0] }}">
+        <li class="  {{ makeActiveLinkActive()[0] }}">
             <a href="{{url('/')}}/reports" style="{{ makeActiveLinkActive()[1] }}">
                 <i class="fa fa-file"></i> <span>{!! trans('club.Reports') !!}</span>
             </a>
-        </li>--}}
+        </li>
         <!------->
 
         <!------->

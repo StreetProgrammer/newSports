@@ -12,16 +12,6 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
 
@@ -121,8 +111,10 @@ class LoginController extends Controller
                 'type'              => 1,
                 'user_is_active'    => 1,
                 'our_is_active'     => 1,
+                'verified'          => 1,
                 'active_code'       => $activateCode,
                 'password'          => bcrypt('secret'),
+                'verify'            => str_random(40),
                 ]);
 
             playerProfile::create(['p_user_id'              => $newuser->id,
@@ -138,9 +130,12 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->type == 1) { // make sure the user is a player 
-            if ($user->our_is_active == 0) { // check if user is verified or not
+            if ($user->verified == 0) { // check if user is verified or not
                 auth()->logout();
-                return back()->with('warning', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+                $en_warning = 'You need to confirm your account. We have sent you an activation code, please check your email.' ;
+                $ar_warning = 'سوف تحتاج إلى تأكيد حسابك وقد تم ارسال كود التأكيد يرجى مراجعة اللإيميل الخاص بك' ;
+                $warning = direction() == 'ltr' ? $en_warning : $ar_warning ;
+                return back()->with('warning', $warning);
             }
         }
         return redirect()->intended($this->redirectPath());

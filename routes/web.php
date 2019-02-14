@@ -4,7 +4,10 @@ Route::get('/themeHome', function (){
     symlink('/home4/mind/public_html/sports-mate.net/SportsMate/storage/app/public', '/home4/mind/public_html/sports-mate.net/storage') ;
 });
 Route::get('/try', function (){
-    return view('club.Invoice.Invoice');
+    //return view('club.Reports.Pages.template');
+    $pdf = \PDF::loadView('club.Reports.Pages.template');
+    return $pdf ->download('try.pdf');
+
 }); 
 /*
 |--------------------------------------------------------------------------

@@ -15,6 +15,7 @@
 <div class="box">
   <div class="box-header">
     {{-- <h3 class="box-title">{{ $title }}</h3> --}}
+    <button id="pdf">get pdf</button>
   </div>
     <!--box-header-->
   <div class="box-body">
@@ -75,3 +76,10 @@
 @endpush
 
 @endsection
+
+
+@section('page_specific_scripts')
+    <!-- player cripts -->
+    
+    <!-- player cripts -->
+@stop

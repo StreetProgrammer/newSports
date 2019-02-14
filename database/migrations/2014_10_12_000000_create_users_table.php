@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->integer('our_is_active')->nullable();
             $table->string('active_code')->nullable();
             $table->string('password')->nullable();
+            $table->string('verify')->nullable();
+            $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

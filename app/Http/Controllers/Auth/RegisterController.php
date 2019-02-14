@@ -8,7 +8,8 @@ use App\Model\User;
 use App\Model\playerProfile;
 use App\Model\ClubProfile;
 use App\Model\clubBranche;
-use App\Mail\palyer\VerifyMail;
+use App\Mail\player\VerifyMail;
+use Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -71,6 +72,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //return $data['type'] ;
         $slugCode = substr(str_shuffle(str_repeat("0123456789", 5)), 0, 5);
         $slug = str_slug($data['name'] . '-' . $slugCode, '-');
         $activateCode = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 8)), 0, 8);
@@ -78,14 +80,14 @@ class RegisterController extends Controller
         if ($data['type'] == 2) {
             //////////// IF Registering User type is Club////////////
              $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'slug' => $slug,
-                'type' => $data['type'],
-                'user_is_active' => 1,
-                'our_is_active' => 0,
-                'active_code' => $activateCode,
-                'password' => bcrypt($data['password']),
+                'name'                  => $data['name'],
+                'email'                 => $data['email'],
+                'slug'                  => $slug,
+                'type'                  => $data['type'],
+                'user_is_active'        => 1,
+                'our_is_active'         => 0,
+                'active_code'           => $activateCode,
+                'password'              => bcrypt($data['password']),
                 ]);
 
              clubProfile::create(['c_user_id'       => $user->id,
@@ -105,7 +107,8 @@ class RegisterController extends Controller
                 'slug'              => $slug,
                 'type'              => $data['type'],
                 'user_is_active'    => 1,
-                'our_is_active'     => 0,
+                'our_is_active'     => 1,
+                'verified'          => 0,
                 'active_code'       => $activateCode,
                 'password'          => bcrypt($data['password']),
                 'verify'            => str_random(40),
@@ -125,19 +128,26 @@ class RegisterController extends Controller
 
     public function verifyUser($token)
     {
-        $User = User::where('verify ', $token)->first() ;
+        $User = User::where('verify', $token)->first() ;
         $verifyUser = $User->verify ;
-        if( $verifyUser != 0 ){
-            $user = User::where('verify ', $token)->first();
-            if($user->our_is_active == 0) {
-                $user->our_is_active = 1;
-                $user->our_is_active->save();
-                $status = "Your e-mail is verified. You can now login.";
+        if( $verifyUser ){
+            $user = User::where('verify', $token)->first();
+            if($user->verified == 0) {
+                $user->verified = 1;
+                $user->save();
+                $en_status = 'Your e-mail is verified. You can now login.' ;
+                $ar_status = 'تم التأكد من الإيميل الخاص بك يمكنك تسجيل الدخول الان' ;
+                $status = direction() == 'ltr' ? $en_status : $ar_status ;
             }else{
-                $status = "Your e-mail is already verified. You can now login.";
+                $en_status = 'Your e-mail is verified. You can now login.' ;
+                $ar_status = 'تم التأكد من الإيميل الخاص بك يمكنك تسجيل الدخول الان' ;
+                $status = direction() == 'ltr' ? $en_status : $ar_status ;
             }
         }else{
-            return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
+            $en_warning = 'Sorry your email cannot be identified.' ;
+            $ar_warning = 'للأسف لا يمكننا التعرف علي الإيميل الخاص بك' ;
+            $warning = direction() == 'ltr' ? $en_warning : $ar_warning ;
+            return redirect('/login')->with('warning', $warning);
         }
 
         return redirect('/login')->with('status', $status);
@@ -154,7 +164,10 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         $this->guard()->logout();
-        return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
+        $en_status = 'We sent you an activation code. Check your email and click on the link to verify.' ;
+        $ar_status = 'لقد تم ارسال كود التحقق على اللإيميل الخاص بك ,من فضلك راجع الإيميل واضغط على رابط التأكد لتأكيد حسابك' ;
+        $status = direction() == 'ltr' ? $en_status : $ar_status ;
+        return redirect('/login')->with('status', $status);
     }
 
 }

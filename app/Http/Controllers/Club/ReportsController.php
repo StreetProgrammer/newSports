@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller ;
 //use App\Http\Controllers\App\User ;
 use Storage ;
 use PdfReport;
+use PDF;
 
 use App\Notifications\admin\NewClubRegistered ;
 use App\Notifications\admin\NewClubFixedErr ;
@@ -35,32 +36,27 @@ class ReportsController extends Controller
     */
     public function index()
     {
-        $title = direction() == 'ltr' ? 'creat_report' : 'أنشئ تقرير' ;
+        $title = direction() == 'ltr' ? 'Create Report' : 'أنشئ تقرير' ;
+        $part_title = direction() == 'ltr' ? 'Reservations' : 'الحجوزات'; //landing part title
         $governorate = Governorate::with('areas')->get();
         $id = (Auth::user()->type == 2) ? Auth::id() : Auth::user()->club_id ;
         $club = User::find($id) ;
-        return view('club.Reports.Pages.create', compact('title', 'club', 'Sports', 'governorate') );
+        return view('club.Reports.Pages.create', compact('title', 'club', 'Sports', 'governorate', 'part_title') );
     }
 
+    // take request from user and get target model and send data to prepareQuery function 
     public function displayReport(Request $request)
     {
         //return $request ;
-        
-        
         $model = $request->type ;
         return self::prepareQuery($model, $request) ;
     }
 
    
-
     ////////////////////////////// start static query builder //////////////////////////////
+    // take request from displayReport and send date to target model function to handle it
     public static function prepareQuery($model, Request $request)
     {   
-        //$fromDate = $request->input('from_date');
-        //$toDate = $request->input('to_date');
-        //$sortBy = $request->input('sort_by');
-        //$id = (Auth::user()->type == 2) ? Auth::id() : Auth::user()->club_id ;
-        //$club = User::find($id) ;
         switch ($model) {
             case 'reservations':
                 return self::reservations($request);
@@ -82,6 +78,7 @@ class ReportsController extends Controller
 
     public static function reservations(Request $request)
     {
+        //return $request ;
         $fromDate = $request->input('from_date');
         $toDate = $request->input('to_date');
         $sortBy = $request->input('sort_by');
@@ -93,10 +90,11 @@ class ReportsController extends Controller
             'Sort By' => $sortBy
         ];
 
-        $queryBuilder = DB::table('reservations')
+        $reservations = DB::table('reservations')
                         ->leftJoin('users AS Club', 'reservations.R_playground_owner_id', '=', 'Club.id')
-                        ->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')
                         ->leftJoin('users AS Creator', 'reservations.R_creator_id', '=', 'Creator.id')
+                        //->leftJoin('users AS reservedBy', 'reservations.reservedBy', '=', 'reservedBy.id')
+                        ->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')
                         ->leftJoin('events AS Event', 'reservations.R_event_id', '=', 'Event.id')
                         ->leftJoin('days AS Day', 'reservations.R_day', '=', 'Day.day_id')
                         ->leftJoin('hours AS From', 'reservations.R_from', '=', 'From.hour_id')
@@ -104,45 +102,42 @@ class ReportsController extends Controller
                         /*->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')*/
                         /*->leftJoin('reservations AS Reservation', 'reservations.R_Reservation', '=', 'Reservation.id')*/
                         
-                        ->select(['reservations.created_at as created_at','reservations.id', 
+                        ->select(['reservations.created_at as created_at','reservations.R_date','reservations.resOwner','reservations.reservedBy as Position',
+                                    'reservations.id','reservations.R_price_per_hour', 'reservations.R_hour_count',
+                                    'reservations.R_total_price','reservations.clubPaid', 'reservations.reservedBy',                                    
                                     'Club.name as Club', 
-                                    'Creator.name as Creator', 
+                                    'Creator.name as Creator',
+                                    //'reservedBy.name as Position', 
                                     'Day.day_format as Day',
                                     'From.hour_format as From',
                                     'To.hour_format as To',
                                     'Playground.c_b_p_name as Playground',
+                                    //'reservations.R_total_price', DB::raw('SUM(reservations.R_total_price) as total')
+                                    
 
                         ])
-                        ->where('reservations.R_playground_owner_id', '=', $request->clubId)
-                        ->whereBetween('reservations.created_at', [$fromDate, $toDate])
-                        ->orderBy($sortBy);
-                        //->get();
+                        //->groupBy('reservations.created_at')
+                        ->where('reservations.R_playground_owner_id', '=', $request->clubId);
+                        if (!empty($request->input('from_date'))) {
+                            $reservations->where('reservations.created_at', '>', $request->input('from_date'));
+                            //$reservations$reservationsBetween('reservations.created_at', [$fromDate, $toDate]);
+                        }elseif (!empty($request->input('to_date'))) {
+                            $reservations->where('reservations.created_at', '<', $request->input('to_date'));
+                            //$reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
+                        }elseif (!empty($request->input('from_date')) && !empty($request->input('to_date'))) {
+                            $reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
+                        }
+                        
+                        $reservations->orderBy($sortBy);
+                        $reservations = $reservations->get();
+                        //return $reservations;
+                        //return view('club.Reports.Pages.reportsTemplates.reservations', compact('reservations', 'fromDate', 'toDate')) ;
+
+                        $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.reservations', compact('reservations', 'fromDate', 'toDate'));
+                        return $pdf ->download('try.pdf');
         
-        $columns = [ // Set Column to be displayed
-            'Club'      => 'Club',
-            'Degree'    => function($result) { // You can do if statement or any action do you want inside this closure
-                    return ($result->Creator == 4) ? 'Admin' : $result->Creator ;
-                } ,// if no column_name specified, this will automatically seach for snake_case of column name (will be registered_at) column from query result
-            'Club'      => 'Club',
-            'Created At' => 'created_at',
-        ];
+        
 
-        return PdfReport::of($title, $meta, $queryBuilder, $columns)
-                        ->editColumn('Created At', [ // Change column class or manipulate its data for displaying to report
-                            'displayAs' => function($result) {
-                                return $result->created_at->format('M Y');
-                            },
-                            'class' => 'left'
-                        ])
-                        ->editColumns(['Degree', 'Name'], [ // Mass edit column
-                            'class' => 'bold'
-                        ])
-                        ->groupBy('created_at')
-                        ->showTotal([ // Used to sum all value on specified column on the last table (except using groupBy method). 'point' is a type for displaying total with a thousand separator
-                            'No' => 'point' // if you want to show dollar sign ($) then use 'Total Balance' => '$'
-                        ])
-                        //->limit(20) // Limit record to be showed
-                        ->stream(); 
     }
 
     public static function courts($model, Request $request)
@@ -174,19 +169,23 @@ class ReportsController extends Controller
         $club = User::find($id) ;
         switch ($model) {
             case 'users':
-                return view('club.Reports.pageParts.createReportOf.Users', compact('club'));
+                $part_title = direction() == 'ltr' ? 'Users' : 'المستخدمين';
+                return view('club.Reports.pageParts.createReportOf.Users', compact('club', 'part_title'));
 
                 break;
             case 'branches':
-                return view('club.Reports.pageParts.createReportOf.Branches', compact('club'));
+                $part_title = direction() == 'ltr' ? 'Branches' : 'الفروع';
+                return view('club.Reports.pageParts.createReportOf.Branches', compact('club', 'part_title'));
 
                 break;
             case 'courts':
-                return view('club.Reports.pageParts.createReportOf.Courts', compact('club'));
+                $part_title = direction() == 'ltr' ? 'Courts' : 'الملاعب';
+                return view('club.Reports.pageParts.createReportOf.Courts', compact('club', 'part_title'));
 
                 break;
             case 'reservations':
-                return view('club.Reports.pageParts.createReportOf.Reservations', compact('club'));
+                $part_title = direction() == 'ltr' ? 'Reservations' : 'الحجوزات';
+                return view('club.Reports.pageParts.createReportOf.Reservations', compact('club', 'part_title'));
 
                 break;
             default:

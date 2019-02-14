@@ -13,6 +13,7 @@
                             <article id="post-122" class="post-122 page type-page status-publish hentry">
                                 <div class="post-wrap">
                                     <h1 class="entry-title">{{ trans('player.Visual_Information') }}</h1>
+                                    {{----}}
                                     <div class="post-content entry-content">
 										<h3 class="entry-title">{{ trans('player.how_to_register') }}</h3>
 										<div class="row">
@@ -24,6 +25,46 @@
 											</div>
 										</div>
                                     </div>
+                                    {{----}}
+                                    {{----}}
+                                    <div class="post-content entry-content">
+										<h3 class="entry-title">{{ trans('player.how_to_edit_profile') }}</h3>
+										<div class="row">
+											<div class="col-md-8 col-md-offset-2 text-center">
+												<video style="width:100%" controls >
+													<source src="{{ Storage::url('/media/videos/EditProfile.mp4')}}" type="video/mp4">
+													Your browser does not support the video tag.
+												</video>  
+											</div>
+										</div>
+                                    </div>
+                                    {{----}}
+                                    {{----}}
+                                    <div class="post-content entry-content">
+										<h3 class="entry-title">{{ trans('player.how_to_edit_sports') }}</h3>
+										<div class="row">
+											<div class="col-md-8 col-md-offset-2 text-center">
+												<video style="width:100%" controls >
+													<source src="{{ Storage::url('/media/videos/EditSport.mp4')}}" type="video/mp4">
+													Your browser does not support the video tag.
+												</video>  
+											</div>
+										</div>
+                                    </div>
+                                    {{----}}
+                                    {{----}}
+                                    <div class="post-content entry-content">
+										<h3 class="entry-title">{{ trans('player.how_to_edit_vacant_time') }}</h3>
+										<div class="row">
+											<div class="col-md-8 col-md-offset-2 text-center">
+												<video style="width:100%" controls >
+													<source src="{{ Storage::url('/media/videos/EditTime.mp4')}}" type="video/mp4">
+													Your browser does not support the video tag.
+												</video>  
+											</div>
+										</div>
+                                    </div>
+                                    {{----}}
                                 </div><!-- /.post-wrap -->
                             </article>
                         </div>

@@ -48,7 +48,7 @@
                             <tr>
                                 <td align="center" style="color: #5caad4; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
                                     <div style="line-height: 24px">
-                                        you have recieved this email baecouse your are the creator of the challenge. 
+                                        you have recieved this email because your are the creator of the challenge. 
                                     </div>
                                 </td>
                             </tr>

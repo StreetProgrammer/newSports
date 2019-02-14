@@ -312,6 +312,9 @@ return [
     
     'Visual_Information'                        => 'Tutorials' , 
     'how_to_register'                           => 'How To Register' ,
+    'how_to_edit_profile'                       => 'How To Edit Profile' ,
+    'how_to_edit_sports'                        => 'How To Edit Sports' ,
+    'how_to_edit_vacant_time'                   => 'How To Edit Vacant Time' ,
     
     //////////////////////////// end site.pages.static_pages.videos /////////////////////
     

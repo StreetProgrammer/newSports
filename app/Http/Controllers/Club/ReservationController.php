@@ -242,7 +242,9 @@ class ReservationController extends Controller
                                     'R_hour_count'            => $R_hour_count,
                                     'R_total_price'           => $R_total_price,
                                     'R_payment_status'        => 1,
-                                    'resOwner'                => $request->name, 
+                                    'resOwner'                => $request->name,
+                                    'reservedBy'              => Auth::user()->type, 
+
                                     ]);
                     if ($reservation) {
                         return $reservation->id ;

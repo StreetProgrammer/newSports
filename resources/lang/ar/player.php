@@ -296,6 +296,9 @@ return [
 
     'Visual_Information'                        => 'توضيحات' , 
     'how_to_register'                           => 'كيفية التسجيل' ,
+    'how_to_edit_profile'                       => 'كيفية تعديل بياناتك الشخصية' ,
+    'how_to_edit_sports'                        => 'كيفية تعديل الرياضات' ,
+    'how_to_edit_vacant_time'                   => 'كيفية تعديل الأوقات المناسبة' ,
     
     //////////////////////////// end site.pages.static_pages.videos /////////////////////
 
