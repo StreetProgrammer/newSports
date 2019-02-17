@@ -68,9 +68,15 @@
                   {{ session('status') }}
               </div>
             @endif
+            @if (session('warning_2'))
+              <div class="alert alert-danger text-center">
+                  {{ session('warning_2')[0] }} <br>
+              <a href="{{ url('SendActivateLinkAgain') }}/{{ session('warning_2')[2] }}">{{ session('warning_2')[1] }} </a>
+              </div>
+            @endif
             @if (session('warning'))
               <div class="alert alert-danger text-center">
-                  {{ session('warning') }}
+                  {{ session('warning') }} <br>
               </div>
             @endif
             @if ($errors->has('email'))

@@ -9,6 +9,8 @@ use Socialite ;
 use App\Model\User;
 use App\Model\playerProfile;
 use Illuminate\Http\Request;
+use App\Mail\player\VerifyMail;
+use Mail;
 
 class LoginController extends Controller
 {
@@ -134,11 +136,35 @@ class LoginController extends Controller
                 auth()->logout();
                 $en_warning = 'You need to confirm your account. We have sent you an activation code, please check your email.' ;
                 $ar_warning = 'سوف تحتاج إلى تأكيد حسابك وقد تم ارسال كود التأكيد يرجى مراجعة اللإيميل الخاص بك' ;
-                $warning = direction() == 'ltr' ? $en_warning : $ar_warning ;
-                return back()->with('warning', $warning);
+                $warningtext = direction() == 'ltr' ? $en_warning : $ar_warning ;
+                $SendTheLinkAgain = direction() == 'ltr' ? 'Send The Link Again' : 'ارسل الرابط مرة اخرى' ;
+                return back()->with('warning_2', [$warningtext, $SendTheLinkAgain, $request->email]);
             }
         }
         return redirect()->intended($this->redirectPath());
         
     }
+
+    public function SendActivateLinkAgain($email)
+    {
+        $User = User::where('email', $email)->first() ;
+
+        if( $User ){
+            $en_status = 'We sent you an activation code. Check your email and click on the link to verify.' ;
+            $ar_status = 'لقد تم ارسال كود التحقق على اللإيميل الخاص بك ,من فضلك راجع الإيميل واضغط على رابط التأكد لتأكيد حسابك' ;
+            $status = direction() == 'ltr' ? $en_status : $ar_status ;
+            Mail::to($User->email)->send(new VerifyMail($User));
+            return redirect('/login')->with('status', $status);
+        }else{
+            $en_warning = 'Sorry your email cannot be identified.' ;
+            $ar_warning = 'للأسف لا يمكننا التعرف علي الإيميل الخاص بك' ;
+            $warning = direction() == 'ltr' ? $en_warning : $ar_warning ;
+            return redirect('/login')->with('warning', $warning);
+        }
+  
+    }
+
+
+
+
 }

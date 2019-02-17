@@ -50,6 +50,7 @@ Route::get('/olfat', function () {
 //////////////////////////start register [ club / player ] //////////////////////
 Auth::routes();
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+Route::get('/SendActivateLinkAgain/{email}', 'Auth\LoginController@SendActivateLinkAgain');
 
 // to display preregister options [ club / player ] as acomplete page // final
 Route::get('/preregister', function () {
