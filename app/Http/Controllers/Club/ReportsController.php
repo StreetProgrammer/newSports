@@ -140,21 +140,79 @@ class ReportsController extends Controller
 
     }
 
-    public static function courts($model, Request $request)
+    public static function courts(Request $request)
+    {
+        //return $request ;
+        $fromDate = $request->input('from_date');
+        $toDate = $request->input('to_date');
+        $sortBy = $request->input('sort_by');
+
+        $title = 'Reservations Report';
+
+        $meta = [ // For displaying filters description on header
+            'Club User Accounts on' => $fromDate . ' To ' . $toDate,
+            'Sort By' => $sortBy
+        ];
+
+        $reservations = DB::table('reservations')
+                        ->leftJoin('users AS Club', 'reservations.R_playground_owner_id', '=', 'Club.id')
+                        ->leftJoin('users AS Creator', 'reservations.R_creator_id', '=', 'Creator.id')
+                        //->leftJoin('users AS reservedBy', 'reservations.reservedBy', '=', 'reservedBy.id')
+                        ->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')
+                        ->leftJoin('events AS Event', 'reservations.R_event_id', '=', 'Event.id')
+                        ->leftJoin('days AS Day', 'reservations.R_day', '=', 'Day.day_id')
+                        ->leftJoin('hours AS From', 'reservations.R_from', '=', 'From.hour_id')
+                        ->leftJoin('hours AS To', 'reservations.R_to', '=', 'To.hour_id')
+                        /*->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')*/
+                        /*->leftJoin('reservations AS Reservation', 'reservations.R_Reservation', '=', 'Reservation.id')*/
+                        
+                        ->select(['reservations.created_at as created_at','reservations.R_date','reservations.resOwner','reservations.reservedBy as Position',
+                                    'reservations.id','reservations.R_price_per_hour', 'reservations.R_hour_count', 'reservations.R_playground_id', 
+                                    'reservations.R_total_price','reservations.clubPaid', 'reservations.reservedBy',                                    
+                                    'Club.name as Club', 
+                                    'Creator.name as Creator',
+                                    //'reservedBy.name as Position', 
+                                    'Day.day_format as Day',
+                                    'From.hour_format as From',
+                                    'To.hour_format as To',
+                                    'Playground.c_b_p_name as Playground',
+                                    //'reservations.R_total_price', DB::raw('SUM(reservations.R_total_price) as total')
+                                    
+
+                        ])
+                        //->groupBy('reservations.created_at')
+                        ->where('reservations.R_playground_owner_id', '=', $request->clubId)
+                        ->whereIn('reservations.R_playground_id', $request->playgrounds);
+                        if (!empty($request->input('from_date'))) {
+                            $reservations->where('reservations.created_at', '>', $request->input('from_date'));
+                            //$reservations$reservationsBetween('reservations.created_at', [$fromDate, $toDate]);
+                        }elseif (!empty($request->input('to_date'))) {
+                            $reservations->where('reservations.created_at', '<', $request->input('to_date'));
+                            //$reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
+                        }elseif (!empty($request->input('from_date')) && !empty($request->input('to_date'))) {
+                            $reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
+                        }
+                        
+                        $reservations->orderBy($sortBy);
+                        $reservations = $reservations->get();
+                        $courts = $request->playgrounds ;
+                        //return $reservations;
+                        //return view('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts')) ;
+
+                        $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts'));
+                        return $pdf ->download('try.pdf');
+        
+        
+    }
+
+    public static function branches(Request $request)
     {
         $fromDate = $request->input('from_date');
         $toDate = $request->input('to_date');
         $sortBy = $request->input('sort_by');
     }
 
-    public static function branches($model, Request $request)
-    {
-        $fromDate = $request->input('from_date');
-        $toDate = $request->input('to_date');
-        $sortBy = $request->input('sort_by');
-    }
-
-    public static function users($model, Request $request)
+    public static function users(Request $request)
     {
         $fromDate = $request->input('from_date');
         $toDate = $request->input('to_date');

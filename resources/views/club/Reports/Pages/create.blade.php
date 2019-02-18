@@ -15,69 +15,69 @@
     >
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
     </span>
-          <!-- About Me Box -->
 
-          <div class="row" style="margin: auto">
-            {{------- START CHANGABLE DIV FOR DISPLAYING REPORT FROM --------}}
-            <div class="col-md-8">
-              {!! Form::open(['url' => url('displayReport'), 'method' => 'POST']) !!}
-              <div id="changable">
-                @include('club.Reports.pageParts.createReportOf.Reservations')
-              </div>
-               {!! Form::submit(trans('admin.saveCountryBtn'),['class'=>'btn btn-primary', 'id' => 'createAdmin']) !!}
-               {!! Form::close() !!}
-            </div><!-- col-md-8 -->
-            {{------- END CHANGABLE DIV FOR DISPLAYING REPORT FROM --------}}
+    <div class="row" style="margin: auto">
+      
+      {{------- START CHANGABLE DIV FOR DISPLAYING REPORT FROM --------}}
+      <div class="col-md-8">
+        {!! Form::open(['url' => url('displayReport'), 'method' => 'POST']) !!}
+        <div id="changable">
+          @include('club.Reports.pageParts.createReportOf.Reservations')
+        </div>
+          {!! Form::submit(trans('club.getReport'),['class'=>'btn btn-primary', 'id' => 'createAdmin']) !!}
+          {!! Form::close() !!}
+      </div><!-- col-md-8 -->
+      {{------- END CHANGABLE DIV FOR DISPLAYING REPORT FROM --------}}
 
-            {{------- START RAIDEO BUTTONS DIV CONTROL CHANGABLE CONTENT -------}}
-            <div class="col-md-4 text-center" style="background: #fff">
-              
-              <div class="form-group">
-                <div class="radio">
-                  <label>
-                    <div class="col-md-4 pull-left">
-                      <input type="radio" name="changeForm" id="optionsRadios1" value="Reservations" checked="checked">
-                    </div>
-                    <div class="col-md-8">
-                      <span >{{trans('club.Reservations')}}</span>
-                    </div>
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <div class="col-md-4 pull-left">
-                      <input type="radio" name="changeForm" id="optionsRadios1" value="Courts">
-                    </div>
-                    <div class="col-md-8">
-                      <span >{{trans('club.Courts')}}</span>
-                    </div>
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <div class="col-md-4 pull-left">
-                      <input type="radio" name="changeForm" id="optionsRadios1" value="Branches">
-                    </div>
-                    <div class="col-md-8">
-                      <span >{{trans('club.Branches')}}</span>
-                    </div>
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <div class="col-md-4 pull-left">
-                      <input type="radio" name="changeForm" id="optionsRadios1" value="Users">
-                    </div>
-                    <div class="col-md-8">
-                      <span >{{trans('club.Users')}}</span>
-                    </div>
-                  </label>
-                </div>
+      {{------- START RAIDEO BUTTONS DIV CONTROL CHANGABLE CONTENT -------}}
+      <div class="col-md-4 text-center" style="background: #fff">
+        
+        <div class="form-group">
+          <div class="radio">
+            <label>
+              <div class="col-md-4 pull-left">
+                <input type="radio" name="changeForm" id="optionsRadios1" value="Reservations" checked="checked">
               </div>
-              
-            </div><!-- col-md-4 -->
-            {{------- END RAIDEO BUTTONS DIV CONTROL CHANGABLE CONTENT -------}}
+              <div class="col-md-8">
+                <span >{{trans('club.Reservations')}}</span>
+              </div>
+            </label>
           </div>
+          <div class="radio">
+            <label>
+              <div class="col-md-4 pull-left">
+                <input type="radio" name="changeForm" id="optionsRadios1" value="Courts">
+              </div>
+              <div class="col-md-8">
+                <span >{{trans('club.Courts')}}</span>
+              </div>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <div class="col-md-4 pull-left">
+                <input type="radio" name="changeForm" id="optionsRadios1" value="Branches">
+              </div>
+              <div class="col-md-8">
+                <span >{{trans('club.Branches')}}</span>
+              </div>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <div class="col-md-4 pull-left">
+                <input type="radio" name="changeForm" id="optionsRadios1" value="Users">
+              </div>
+              <div class="col-md-8">
+                <span >{{trans('club.Users')}}</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        
+      </div><!-- col-md-4 -->
+      {{------- END RAIDEO BUTTONS DIV CONTROL CHANGABLE CONTENT -------}}
+    </div>
   </div>
         <!-- /.box-body -->
 </div>
