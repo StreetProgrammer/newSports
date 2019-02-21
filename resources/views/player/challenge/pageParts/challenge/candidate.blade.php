@@ -96,7 +96,7 @@
       <span>
 					@if ( $challenge->C_YesOrNo == 1 ) {{-- if event candidate exist --}}
 
-						@if ( $challenge->C_date < date("Y-m-d") ) {{-- if event date is in past --}}
+						@if ( $challenge->C_JQueryTo < date("Y-m-d H:i:s") ) {{-- if event date is in past --}}
 							@php 
 								$candidateRateCount=willvincent\Rateable\Rating::where('user_id', $challenge->creator->id)
 																															->where('rateable_id', $challenge->candidate->playerProfile->id)

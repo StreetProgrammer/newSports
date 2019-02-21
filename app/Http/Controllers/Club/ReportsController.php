@@ -149,11 +149,6 @@ class ReportsController extends Controller
 
         $title = 'Reservations Report';
 
-        $meta = [ // For displaying filters description on header
-            'Club User Accounts on' => $fromDate . ' To ' . $toDate,
-            'Sort By' => $sortBy
-        ];
-
         $reservations = DB::table('reservations')
                         ->leftJoin('users AS Club', 'reservations.R_playground_owner_id', '=', 'Club.id')
                         ->leftJoin('users AS Creator', 'reservations.R_creator_id', '=', 'Creator.id')
@@ -170,34 +165,30 @@ class ReportsController extends Controller
                                     'reservations.id','reservations.R_price_per_hour', 'reservations.R_hour_count', 'reservations.R_playground_id', 
                                     'reservations.R_total_price','reservations.clubPaid', 'reservations.reservedBy',                                    
                                     'Club.name as Club', 
-                                    'Creator.name as Creator',
-                                    //'reservedBy.name as Position', 
+                                    'Creator.name as Creator', 
                                     'Day.day_format as Day',
                                     'From.hour_format as From',
                                     'To.hour_format as To',
                                     'Playground.c_b_p_name as Playground',
-                                    //'reservations.R_total_price', DB::raw('SUM(reservations.R_total_price) as total')
-                                    
-
                         ])
                         //->groupBy('reservations.created_at')
                         ->where('reservations.R_playground_owner_id', '=', $request->clubId)
                         ->whereIn('reservations.R_playground_id', $request->playgrounds);
                         if (!empty($request->input('from_date'))) {
                             $reservations->where('reservations.created_at', '>', $request->input('from_date'));
-                            //$reservations$reservationsBetween('reservations.created_at', [$fromDate, $toDate]);
                         }elseif (!empty($request->input('to_date'))) {
                             $reservations->where('reservations.created_at', '<', $request->input('to_date'));
-                            //$reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
                         }elseif (!empty($request->input('from_date')) && !empty($request->input('to_date'))) {
                             $reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
                         }
+                        if (!empty($request->input('sort_by'))) {
+                            $reservations->orderBy($request->input('sort_by'));
+                        }
                         
-                        $reservations->orderBy($sortBy);
                         $reservations = $reservations->get();
                         $courts = $request->playgrounds ;
-                        //return $reservations;
-                        //return view('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts')) ;
+                        //return $courts;
+                        return view('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts')) ;
 
                         $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts'));
                         return $pdf ->download('try.pdf');

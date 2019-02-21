@@ -1,6 +1,6 @@
 @if ( $challenge->C_YesOrNo == 1 ) {{-- if event candidate accept the challenge --}}
 
-	@if ( $challenge->C_date > date("Y-m-d") ) {{-- if event date is in past --}}
+	@if ( $challenge->C_JQueryTo > date("Y-m-d H:i:s") ) {{-- if event date is in past --}}
 
 		@if ( empty($challenge->C_reservation) ) {{-- if event reservation not exist --}}
 
