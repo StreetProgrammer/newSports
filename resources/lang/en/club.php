@@ -315,6 +315,25 @@ return [
     'C_delete'                                                  => 'مسح',
     //////////////////////////club branches datatable////////////////////////////////
 
+    ////////////////////////// start club reports ////////////////////////////////
+    'Reservations'                                              => 'Reservations' ,
+    'Courts'                                                    => 'Courts' ,
+    'Branches'                                                  => 'Branches' ,
+    'Users'                                                     => 'Users' ,
+    'From'                                                      => 'From' ,
+    'To'                                                        => 'To' ,
+    'sortBy'                                                    => 'Sort By' ,
+    'getReport'                                                 => 'Get Report' ,
+    'courtName'                                                 => 'Court Name' ,
+    'branchName'                                                => 'Branch Name' ,
+    'branchCreatedAt'                                           => 'Branch Created Date' ,
+    'modelId'                                                   => "ID's" ,
+    'courtCreatedAt'                                            => 'Court Created Date' ,
+    'SortByPlaceholder'                                         => 'SortBy ...' ,
+    'reservationDate'                                           => 'Reservation Date',
+    'ReservationCreatedDate'                                    => 'Reservation Created Date'
+    ////////////////////////// end club reports ////////////////////////////////
+
 
     
 ];

@@ -1,29 +1,30 @@
 
               <h3>{{ $part_title }}</h3>
               {!! Form::hidden( 'clubId', $club->id ) !!}
-              {!! Form::hidden( 'type', 'users' ) !!}
+              {!! Form::hidden( 'type', 'courts' ) !!}
               <div class="row">
-                <div class="col-md-6">
+
+                <div class="col-md-4">
                   <p style="font-weight:bold" id="formTitle">
-                    <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                    <i class="fa fa-calendar custom" style="color: #3c8dbc;"></i>
                     {{ trans('club.From') }}
                   </p>
                   <p class="text-muted">
                     {!! Form::date('from_date', old('from'),['class'=>'form-control']) !!}
                   </p>
-                </div><!--/.col-md-6--->
+                </div><!--/.col-md-4--->
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <p style="font-weight:bold" id="formTitle">
-                    <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                    <i class="fa fa-calendar custom" style="color: #3c8dbc;"></i>
                     {{ trans('club.To') }}
                   </p>
                   <p class="text-muted">
                     {!! Form::date('to_date', old('to'),['class'=>'form-control']) !!}
                   </p>
-                </div><!--/.col-md-6--->
+                </div><!--/.col-md-4--->
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p style="font-weight:bold" id="formTitle">
                       <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
                       {{ trans('club.sortBy') }}
@@ -31,39 +32,33 @@
                     <p class="text-muted">
                       {!! Form::select(
                                         'sort_by',  
-                                        ['name' => 'Names', 'id' => "ID's", 'created_at' => "Account Created Date"], 
+                                        ['name'         => trans('club.branchName'), 
+                                          'id'          => trans('club.modelId'), 
+                                          'created_at'  => trans('club.branchCreatedAt')
+                                        ], 
                                         null, 
-                                        ['class'=>'form-control','placeholder' => 'Pick a size...']
+                                        ['class'=>'form-control','placeholder' => trans('club.SortByPlaceholder')]
                       ); !!}
                     </p>
-                  </div><!--/.col-md-6--->
+                  </div><!--/.col-md-4--->
 
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <p style="font-weight:bold" id="formTitle">
                       <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
                       {{ trans('club.adminName') }}
                     </p>
-                    <p class="text-muted">
-                      {!! Form::date('too',old('to'),['class'=>'form-control']) !!}
-                    </p>
-                  </div><!--/.col-md-6--->
+                      @foreach ($club->clubBranches as $branch)
+                        <div class="col-lg-4">
+                            @if ($branch->name != 'post')
+                              <div class="checkbox">
+                                <label><input type="checkbox" name="branches[]" value="{{ $branch->id }}">{{ $branch->c_b_name }}</label>
+                              </div>
+                            @endif
+                        </div>
+                      @endforeach
+                  </div><!--/.col-md-12--->
+
               </div><!--/.row--->
-              
-              
-              <div class="col-md-10">
-                <p class="text-muted">
-                  <input type="password" name="password" class="form-control" value="">
-                </p>
-              </div>
-              <div class="col-md-2 text-center">
-                <strong class="showHidePass" style="font-size: 120%;
-                                        border: 2px solid #3c8dbc;
-                                        padding: 3px 5px;
-                                        border-radius: 15px;
-                                        cursor: pointer;"
-                >
-                  <i class="fa fa-eye" style="color: #3c8dbc;"aria-hidden="true"></i>
-                </strong>
-              </div>
+    
               <br><br><br><br><br>
               <!----->

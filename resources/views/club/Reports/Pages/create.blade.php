@@ -36,7 +36,7 @@
           <div class="radio">
             <label>
               <div class="col-md-4 pull-left">
-                <input type="radio" name="changeForm" id="optionsRadios1" value="Reservations" checked="checked">
+                <input type="radio" name="changeForm" value="Reservations" checked="checked">
               </div>
               <div class="col-md-8">
                 <span >{{trans('club.Reservations')}}</span>
@@ -46,7 +46,7 @@
           <div class="radio">
             <label>
               <div class="col-md-4 pull-left">
-                <input type="radio" name="changeForm" id="optionsRadios1" value="Courts">
+                <input type="radio" name="changeForm" value="Courts">
               </div>
               <div class="col-md-8">
                 <span >{{trans('club.Courts')}}</span>
@@ -56,7 +56,7 @@
           <div class="radio">
             <label>
               <div class="col-md-4 pull-left">
-                <input type="radio" name="changeForm" id="optionsRadios1" value="Branches">
+                <input type="radio" name="changeForm" value="Branches">
               </div>
               <div class="col-md-8">
                 <span >{{trans('club.Branches')}}</span>
@@ -66,7 +66,7 @@
           <div class="radio">
             <label>
               <div class="col-md-4 pull-left">
-                <input type="radio" name="changeForm" id="optionsRadios1" value="Users">
+                <input type="radio" name="changeForm" value="Users">
               </div>
               <div class="col-md-8">
                 <span >{{trans('club.Users')}}</span>

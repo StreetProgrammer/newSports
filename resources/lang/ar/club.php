@@ -312,7 +312,8 @@ return [
     'admin'                                                     => 'مشرف' ,
     'manager'                                                   => 'مدير' ,
     ////////////////////////// end club users datatable ////////////////////////////
-    ////////////////////////// end club users pages ////////////////////////////
+
+    ////////////////////////// end club users pages ////////////////////////////////
     'managerName'                                               => 'اسم المدير' ,
     'adminName'                                                 => 'اسم المشرف' ,
     'email'                                                     => 'البريد الإليكتروني' ,
@@ -325,7 +326,8 @@ return [
     'updatedSuccessfully'                                       => 'تم تعديل السجل بنجاح' ,
     'deletedSuccessfully'                                       => 'تم مسح السجل بنجاح' ,
 
-    ////////////////////////// end club users pages ////////////////////////////
+    ////////////////////////// end club users pages /////////////////////////////////
+
     //////////////////////////club branches datatable////////////////////////////////
     'brancheName'                                               => 'الإسم',
     'phone'                                                     => 'تليفون',
@@ -335,4 +337,22 @@ return [
     'C_delete'                                                  => 'مسح',
     //////////////////////////club branches datatable////////////////////////////////
 
+    ////////////////////////// start club reports ////////////////////////////////
+    'Reservations'                                              => 'الحجوزات' ,
+    'Courts'                                                    => 'الملاعب' ,
+    'Branches'                                                  => 'الفروع' ,
+    'Users'                                                     => 'المستخدمين' ,
+    'From'                                                      => 'من' ,
+    'To'                                                        => 'إلى' ,
+    'sortBy'                                                    => 'مرتب بحسب',
+    'getReport'                                                 => 'استخرج التقرير',
+    'courtName'                                                 => 'اسم الملعب',
+    'branchName'                                                => 'اسم الفرع' ,
+    'branchCreatedAt'                                           => 'وقت انشاء الفرع' ,
+    'modelId'                                                   => "ID's",
+    'courtCreatedAt'                                            => 'وقت انشاء الملعب' ,
+    'SortByPlaceholder'                                         => 'الترتيب حسب ...' ,
+    'reservationDate'                                           => 'تاريخ الحجز',
+    'ReservationCreatedDate'                                    => 'تاريخ انشاء الحجز' ,
+    ////////////////////////// end club reports ////////////////////////////////
 ];

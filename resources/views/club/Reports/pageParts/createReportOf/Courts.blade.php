@@ -6,7 +6,7 @@
 
                 <div class="col-md-4">
                   <p style="font-weight:bold" id="formTitle">
-                    <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                    <i class="fa fa-calendar custom" style="color: #3c8dbc;"></i>
                     {{ trans('club.From') }}
                   </p>
                   <p class="text-muted">
@@ -16,7 +16,7 @@
 
                 <div class="col-md-4">
                   <p style="font-weight:bold" id="formTitle">
-                    <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                    <i class="fa fa-calendar custom" style="color: #3c8dbc;"></i>
                     {{ trans('club.To') }}
                   </p>
                   <p class="text-muted">
@@ -32,9 +32,12 @@
                     <p class="text-muted">
                       {!! Form::select(
                                         'sort_by',  
-                                        ['name' => 'Names', 'id' => "ID's", 'created_at' => "Account Created Date"], 
+                                        ['name'         => trans('club.courtName'), 
+                                          'id'          => trans('club.modelId'), 
+                                          'created_at'  => trans('club.courtCreatedAt')
+                                        ], 
                                         null, 
-                                        ['class'=>'form-control','placeholder' => 'Sort By ...']
+                                        ['class'=>'form-control','placeholder' => trans('club.SortByPlaceholder')]
                       ); !!}
                     </p>
                   </div><!--/.col-md-4--->
@@ -56,13 +59,6 @@
                   </div><!--/.col-md-12--->
 
               </div><!--/.row--->
-              
-              
-              <div class="col-md-12">
-                <p class="text-muted">
-                  <input type="password" name="password" class="form-control" value="">
-                </p>
-              </div>
     
               <br><br><br><br><br>
               <!----->
