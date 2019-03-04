@@ -62,17 +62,17 @@
     {{-- end court info report --}}
 
     {{-- start court users report --}}
-    <table class="pdfTable">
+    <table class="pdfTable" style="text-align: center;">
       <tr>
         <th>User</th>
         <th>Position</th>
         <th>Account Status</th>
       </tr>
-      @foreach ($court->users() as $user)
+      @foreach ($court->users as $user)
         <tr>
           <td>{{ $user->name }}</td>
-          <td>{{ $user->name }}</td>
-          <td>{{ $user->name }} LE</td>
+          <td>{{ $user->PlaygroundUsers->type == 3 ? 'Admin' : 'Manager'}}</td>
+          <td>{{ $user->PlaygroundUsers->user_is_active == 1 ? 'Active' : 'Deactive'}}</td>
         </tr>
       @endforeach
     </table>

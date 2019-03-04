@@ -25,7 +25,7 @@
 
                 <div class="col-md-4">
                     <p style="font-weight:bold" id="formTitle">
-                      <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                      <i class="fa fa-sort custom" style="color: #3c8dbc;"></i>
                       {{ trans('club.sortBy') }}
                     </p>
                     <p class="text-muted">

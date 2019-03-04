@@ -26,7 +26,7 @@
 
                 <div class="col-md-4">
                     <p style="font-weight:bold" id="formTitle">
-                      <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
+                      <i class="fa fa-sort custom" style="color: #3c8dbc;"></i>
                       {{ trans('club.sortBy') }}
                     </p>
                     <p class="text-muted">
@@ -44,8 +44,8 @@
 
                   <div class="col-md-12">
                     <p style="font-weight:bold" id="formTitle">
-                      <i class="fa fa-user custom" style="color: #3c8dbc;"></i>
-                      {{ trans('club.adminName') }}
+                      <i class="fa fa-building custom" style="color: #3c8dbc;"></i>
+                      {{ trans('club.Branch') }}
                     </p>
                       @foreach ($club->clubBranches as $branch)
                         <div class="col-lg-4">

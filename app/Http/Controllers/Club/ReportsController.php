@@ -127,8 +127,13 @@ class ReportsController extends Controller
                         }elseif (!empty($request->input('from_date')) && !empty($request->input('to_date'))) {
                             $reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
                         }
+
+                        if (!empty($request->input('sort_by'))) {
+                            $reservations->orderBy($sortBy, 'DESC');
+                        }else{
+                            $reservations->orderBy('id', 'DESC');
+                        }
                         
-                        $reservations->orderBy($sortBy);
                         $reservations = $reservations->get();
                         //return $reservations;
                         //return view('club.Reports.Pages.reportsTemplates.reservations', compact('reservations', 'fromDate', 'toDate')) ;
@@ -146,7 +151,8 @@ class ReportsController extends Controller
         $fromDate = $request->input('from_date');
         $toDate = $request->input('to_date');
         $sortBy = $request->input('sort_by');
-
+        $courts = ($request->has('playgrounds')) ? $request->playgrounds : User::find($request->clubId)->clubPlaygrounds()->select('id')->get()->pluck('id')->toArray();
+        //return $courts;
         $title = 'Reservations Report';
 
         $reservations = DB::table('reservations')
@@ -173,7 +179,7 @@ class ReportsController extends Controller
                         ])
                         //->groupBy('reservations.created_at')
                         ->where('reservations.R_playground_owner_id', '=', $request->clubId)
-                        ->whereIn('reservations.R_playground_id', $request->playgrounds);
+                        ->whereIn('reservations.R_playground_id', $courts)->orderBy('id', 'DESC');
                         if (!empty($request->input('from_date'))) {
                             $reservations->where('reservations.created_at', '>', $request->input('from_date'));
                         }elseif (!empty($request->input('to_date'))) {
@@ -181,13 +187,14 @@ class ReportsController extends Controller
                         }elseif (!empty($request->input('from_date')) && !empty($request->input('to_date'))) {
                             $reservations->whereBetween('reservations.created_at', [$fromDate, $toDate]);
                         }
+                        
                         if (!empty($request->input('sort_by'))) {
                             $reservations->orderBy($request->input('sort_by'));
                         }
                         
                         $reservations = $reservations->get();
-                        $courts = $request->playgrounds ;
-                        //return $courts;
+                         
+                        //return $reservations;
                         return view('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts')) ;
 
                         $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts'));

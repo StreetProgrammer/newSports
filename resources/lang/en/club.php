@@ -238,7 +238,7 @@ return [
     'svaeEdits'                                                 => 'حفظ التعديلات' ,
     'reservationCreator'                                        => 'منشئ الحجز' ,
     'club'                                                      => 'النادي' ,
-    'playground'                                                => 'الملعب' ,
+    'playground'                                                => 'Court' ,
     'eventID'                                                   => 'رقم الحدث' ,
     'price/Hour'                                                => 'سعر الساعة' ,
     'hourCount'                                                 => 'عدد الساعات' ,
@@ -331,7 +331,9 @@ return [
     'courtCreatedAt'                                            => 'Court Created Date' ,
     'SortByPlaceholder'                                         => 'SortBy ...' ,
     'reservationDate'                                           => 'Reservation Date',
-    'ReservationCreatedDate'                                    => 'Reservation Created Date'
+    'ReservationCreatedDate'                                    => 'Reservation Created Date',
+    'Court'                                                     => 'Court' ,
+    'Branch'                                                    => 'Branch' ,
     ////////////////////////// end club reports ////////////////////////////////
 
 
