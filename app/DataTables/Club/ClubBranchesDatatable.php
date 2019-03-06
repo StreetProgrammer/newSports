@@ -60,7 +60,7 @@ class ClubBranchesDatatable extends DataTable
                         //DB::raw("count(playgrounds.c_branch_id) as Playgrounds"),
 
             ])
-            ->where('club_branches.c_b_user_id', '=', $club_id)
+            ->where('club_branches.c_b_user_id', $club_id)
             //->groupBy('club_branches.id')
             ->get();
         //return Event::all();

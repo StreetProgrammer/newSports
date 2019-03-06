@@ -1,7 +1,7 @@
 
               <h3>{{ $part_title }}</h3>
               {!! Form::hidden( 'clubId', $club->id ) !!}
-              {!! Form::hidden( 'type', 'courts' ) !!}
+              {!! Form::hidden( 'type', 'branches' ) !!}
               <div class="row">
 
                 <div class="col-md-4">
