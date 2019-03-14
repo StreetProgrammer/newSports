@@ -99,8 +99,6 @@ class ReportsController extends Controller
                         ->leftJoin('days AS Day', 'reservations.R_day', '=', 'Day.day_id')
                         ->leftJoin('hours AS From', 'reservations.R_from', '=', 'From.hour_id')
                         ->leftJoin('hours AS To', 'reservations.R_to', '=', 'To.hour_id')
-                        /*->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')*/
-                        /*->leftJoin('reservations AS Reservation', 'reservations.R_Reservation', '=', 'Reservation.id')*/
                         
                         ->select(['reservations.created_at as created_at','reservations.R_date','reservations.resOwner','reservations.reservedBy as Position',
                                     'reservations.id','reservations.R_price_per_hour', 'reservations.R_hour_count',
@@ -164,8 +162,6 @@ class ReportsController extends Controller
                         ->leftJoin('days AS Day', 'reservations.R_day', '=', 'Day.day_id')
                         ->leftJoin('hours AS From', 'reservations.R_from', '=', 'From.hour_id')
                         ->leftJoin('hours AS To', 'reservations.R_to', '=', 'To.hour_id')
-                        /*->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')*/
-                        /*->leftJoin('reservations AS Reservation', 'reservations.R_Reservation', '=', 'Reservation.id')*/
                         
                         ->select(['reservations.created_at as created_at','reservations.R_date','reservations.resOwner','reservations.reservedBy as Position',
                                     'reservations.id','reservations.R_price_per_hour', 'reservations.R_hour_count', 'reservations.R_playground_id', 
@@ -221,8 +217,6 @@ class ReportsController extends Controller
                         ->leftJoin('days AS Day', 'reservations.R_day', '=', 'Day.day_id')
                         ->leftJoin('hours AS From', 'reservations.R_from', '=', 'From.hour_id')
                         ->leftJoin('hours AS To', 'reservations.R_to', '=', 'To.hour_id')
-                        /*->leftJoin('playgrounds AS Playground', 'reservations.R_playground_id', '=', 'Playground.id')*/
-                        /*->leftJoin('reservations AS Reservation', 'reservations.R_Reservation', '=', 'Reservation.id')*/
                         
                         ->select(['reservations.created_at as created_at','reservations.R_date','reservations.resOwner','reservations.reservedBy as Position',
                                     'reservations.id','reservations.R_price_per_hour', 'reservations.R_hour_count', 'reservations.R_playground_id', 
@@ -235,8 +229,8 @@ class ReportsController extends Controller
                                     'Playground.c_b_p_name as Playground',
                         ])
                         //->groupBy('reservations.created_at')
-                        ->where('reservations.R_playground_owner_id', '=', $request->clubId)
-                        ->whereIn('reservations.R_playground_id', $courts)->orderBy('id', 'DESC');
+                        ->where('reservations.R_playground_owner_id', '=', $request->clubId);
+                        // ->whereIn('reservations.R_playground_id', $courts)->orderBy('id', 'DESC');
                         if (!empty($request->input('from_date'))) {
                             $reservations->where('reservations.created_at', '>', $request->input('from_date'));
                         }elseif (!empty($request->input('to_date'))) {
@@ -252,10 +246,10 @@ class ReportsController extends Controller
                         $reservations = $reservations->get();
                          
         //return $reservations;
-        return view('club.Reports.Pages.reportsTemplates.branches', compact('fromDate', 'toDate', 'branches')) ;
+        //return view('club.Reports.Pages.reportsTemplates.branches', compact('reservations', 'fromDate', 'toDate', 'branches')) ;
 
         $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.branches', compact('reservations', 'fromDate', 'toDate', 'branches'));
-        return $pdf ->download('try.pdf');
+        return $pdf ->download('branch-report.pdf');
         
         
     }

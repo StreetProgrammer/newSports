@@ -40,6 +40,11 @@ class clubBranche extends Model
         return $this->hasMany(Playground::class,'c_branch_id');
     }  
 
+    public function courtsIds()
+    {
+        return $this->branchPlaygrounds->pluck('id');
+    }
+
 
     public function AddPlayground($request)
     {
