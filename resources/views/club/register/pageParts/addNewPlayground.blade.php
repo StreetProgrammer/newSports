@@ -43,7 +43,7 @@
               </p>
 
               <hr class="">
-              <strong><i class="fa fa-phone custom" style="color: #3c8dbc;"></i> 
+              <strong><i class="fa fa-futbol-o custom" style="color: #3c8dbc;"></i> 
                 {{ trans('club.Sport') }}
               </strong>
 
@@ -61,7 +61,7 @@
               </p>
 
               <hr class="">
-              <strong><i class="fa fa-phone custom" style="color: #3c8dbc;"></i> 
+              <strong><i class="fa fa-money custom" style="color: #3c8dbc;"></i> 
                 {{ trans('club.Price_Per_Hour') }}
               </strong>
 
@@ -110,13 +110,13 @@
               <div class="col-lg-5" style="">
                 <select class="form-control input-xs" name="c_b_p_area" id="area" disabled>
                   <option value="">{{ trans('club.Select_Area') }}</option>
-                    @foreach ($governorate as $goov) <!--loop throw each city -->
-                      @foreach ($goov->areas as $area) <!--loop throw each city->area -->
-                        <!--check if we are in club city -->
-                        @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
+                    @foreach ($governorate as $goov)
+                      @foreach ($goov->areas as $area) 
+                        
+                        @if ($area->a_governorate_id == $clubBranch->c_b_city)
                           <option
                             value="{{ $area->id }}"
-                            {{ $clubBranch->c_b_Area->id == $area->id ? 'selected' : '' }}
+                            {{ !empty($clubBranch->c_b_area) ? ($clubBranch->c_b_Area->id == $area->id ? 'selected' : '') : '' }}
                           >
                             {{ direction() == 'ltr' ? $area->a_en_name : $area->a_ar_name }}
                           </option>
@@ -154,7 +154,11 @@
                   </textarea>
                   <div class="row" >
                     <div class="col-md-12">
-                      <p>{{ trans('club.features') }}</p>
+                      <strong>
+                        <i class="fa fa-tasks margin-r-5" style="color: #3c8dbc;"></i> 
+                        {{ trans('club.features') }}
+                      </strong>
+
                     </div>
                     <div class="col-md-12">
                       <div class="col-md-3 text-center">
@@ -193,30 +197,35 @@
                           {{ Form::checkbox('features[]', 'feature6', ['id'=> 'feature 6']) }}
                         </div>
                       </div>
+                      {{--
                       <div class="col-md-3 text-center">
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 7">{{ trans('club.feature7') }}</label>
                           {{ Form::checkbox('features[]', 'feature7', ['id'=> 'feature 7']) }}
                         </div>
                       </div>
+
                       <div class="col-md-3 text-center">
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 8">{{ trans('club.feature8') }}</label>
                           {{ Form::checkbox('features[]', 'feature8', ['id'=> 'feature 8']) }}
                         </div>
                       </div>
+
                       <div class="col-md-3 text-center">
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 9">{{ trans('club.feature9') }}</label>
                           {{ Form::checkbox('features[]', 'feature9', ['id'=> 'feature 9']) }}
                         </div>
                       </div>
+
                       <div class="col-md-3 text-center">
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 10">{{ trans('club.feature10') }}</label>
                           {{ Form::checkbox('features[]', 'feature10', ['id'=>'feature 10']) }}
                         </div>
                       </div>
+                      --}}
                     </div>
                       
                   </div>

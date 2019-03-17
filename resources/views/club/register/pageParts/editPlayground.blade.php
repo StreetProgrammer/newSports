@@ -115,10 +115,10 @@
                   @foreach ($governorate as $goov) <!--loop throw each city -->
                     @foreach ($goov->areas as $area) <!--loop throw each city->area -->
                       <!--check if we are in club city -->
-                      @if ($area->a_governorate_id == Auth::user()->clubProfile->c_city)
+                      @if ($area->a_governorate_id == $clubBranch->c_b_city)
                         <option
                           value="{{ $area->id }}"
-                          {{ ($clubBranch->c_b_area == $area->id ? ' selected="selected" ' : '') }}
+                          {{ !empty($clubBranch->c_b_area) ? ($clubBranch->c_b_Area->id == $area->id ? 'selected' : '') : '' }}
                         >
                           {{ (direction() == 'ltr' ? $area->a_en_name : $area->a_ar_name) }}
                         </option>
@@ -207,6 +207,7 @@
                           >
                         </div>
                       </div>
+                      {{--
                       <div class="col-md-3 text-center">
                         <div class="fea" style="background: #ecf0f5;border:1px solid #ddd;margin-bottom: 5px;">
                           <label class="" style="cursor: pointer;" for="feature 7">{{ trans('club.feature7') }}</label>
@@ -239,6 +240,7 @@
                           >
                         </div>
                       </div>
+                      --}}
                     </div>
                       
                   </div>

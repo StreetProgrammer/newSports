@@ -94,5 +94,5 @@
 
 @section('page_specific_scripts')
     <!-- flot charts scripts-->
-    <script src="{{ url('/') }}/club/club/js/clubRegister.js"></script>
+    <script src="{{ url('/') }}/club/js/clubRegister.js"></script>
 @stop

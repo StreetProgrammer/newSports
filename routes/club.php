@@ -6,9 +6,10 @@ Route::get('/newclubregisterview', function () {
     //return view('admin.emails.NewClubRegister');
     //return view('admin.emails.NewClubEditRequest');
 });
-/*/////////////////###############################################///////////////////
-* /////////////////////////// START REGISTER A CLUB /////////////////////////////////
-/////////////////#################################################//////////////////*/
+
+
+
+/////////////////////////// START REGISTER A CLUB /////////////////////////////////
 
 	//start of routs for register a club with all data enterd [profile info, branches, playgrounds] 
 
@@ -51,7 +52,7 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 	Route::post('/DeleteRegisterPlaygroundPhoto', 'PlaygroundsController@DeleteRegisterPlaygroundPhoto');
 
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
-	// [[ajaxLoad]] %%%%%%%%%%% partial views %%%%%%%%%%%  [[ajaxLoad]]//
+	// [[ajaxLoad]] %%%%%%%%%%% start partial views %%%%%%%%%%%  [[ajaxLoad]]//
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
 		/* ## important note ## ====> will use this routes in other place 
 		to handle update [ clubprofile - branch - playground ] after complete register */
@@ -74,7 +75,7 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 	// Load Editable branch record for the club account in register procces
 	Route::get('club/{Playground}/DisplayEditPlaygroundRegister/{when?}', 'PlaygroundsController@DisplayEditPlaygroundRegister');
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
-	// [[ajaxLoad]] %%%%%%%%%%% partial views %%%%%%%%%%%  [[ajaxLoad]]//
+	// [[ajaxLoad]] %%%%%%%%%%% end partial views %%%%%%%%%%%  [[ajaxLoad]]//
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
 
 });
@@ -85,9 +86,7 @@ Route::group([ 'middleware' => ['auth'], 'namespace' => 'Club' ], function(){
 
 	Route::get('/registerAddBranchPlayground', 'Club\ClubProfilesController@registerAddBranchPlayground');
 
-/////////////////################################################////////////////////
 /////////////////////////// END REGISTER A CLUB /////////////////////////////////////
-/////////////////#################################################///////////////////
 
 //=================================================================================================================================================
 //===================================================================================================================================================

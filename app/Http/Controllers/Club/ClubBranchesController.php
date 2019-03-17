@@ -351,16 +351,18 @@ class ClubBranchesController extends Controller
     */
     public function DisplayEditBranchRegister($clubBranch, $when = '')
     {
-        $countries = Country::get();
-        $governorate = Governorate::with('areas')->get();
-        $clubBranch = clubBranche::where('id', $clubBranch)
-                        ->firstOrFail();
+        $countries      = Country::get();
+        $governorate    = Governorate::with('areas')->get();
+        $clubBranch     = clubBranche::where('id', $clubBranch)
+                            ->firstOrFail();
+        $club           = User::where('id', $clubBranch->c_b_user_id)
+                            ->firstOrFail();
         $title = direction() == 'ltr' ? 'Edit' : 'تعديل';
         // ear => edit after register
         if ($when == 'ear') {
             return view('club.Edits.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries', 'title')) ;
         } else {
-            return view('club.register.pageParts.editBranch', compact('clubBranch', 'governorate', 'countries', 'title')) ;
+            return view('club.register.pageParts.editBranch', compact('club', 'clubBranch', 'governorate', 'countries', 'title')) ;
         }
     }
 

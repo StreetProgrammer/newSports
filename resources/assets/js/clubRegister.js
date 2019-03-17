@@ -256,6 +256,22 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
         });
     }
 
+    var c_country = $("select[name=c_country]").val();
+
+    if (c_country.replace(/\s/g, "") === "") {
+        errors = 1;
+        $("select[name=c_country]").css({
+            border: '2px solid #e80f0f',
+            background: '#f7e7e7'
+        });
+
+    } else {
+        $("select[name=c_country]").css({
+            border: '2px solid #5cb85c',
+            background: '#b2e8b2'
+        });
+    }
+
     var c_city = $("select[name=c_city]").val();
 
     if (c_city.replace(/\s/g, "") === "") {
@@ -344,6 +360,10 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
             border: '2px solid #5cb85c',
             background: '#b2e8b2'
         });
+        $("select[name=c_country]").css({
+            border: '2px solid #5cb85c',
+            background: '#b2e8b2'
+        });
         $("select[name=c_city]").css({
             border: '2px solid #5cb85c',
             background: '#b2e8b2'
@@ -372,6 +392,7 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
                 name: name,
                 c_phone: c_phone,
                 email: email,
+                c_country:c_country,
                 c_city: c_city,
                 c_area: c_area,
                 c_address: c_address,
@@ -383,7 +404,7 @@ $(document).on('click', "#StoreClubMainInfo", function (e) {
                     console.log(data) ;
                     swal({
                         title: "Not Valid ?",
-                        text: "Check Errors, and try again !!!",
+                        text: `Check Errors, and try again !!! ${data.errors}`,
                         icon: "warning",
                         dangerMode: true,
                     });
@@ -564,9 +585,9 @@ $(document).on('click', ".crop_playgroundImage", function (event) {
                 var addPlaygroundImageFile = $("#addPlaygroundImageFile");
                 addPlaygroundImageFile.replaceWith(addPlaygroundImageFile = addPlaygroundImageFile.clone(true));
                 if ($('.gallaryImg').length > 4) {
-                    $('#forPlaygroundImageFile').fadeOut();
+                    $('#foraddPlaygroundImageFile').fadeOut();
                 } else {
-                    $('#forPlaygroundImageFile').fadeIn();
+                    $('#foraddPlaygroundImageFile').fadeIn();
                 }
                 $('#newPhotoAdded').attr('id', data);
                 console.log(data.imgUrl);
@@ -581,9 +602,9 @@ $(document).on('click', ".completelyDelImg", function () {
     var count = $('.gallaryImg').length;
     //alert(count);
     if ($('.gallaryImg').length > 4) {
-        $('#forPlaygroundImageFile').fadeOut();
+        $('#foraddPlaygroundImageFile').fadeOut();
     } else {
-        $('#forPlaygroundImageFile').fadeIn();
+        $('#foraddPlaygroundImageFile').fadeIn();
     }
     var _token = $("input[name=_token]").val();
     var PlaygroundId = $("input[name=playgroundId]").val();
@@ -1611,7 +1632,7 @@ $(document).on('click', "#updateBranchRegister", function (e) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-/////////// start [[ create ]] Playground record for Club [[ before register ]] ///////////////////////
+/////////// start [[ create ]] club Branch record for Club [[ before register ]] ///////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).on('click', "#AddNewBranchRegister", function (e) {
@@ -1673,7 +1694,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
 
     if (c_b_area.replace(/\s/g, "") === "") {
 
-        // errors = 1;
         $("select[name=c_b_area]").css({
             border: '2px solid #e80f0f',
             background: '#f7e7e7'
@@ -1729,8 +1749,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
         });
         var _token = $("input[name=_token]").val();
         var clubId = $("input[name=clubId]").val();
-        //var c_b_logo = $("input[name=c_b_logo]").val();
-        //var c_b_banner = $("input[name=c_b_banner]").val();
         var c_b_desc = $('textarea#c_b_desc').val();
 
         $.ajax({
@@ -1746,8 +1764,6 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
                 c_b_area: c_b_area,
                 c_b_address: c_b_address,
                 c_b_desc: c_b_desc,
-                //c_b_logo:c_b_logo,
-                //c_b_banner:c_b_banner,
             },
             success: function (data) {
                 console.log(data);
@@ -1780,7 +1796,7 @@ $(document).on('click', "#AddNewBranchRegister", function (e) {
 
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////// end [[ create ]] Playground record for Club [[ before register ]] /////////////////////
+/////////////// end [[ create ]] club Branch record for Club [[ before register ]] /////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1852,7 +1868,6 @@ $(document).on('click', ".DisplayEditBranch", function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).on('click', "#ShowEditPart", function () {
-    //alert('done') ;
     $('#contentChangable').fadeOut('200');
     $('.Loader').fadeIn();
 
@@ -1872,7 +1887,7 @@ $(document).on('click', "#ShowEditPart", function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).on('click', ".ShowManagePart", function () {
-    alert('done') ;
+
     $('#contentChangable').fadeOut('200');
     $('.Loader').fadeIn();
 

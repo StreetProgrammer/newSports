@@ -43,14 +43,14 @@ class ClubProfilesController extends Controller
         $club = User::find($request->clubId);
         $admins = Admin::all();
 
-        if ($club->our_is_active == 0) {
+        if ($club->our_is_active == 0) { // in case of new register club
             \Notification::send($admins, new NewClubRegistered($club));
-        } elseif ($club->our_is_active == 3) {
+        } elseif ($club->our_is_active == 3) { // in case of new register club with refused data and try to handle it
             \Notification::send($admins, new NewClubFixedErr($club));
-        }elseif($club->our_is_active == 1){
+        }elseif($club->our_is_active == 1){ // in case of registered club want to edit some data
             \Notification::send($admins, new NewClubEditRequest($club));
         }
-        $club->our_is_active = 2 ;
+        $club->our_is_active = 2 ; // then put the club in pending mode
         $club->save();
 
         Auth::logout();
@@ -58,7 +58,7 @@ class ClubProfilesController extends Controller
         return redirect()->back() ;
     }
 
-    // club register first step [ Main Information ]
+    // club register first step [ Store Main Information ]
     public function registerClub(Request $request)
     {
         //return $request ;
@@ -70,7 +70,7 @@ class ClubProfilesController extends Controller
                     'c_phone'       => 'required|min:10',
                     'email'         => 'required|email|unique:users',
                     'c_city'        => 'required',
-                    'c_area'        => 'required',
+                    'c_area'        => '',
                     'c_address'     => 'required',
                     'password'      => 'required|min:6',
                     'c_desc'        => '',
@@ -134,14 +134,15 @@ class ClubProfilesController extends Controller
                         ));
             }
 
+            // then make user logged in to complete register
             if (auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'), 'our_is_active' => 0])) {
                 return $user ;
-                //return redirect('admin');
             }
 
         }
     }
 
+    // club edit register step [ Update Main Information ]
     public function updateRegisterClubMainInfo(Request $request)
     {
         //return $request ;
@@ -163,13 +164,13 @@ class ClubProfilesController extends Controller
         if (Auth::user()->id == $request->clubId) {
             clubProfile::where('c_user_id', '=', Auth::user()->id)
                         ->update(array(
-                            'c_phone' => $request->c_phone,
-                            'c_city' => $request->c_country,
-                            'c_city' => $request->c_city,
-                            'c_area' => $request->c_area,
-                            'c_address' => $request->c_address,
-                            'c_desc' => $request->c_desc,
-                            //'p_date' => $request->p_born_date,
+                            'c_phone'       => $request->c_phone,
+                            'c_country'     => $request->c_country,
+                            'c_city'        => $request->c_city,
+                            'c_area'        => $request->c_area,
+                            'c_address'     => $request->c_address,
+                            'c_desc'        => $request->c_desc,
+
                         ));
             return $request->name ;
         } else {

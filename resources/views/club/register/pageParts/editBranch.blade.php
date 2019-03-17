@@ -68,12 +68,14 @@
                 <select class="form-control input-xs" name="c_b_city" id="governorate">
                   <option value="">{{ trans('club.Select_Governorate') }}</option>
                   @foreach ($governorate as $gov)
-                    <option
-                      value="{{ $gov->id }}"
-                      {{ ($clubBranch->c_b_city == $gov->id ? ' selected="selected" ' : '') }} 
-                    >
-                      {{ (direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
-                    </option>
+                    @if ( $gov->g_country_id == $club->clubProfile->c_country )
+                      <option
+                        value="{{ $gov->id }}"
+                        {{ ($clubBranch->c_b_city == $gov->id ? ' selected="selected" ' : '') }} 
+                      >
+                        {{ (direction() == 'ltr' ? $gov->g_en_name : $gov->g_ar_name) }}
+                      </option>
+                    @endif
                   @endforeach
                 </select>
               </div>
