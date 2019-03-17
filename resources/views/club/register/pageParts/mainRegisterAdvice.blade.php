@@ -9,30 +9,30 @@
                 <div class="row">
                 <div class="col-sm-4 col-md-6">
                     <h4 class="text-center">{{ trans('club.PrimaryRegisterInfo') }}</h4>
-                    <div class="color-palette-set">
+                    <div class="color-palette-set" style="background: #ecf0f5;padding: 10px">
 
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.1_general_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.2_general_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.3_general_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.4_general_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.5_general_advice') }}
                             </span>
                         </div>
@@ -42,34 +42,34 @@
                 <!-- /.col -->
                 <div class="col-sm-4 col-md-6">
                     <h4 class="text-center">{{ trans('club.SecondryRegisterInfo') }}</h4>
-                    <div class="color-palette-set">
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                    <div class="color-palette-set" style="background: #ecf0f5;padding: 10px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.1_more_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.2_more_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.3_more_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.4_more_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.5_more_advice') }}
                             </span>
                         </div>
-                        <div class="bg-light-blue" style="margin:5px">
-                            <span style="padding: 5px;margin: 5px">
+                        <div style="margin:5px;color:#ddd;">
+                            <span style="padding: 5px;margin: 5px;color: #3c8dbc;">
                                 {{ trans('club.6_more_advice') }}
                             </span>
                         </div>

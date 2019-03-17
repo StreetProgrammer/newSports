@@ -17,6 +17,8 @@ Route::get('/try', function (){
 //***************** start routes for [ Home - static pages ] **************//
 
 Route::get('/', 'HomeController@index'); // final
+Route::get('/home', 'HomeController@index')->name('home'); // final
+
 
 Route::get('/privacy_policy', 'HomeController@privacy_policy'); // final
 Route::get('/social_media_disclosure', 'HomeController@social_media_disclosure'); // final
@@ -25,37 +27,20 @@ Route::get('/terms_of_service', 'HomeController@terms_of_service'); // final
 Route::get('/faq', 'HomeController@faq'); // final
 Route::get('/videos', 'HomeController@videos'); // final
 Route::get('/contactus', 'HomeController@contactus'); // final
+Route::post('/contactus', 'ContactusController@contactus'); // final
 
-//************************ start routes for [ Home - static pages ]********************//
 
-Route::get('/olfat', function () {
-    //$user = App\User::with('roles')->first();
-    $userModel = '\App\Model\User' ;
+//************************ Ends routes for [ Home - static pages ]********************//
 
-    $newReords= [
-        'name' => 'Taha Mostafa Ali',
-        'email' => 'tahamostfa8@gmail.com'
-    ];
-
-    $Model = $userModel::with('sports.playgrounds')->find(21);
-
-    foreach ($newReords as $key => $record) {
-        $Model->$key = $record;
-    }
-    
-
-    $Model->save();
-    return $Model;
-});
 //////////////////////////start register [ club / player ] //////////////////////
-Auth::routes();
-Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
-Route::get('/SendActivateLinkAgain/{email}', 'Auth\LoginController@SendActivateLinkAgain');
+Auth::routes(); // final
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser'); // final
+Route::get('/SendActivateLinkAgain/{email}', 'Auth\LoginController@SendActivateLinkAgain'); // final
 
 // to display preregister options [ club / player ] as acomplete page // final
 Route::get('/preregister', function () {
     return view('auth/preRegister');
-});
+}); // final
 
 // used to redirect to register page depending on type [ club / player ] // final 
 Route::any('/handlepreregister',function(){
@@ -69,18 +54,17 @@ Route::any('/handlepreregister',function(){
     } else {
         return 3 ;
     }
-})->middleware('clubRegister');
-//////////////////////////start register [ club / player ] ///////////////////////
+})->middleware('clubRegister'); // final
+//////////////////////////ends register [ club / player ] ///////////////////////
 
-Route::get('/home', 'HomeController@index')->name('home'); // final
 
-Route::post('/contactus', 'ContactusController@contactus'); // final
 
 
 //////////////////////////// start social login routes////////////////////////////////
-Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
-Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider'); // final
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback'); // final
 //////////////////////////// end social login routes////////////////////////////////
+
 Route::group(['middleware' => ['isActive', 'isPlayer', 'web'],'namespace' => 'Player'], function(){
 //***************** routes for Notifications **************//
 Route::post('/newNotiCount', 'NotificationController@newNotiCount'); // final
@@ -133,7 +117,7 @@ Route::get('/getNoti', 'NotificationController@getNoti'); // final
 
     //***************** routes for Sports **************//
 
-    Route::post('/Sports/{Sport}/Add', 'SportsController@AddToUser');
+    Route::post('/Sports/{Sport}/Add', 'SportsController@AddToUser'); 
 
     Route::get('/Sport/{Sport?}', 'SportsController@index'); // final
 
