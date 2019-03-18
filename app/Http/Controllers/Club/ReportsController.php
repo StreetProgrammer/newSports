@@ -137,7 +137,7 @@ class ReportsController extends Controller
                         //return view('club.Reports.Pages.reportsTemplates.reservations', compact('reservations', 'fromDate', 'toDate')) ;
 
                         $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.reservations', compact('reservations', 'fromDate', 'toDate'));
-                        return $pdf ->download('try.pdf');
+                        return $pdf ->download('reservations-report.pdf');
         
         
 
@@ -194,7 +194,7 @@ class ReportsController extends Controller
                         return view('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts')) ;
 
                         $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts'));
-                        return $pdf ->download('try.pdf');
+                        return $pdf ->download('courts-report.pdf');
         
         
     }
@@ -249,7 +249,7 @@ class ReportsController extends Controller
         //return view('club.Reports.Pages.reportsTemplates.branches', compact('reservations', 'fromDate', 'toDate', 'branches')) ;
 
         $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.branches', compact('reservations', 'fromDate', 'toDate', 'branches'));
-        return $pdf ->download('branch-report.pdf');
+        return $pdf ->download('branches-report.pdf');
         
         
     }

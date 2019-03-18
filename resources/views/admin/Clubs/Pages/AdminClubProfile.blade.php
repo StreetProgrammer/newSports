@@ -24,8 +24,14 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ url('/') }}/design/AdminLTE/dist/img/user4-128x128.jpg" alt="User profile picture">
-
+							<img class="profile-user-img img-responsive img-circle" 
+										@if (empty($User->user_img))
+											src="{{ url('/') }}/design/AdminLTE/dist/img/user.png"
+										@else
+											src="{{ Storage::url($User->user_img) }}"
+										@endif 
+										alt="{{ $User->name }}"
+							>
               <h3 class="profile-username text-center">{{ $User->name }}</h3>
 
               <p class="text-muted text-center">User - Club</p>
@@ -42,6 +48,9 @@
                 </li>
                 <li class="list-group-item">
                   <b>Reservations</b> <a class="pull-right">{{ $User->clubReservation()->count() }}</a>
+								</li>
+								<li class="list-group-item">
+                  <b>Users</b> <a class="pull-right">{{ $User->clubProfile->users()->count() }}</a>
                 </li>
               </ul>
 
@@ -105,27 +114,51 @@
 
               <hr>
 
-              <strong><i class="fa fa-venus-mars custom"></i></i>  Preferred Gender</strong>
+              <strong><i class="fa fa-envelope custom"></i></i>  Eamil</strong>
 
               <p class="text-muted">
-              
+								{{ $User->email }}
               </p>
 
               <hr>
 
               <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-              <p class="text-muted">Malibu, California</p>
+              <p class="text-muted">
+              	{{ $User->clubProfile->country->c_en_name }},
+                {{ $User->clubProfile->governorate->g_en_name }}
+                {{ $User->clubProfile->area->a_en_name }}
+              </p>
 
               <hr>
 
-              <strong><i class="fa fa-soccer-ball-o margin-r-5"></i> Sports</strong>
+              <strong><i class="fa fa-sitemap margin-r-5"></i> Branches</strong>
 
               <p>
-              	@foreach ($User->sports as $sport)
+              	@foreach ($User->clubBranches as $branch)
 
-			           <span class="label @php echo randomClasses() ;  @endphp">{{$sport->sport_name}}</span>
-			     @endforeach
+									<span class="label {{ randomClasses() }}">
+										<a href="{{ aurl('/') }}/branch/{{$branch->id}}" style="color:#fff">
+											{{$branch->c_b_name}}
+										</a>
+									</span>   
+									<span class="label label-success badge label-warning pull-right">{{$branch->branchPlaygrounds->count()}}</span>
+									<ul>
+										@forelse ($branch->branchPlaygrounds as $court)
+
+											<span class="label label-success ">
+												<a href="{{ aurl('/') }}/playgrounds/{{$court->id}}" style="color:#fff">
+													{{$court->c_b_p_name}}
+												</a>
+											</span>
+										@empty
+											<span class="label" style="background-color: #2c3b41 !important">
+												No Courts Found
+											</span>
+										@endforelse
+									</ul>
+									
+			     			@endforeach
 
               </p>
 
@@ -140,489 +173,6 @@
           <!-- /.box -->
         </div>
 
-         <div class="col-md-12">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#CreatedEvents" data-toggle="tab">Created Events</a></li>
-              <li><a href="#appliedEvents" data-toggle="tab">Applied Events</a></li>
-              <li><a href="#candidatedEvents" data-toggle="tab">Candidated Events</a></li>
-              <li><a href="#createdChallenges" data-toggle="tab">Created Challenges</a></li>
-              <li><a href="#challenged" data-toggle="tab">Challenged</a></li>
-            </ul>
-            <div class="tab-content">
-<!--=============================start CreatedEvents tab=============================-->
-            	<div class="active tab-pane" id="CreatedEvents">
-            		@if($User->createdEvents->count() > 0)
-					<div class="box">
-			            <div class="box-header">
-			              <h3 class="box-title">Created Events</h3>
-
-			              <div class="box-tools">
-			                <div class="input-group input-group-sm" style="width: 150px;">
-			                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-			                  <div class="input-group-btn">
-			                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-			                  </div>
-			                </div>
-			              </div>
-			            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body table-responsive no-padding">
-	              <table class="table table-hover">
-	                <tbody><tr>
-	                  <th>ID</th>
-	                  <th>Candidate</th>
-	                  <th>Time to Play</th>
-	                  <th>from - to</th>
-	                  <th>Created Date</th>
-	                  <th>Sport</th>
-	                  <th>Playground</th>
-	                </tr>
-	                @foreach( $User->createdEvents as $createdEvent)
-	                	<tr>
-	        	                  <td>{{ $createdEvent->id }}</td>
-
-	        	                  <td>
-	        	                  	 @if ($createdEvent->E_candidate_id == '')
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                No Candidate Till Now !!
-	                            </span>
-	                        @else
-	                        <a href="{{aurl()}}/clubs/{{ $createdEvent->candidate->slug }}/details/">
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                {{ $createdEvent->candidate->name }}
-	                            </span>
-	                        </a>
-
-	                         @endif
-	        	                  </td>
-
-	        	                  <td>@php  echo date('d-m-Y', strtotime($createdEvent->E_date)) ; @endphp </td>
-	        	                  <td>
-	        	                  	<span class="label label-success">
-	        	                  		{{ $createdEvent->EventFrom->hour_format }}
-	        	                  	</span>
-
-	        	                  	<span class="label label-success">
-	        	                  		{{ $createdEvent->EventTo->hour_format }}
-	        	                  	</span>
-
-	        	                  </td>
-	        	                  <td>@php  echo date('d-m-Y', strtotime($createdEvent->created_at)) ; @endphp </td>
-	        	                  <td>
-	        	                  	{{ $createdEvent->eventSport->sport_name }}
-	        	                  </td>
-	        	                  <td>
-	        	                  	 @if ($createdEvent->E_playground_id == '')
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                No Playground Till Now !!
-	                            </span>
-	                        @else
-	                        <a href="profile/{{ $createdEvent->candidate->id }}">
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                {{ $createdEvent->eventPlayground->c_b_p_name }}
-	                            </span>
-	                        </a>
-
-	                         @endif
-
-	        	                  </td>
-	        	                </tr>
-	                @endforeach
-
-
-	              </tbody>
-	          	</table>
-	            </div>
-	            <!-- /.box-body -->
-          	</div>
-            		<!--------- created events ---------------->
-            @else
-				<div class="text-center">
-					<h3> {{ $User->name }} Don't Create any Event Yet </h3>
-				</div>
-          	@endif
-    	</div><!-- /.tab-pane -->
-<!--=============================end CreatedEvents tab=============================-->
-
-<!--=============================start createdChallenges tab=============================-->
-
-    	<div class="tab-pane" id="createdChallenges">
-    		@if($User->createdChallenges->count() > 0)
-
-			<div class="box">
-	            <div class="box-header">
-	              <h3 class="box-title">Created Challenges</h3>
-
-	              <div class="box-tools">
-	                <div class="input-group input-group-sm" style="width: 150px;">
-	                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-	                  <div class="input-group-btn">
-	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-	                  </div>
-	                </div>
-	              </div>
-            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body table-responsive no-padding">
-	              <table class="table table-hover">
-	                <tbody><tr>
-	                  <th>ID</th>
-	                  <th>Candidate</th>
-	                  <th>Time to Play</th>
-	                  <th>from - to</th>
-	                  <th>Created Date</th>
-	                  <th>Sport</th>
-	                  <th>Playground</th>
-	                </tr>
-	                @foreach( $User->createdChallenges as $createdChallenge)
-	                	<tr>
-	        	                  <td>{{ $createdChallenge->id }}</td>
-
-	        	                  <td>
-	        	                  	 @if ($createdChallenge->C_candidate_id == '')
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                No Candidate Till Now !!
-	                            </span>
-	                        @else
-	                        <a href="{{aurl()}}/Player/{{ $createdChallenge->candidate->slug }}/details/">
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                {{ $createdChallenge->candidate->name }}
-	                            </span>
-	                        </a>
-
-	                         @endif
-	        	                  </td>
-
-	        	                  <td>@php  echo date('d-m-Y', strtotime($createdChallenge->C_date)) ; @endphp </td>
-	        	                  <td>
-	        	                  	<span class="label label-success">
-	        	                  		{{ $createdChallenge->EventFrom->hour_format }}
-	        	                  	</span>
-
-	        	                  	<span class="label label-success">
-	        	                  		{{ $createdChallenge->EventTo->hour_format }}
-	        	                  	</span>
-
-	        	                  </td>
-	        	                  <td>@php  echo date('d-m-Y', strtotime($createdChallenge->created_at)) ; @endphp </td>
-	        	                  <td>
-	        	                  	{{ $createdChallenge->challengeSport->sport_name }}
-	        	                  </td>
-	        	                  <td>
-	        	                  	 @if ($createdChallenge->C_playground_id == '')
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                No Playground Till Now !!
-	                            </span>
-	                        @else
-	                        <a href="profile/{{ $createdChallenge->candidate->id }}">
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                {{ $createdChallenge->eventPlayground->c_b_p_name }}
-	                            </span>
-	                        </a>
-
-	                         @endif
-
-	        	                  </td>
-	        	                </tr>
-	                @endforeach
-
-
-	              </tbody>
-	          	</table>
-	            </div>
-	            <!-- /.box-body -->
-          	</div>
-          	@else
-				<div class="text-center">
-					<h3> {{ $User->name }} Don't Create any Challenge Yet </h3>
-				</div>
-          	@endif
-
-<!---========================================================================---->
-    	</div>
-    	<!--=============================end createdChallenges tab=============================-->
-
-    	<!---========================= start appliedEvents tab =====================================---->
-    	<div class="tab-pane" id="appliedEvents">
-    		    		@if($User->appliedEvents->count() > 0)
-
-			<div class="box">
-	            <div class="box-header">
-	              <h3 class="box-title">Applied Events</h3>
-
-	              <div class="box-tools">
-	                <div class="input-group input-group-sm" style="width: 150px;">
-	                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-	                  <div class="input-group-btn">
-	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-	                  </div>
-	                </div>
-	              </div>
-            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body table-responsive no-padding">
-	              <table class="table table-hover">
-	                <tbody><tr>
-	                  <th>ID</th>
-	                  <th>Creator</th>
-	                  <th>Time to Play</th>
-	                  <th>from - to</th>
-	                  <th>Created Date</th>
-	                  <th>Sport</th>
-	                  <th>Playground</th>
-	                </tr>
-	                @foreach( $User->appliedEvents as $appliedEvent)
-	                	<tr>
-	        	                  <td>{{ $appliedEvent->id }}</td>
-
-	        	                  <td>
-
-	                        <a href="{{aurl()}}/Player/{{ $appliedEvent->creator->slug }}/details">
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                {{ $appliedEvent->creator->name }}
-	                            </span>
-	                        </a>
-
-
-	        	                  </td>
-
-	        	                  <td>@php  echo date('d-m-Y', strtotime($appliedEvent->E_date)) ; @endphp </td>
-	        	                  <td>
-	        	                  	<span class="label label-success">
-	        	                  		{{ $appliedEvent->EventFrom->hour_format }}
-	        	                  	</span>
-
-	        	                  	<span class="label label-success">
-	        	                  		{{ $appliedEvent->EventTo->hour_format }}
-	        	                  	</span>
-
-	        	                  </td>
-	        	                  <td>@php  echo date('d-m-Y', strtotime($appliedEvent->created_at)) ; @endphp </td>
-	        	                  <td>
-	        	                  	{{ $appliedEvent->eventSport->sport_name }}
-	        	                  </td>
-	        	                  <td>
-	        	                  	 @if ($appliedEvent->C_playground_id == '')
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                No Playground Till Now !!
-	                            </span>
-	                        @else
-	                        <a href="profile/{{ $appliedEvent->candidate->id }}">
-	                            <span style="color:#FF5522;font-weight:bold;">
-	                                {{ $appliedEvent->eventPlayground->c_b_p_name }}
-	                            </span>
-	                        </a>
-
-	                         @endif
-
-	        	                  </td>
-	        	                </tr>
-	                @endforeach
-
-
-	              </tbody>
-	          	</table>
-	            </div>
-	            <!-- /.box-body -->
-          	</div>
-          	@else
-				<div class="text-center">
-					<h3> {{ $User->name }} Don't Create any Challenge Yet </h3>
-				</div>
-          	@endif
-    	</div>
-    	<!---========================= end appliedEvents  =====================================---->
-    	<!---========================= start candidatedEvents  =====================================---->
-    	<div class="tab-pane" id="candidatedEvents">
-    		@if($User->candidatedEvents->count() > 0)
-
-			<div class="box">
-	            <div class="box-header">
-	              <h3 class="box-title">Candidated Events</h3>
-
-	              <div class="box-tools">
-	                <div class="input-group input-group-sm" style="width: 150px;">
-	                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-	                  <div class="input-group-btn">
-	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-	                  </div>
-	                </div>
-	              </div>
-            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body table-responsive no-padding">
-	              <table class="table table-hover">
-	                <tbody><tr>
-	                  <th>ID</th>
-	                  <th>Creator</th>
-	                  <th>Time to Play</th>
-	                  <th>from - to</th>
-	                  <th>Created Date</th>
-	                  <th>Sport</th>
-	                  <th>Playground</th>
-	                </tr>
-	                @foreach( $User->candidatedEvents as $candidatedEvent)
-	                	<tr>
-	    	                  <td>{{ $candidatedEvent->id }}</td>
-
-	    	                  <td>
-
-			                        <a href="{{aurl()}}/Player/{{ $candidatedEvent->creator->slug }}/details/">
-			                            <span style="color:#FF5522;font-weight:bold;">
-			                                {{ $candidatedEvent->creator->name }}
-			                            </span>
-			                        </a>
-
-	    	                  </td>
-
-	    	                  <td>@php  echo date('d-m-Y', strtotime($candidatedEvent->E_date)) ; @endphp </td>
-	    	                  <td>
-	    	                  	<span class="label label-success">
-	    	                  		{{ $candidatedEvent->EventFrom->hour_format }}
-	    	                  	</span>
-
-	    	                  	<span class="label label-success">
-	    	                  		{{ $candidatedEvent->EventTo->hour_format }}
-	    	                  	</span>
-
-	    	                  </td>
-	    	                  <td>@php  echo date('d-m-Y', strtotime($candidatedEvent->created_at)) ; @endphp </td>
-	    	                  <td>
-	    	                  	{{ $candidatedEvent->eventSport->sport_name }}
-	    	                  </td>
-        	                  <td>
-        	                  	 @if ($candidatedEvent->E_playground_id == '')
-		                            <span style="color:#FF5522;font-weight:bold;">
-		                                No Playground Till Now !!
-		                            </span>
-		                        @else
-		                        <a href="profile/{{ $candidatedEvent->candidate->id }}">
-		                            <span style="color:#FF5522;font-weight:bold;">
-		                                {{ $candidatedEvent->eventPlayground->c_b_p_name }}
-		                            </span>
-		                        </a>
-
-		                         @endif
-
-        	                  </td>
-        	                </tr>
-	                @endforeach
-
-
-	              </tbody>
-	          	</table>
-	            </div>
-	            <!-- /.box-body -->
-          	</div>
-          	@else
-				<div class="text-center">
-					<h3> {{ $User->name }} Don't Create any Challenge Yet </h3>
-				</div>
-          	@endif
-    	</div>
-    	<!---========================= end candidatedEvents  =====================================---->
-    	<!---========================= start appliedEvents  =====================================---->
-    	<div class="tab-pane" id="challenged">
-    		@if($User->challengeEvents->count() > 0)
-
-			<div class="box">
-	            <div class="box-header">
-	              <h3 class="box-title">Challenge Events</h3>
-
-	              <div class="box-tools">
-	                <div class="input-group input-group-sm" style="width: 150px;">
-	                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-	                  <div class="input-group-btn">
-	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-	                  </div>
-	                </div>
-	              </div>
-            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body table-responsive no-padding">
-	              <table class="table table-hover">
-	                <tbody><tr>
-	                  <th>ID</th>
-	                  <th>Creator</th>
-	                  <th>Time to Play</th>
-	                  <th>from - to</th>
-	                  <th>Created Date</th>
-	                  <th>Sport</th>
-	                  <th>Playground</th>
-	                </tr>
-	                @foreach( $User->challengeEvents as $challengeEvent)
-	                	<tr>
-	    	                  <td>{{ $challengeEvent->id }}</td>
-
-	    	                  <td>
-
-			                        <a href="{{aurl()}}/Player/{{ $challengeEvent->creator->slug }}/details/">
-			                            <span style="color:#FF5522;font-weight:bold;">
-			                                {{ $challengeEvent->creator->name }}
-			                            </span>
-			                        </a>
-
-	    	                  </td>
-
-	    	                  <td>@php  echo date('d-m-Y', strtotime($challengeEvent->E_date)) ; @endphp </td>
-	    	                  <td>
-	    	                  	<span class="label label-success">
-	    	                  		{{ $challengeEvent->EventFrom->hour_format }}
-	    	                  	</span>
-
-	    	                  	<span class="label label-success">
-	    	                  		{{ $challengeEvent->EventTo->hour_format }}
-	    	                  	</span>
-
-	    	                  </td>
-	    	                  <td>@php  echo date('d-m-Y', strtotime($challengeEvent->created_at)) ; @endphp </td>
-	    	                  <td>
-	    	                  	{{ $challengeEvent->challengeSport->sport_name }}
-	    	                  </td>
-        	                  <td>
-        	                  	 @if ($challengeEvent->E_playground_id == '')
-		                            <span style="color:#FF5522;font-weight:bold;">
-		                                No Playground Till Now !!
-		                            </span>
-		                        @else
-		                        <a href="profile/{{ $challengeEvent->candidate->id }}">
-		                            <span style="color:#FF5522;font-weight:bold;">
-		                                {{ $challengeEvent->eventPlayground->c_b_p_name }}
-		                            </span>
-		                        </a>
-
-		                         @endif
-
-        	                  </td>
-        	                </tr>
-	                @endforeach
-
-
-	              </tbody>
-	          	</table>
-	            </div>
-	            <!-- /.box-body -->
-          	</div>
-          	@else
-				<div class="text-center">
-					<h3> {{ $User->name }} No One Challenge {{ $User->name }} Till now</h3>
-				</div>
-          	@endif
-    	</div>
-    	<!---========================= end appliedEvents  =====================================---->
-
-    	<!---========================= end tabs =====================================---->
-
-          </div>
-
-        </div>
-        <!--/.col -->
       </div>
       <!-- /.row -->
 

@@ -168,37 +168,37 @@ class ClubUsersDatatable extends DataTable
             [
                 'name'  => 'id',
                 'data'  => 'id',
-                'title' => trans("club.id"),
+                'title' => (direction() == 'rtl') ? 'رقم' : 'ID' , // trans("club.id"),
             ],
             [
                 'name'      => 'name',
                 'data'      => 'name',
-                'title'     => trans("club.name"), //trans('admin.C_name'),
+                'title'     => (direction() == 'rtl') ? 'الإسم' : 'Name' , // trans("club.name"), 
             ],
             [
                 'name'      => 'email',
                 'data'      => 'email',
-                'title'     => trans("club.email"), //trans('admin.C_email'),
+                'title'     => (direction() == 'rtl') ? 'البريد الإليكتروني' : 'Email' , // trans("club.email"),
             ],
             [
                 'name'          => 'type',
                 'data'          => 'type',
-                'title'         => trans('club.type'),
+                'title'         => (direction() == 'rtl') ? 'وظيفه' : 'Position' , // trans('club.position'),
             ],
             [
                 'name'      => 'activity',
                 'data'      => 'activity',
-                'title'     => 'Activity' //trans('admin.C_created_at'),
+                'title'     => (direction() == 'rtl') ? 'وظيفه' : 'Activity' , // trans('club.activity'),
             ],
             [
                 'name'      => 'created_at',
                 'data'      => 'created_at',
-                'title'     => trans('club.createdAt'), //trans('admin.C_created_at'),
+                'title'     => (direction() == 'rtl') ? 'أنشئ في' : 'Created At' , // trans('club.createdAt'), 
             ],
             [
                 'name'          => 'edit',
                 'data'          => 'edit',
-                'title'         => trans('club.edit'),
+                'title'         => (direction() == 'rtl') ? 'تعديل' : 'Edit' , // trans('club.edit'),
                 'exportable'    => false,
                 'printable'     => false,
                 'orderable'     => false,
@@ -206,7 +206,7 @@ class ClubUsersDatatable extends DataTable
             [
                 'name'          => 'delete',
                 'data'          => 'delete',
-                'title'         => trans('club.delete'),
+                'title'         => (direction() == 'rtl') ? 'مسح' : 'Delete' , // trans('club.delete'),
                 'exportable'    => false,
                 'printable'     => false,
                 'orderable'     => false,
@@ -222,6 +222,6 @@ class ClubUsersDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'ClubUsers' . date('YmdHis');
+        return 'ClubUsers-' . date('YmdHis');
     }
 }

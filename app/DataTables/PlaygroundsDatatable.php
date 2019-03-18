@@ -37,16 +37,17 @@ class PlaygroundsDatatable extends DataTable
     public function query(Playground $model)
     {
         return DB::table('playgrounds')
-            ->leftJoin('users AS Club', 'playgrounds.c_user_id', '=', 'Club.id')
+            //->leftJoin('users AS Club', 'playgrounds.c_user_id', '=', 'Club.id')
             ->leftJoin('club_branches AS Branch', 'playgrounds.c_branch_id', '=', 'Branch.id')
             ->leftJoin('countries AS Country', 'playgrounds.c_b_p_country', '=', 'Country.id')
             ->leftJoin('governorates AS City', 'playgrounds.c_b_p_city', '=', 'City.id')
             ->leftJoin('areas AS Area', 'playgrounds.c_b_p_area', '=', 'Area.id')
+            ->leftJoin('sports AS Sport', 'playgrounds.c_b_p_sport_id', '=', 'Sport.id')
             ->leftJoin('events', 'playgrounds.id', '=', 'events.E_playground_id')
             ->leftJoin('challenges', 'playgrounds.id', '=', 'challenges.C_playground_id')
             
             ->select(['playgrounds.*', 
-                        'Club.name as Club',
+                        //'Club.name as Club',
                         'Branch.c_b_name as Branch', 
                         'Country.c_en_name as enCountry',
                         'Country.c_ar_name as arCountry', 
@@ -54,11 +55,11 @@ class PlaygroundsDatatable extends DataTable
                         'City.g_ar_name as arCity',
                         'Area.a_en_name as enArea',
                         'Area.a_ar_name as arArea',
-                        DB::raw("count(events.E_playground_id) as Events"),
-                        DB::raw("count(challenges.C_playground_id) as Challenges"),
+                        //DB::raw("count(events.E_playground_id) as Events"),
+                        //DB::raw("count(challenges.C_playground_id) as Challenges"),
 
             ])
-            ->groupBy('playgrounds.id')
+            //->groupBy('playgrounds.id')
             ->get();
     }
 

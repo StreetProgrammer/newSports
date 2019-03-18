@@ -38,25 +38,20 @@ class BranchesDatatable extends DataTable
      public function query(clubBranche $model)
     {
         return DB::table('club_branches')
-            ->leftJoin('users AS Club', 'club_branches.c_b_user_id', '=', 'Club.id')
-            ->leftJoin('countries AS Country', 'club_branches.c_b_country', '=', 'Country.id')
-            ->leftJoin('governorates AS City', 'club_branches.c_b_city', '=', 'City.id')
-            ->leftJoin('areas AS Area', 'club_branches.c_b_area', '=', 'Area.id')
-            ->leftJoin('playgrounds', 'club_branches.id', '=', 'playgrounds.c_branch_id')
-            
-            ->select(['club_branches.*', 
-                        'Club.name as Club', 
-                        'Country.c_en_name as enCountry',
-                        'Country.c_ar_name as arCountry', 
-                        'City.g_en_name as enCity',
-                        'City.g_ar_name as arCity',
-                        'Area.a_en_name as enArea',
-                        'Area.a_ar_name as arArea',
-                        DB::raw("count(playgrounds.c_branch_id) as Playgrounds"),
+        ->leftJoin('governorates AS governorates', 'club_branches.c_b_city', '=', 'governorates.id')
+        ->leftJoin('areas AS areas', 'club_branches.c_b_area', '=', 'areas.id')
+        ->leftJoin('playgrounds', 'club_branches.id', '=', 'playgrounds.c_branch_id')
 
-            ])
-            ->groupBy('club_branches.id')
-            ->get();
+        ->select(['club_branches.*',
+                    'governorates.g_en_name as enGovernorates',
+                    'governorates.g_ar_name as arGovernorates',
+                    'areas.a_en_name as enAreas',
+                    'areas.a_ar_name as arAreas',
+                    //DB::raw("count(playgrounds.c_branch_id) as Playgrounds"),
+
+        ])
+        //->groupBy('club_branches.id')
+        ->get();
     }
 
     public static function lang()

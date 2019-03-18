@@ -289,10 +289,11 @@ return [
     ////////////////////////// end admin create & edit details page ////////////////////////////
 
     ////////////////////////// start club users datatable ////////////////////////////
+    'all_club_users'                                            => 'كل المستخدمين' ,
     'id'                                                        => 'رقم' ,
     'name'                                                      => 'الإسم' ,
     'email'                                                     => 'البريد الإليكتروني' ,
-    'type'                                                      => 'المستوى' ,
+    'position'                                                  => 'الوظيفه' ,
     'activity'                                                  => 'الحاله' ,
     'createdAt'                                                 => 'أنشئ في' ,
     'edit'                                                      => 'تعديل' ,

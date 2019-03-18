@@ -102,11 +102,11 @@ trait ChartsGenrator
             $reservations = Reservation::where('R_playground_owner_id', $id)->get();
             $chart = Charts::multi('bar', 'highcharts')
                             ->responsive(false)
-                            ->elementLabel('What You Gain')
-                            ->title('Split Money')
+                            ->elementLabel('Total Revnue')
+                            ->title('Distribution Of Revnue')
                             ->labels(array_keys($total))
                             ->dataset('Total', $total)
-                            ->dataset('your Total', $your_total)
+                            ->dataset('Club Total', $your_total)
                             ->dataset('SportsMate Total', $mind_total);
             break;
             
