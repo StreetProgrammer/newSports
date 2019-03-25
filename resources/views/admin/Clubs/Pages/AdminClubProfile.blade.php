@@ -138,7 +138,7 @@
               	@foreach ($User->clubBranches as $branch)
 
 									<span class="label {{ randomClasses() }}">
-										<a href="{{ aurl('/') }}/branch/{{$branch->id}}" style="color:#fff">
+										<a href="{{ aurl('/') }}/branches/{{$branch->id}}" style="color:#fff">
 											{{$branch->c_b_name}}
 										</a>
 									</span>   
@@ -150,6 +150,14 @@
 												<a href="{{ aurl('/') }}/playgrounds/{{$court->id}}" style="color:#fff">
 													{{$court->c_b_p_name}}
 												</a>
+											</span>
+
+											<span class="label label-primary" style="margin: 0px 15px;">
+												{{ $court->is_active == 1 ? 'Activated By Owner' : 'Deactivated By Owner'}}
+											</span>
+
+											<span class="label label-primary" style="margin: 0px 15px;">
+												{{$court->our_is_active == 1 ? 'Activated By US' : 'Deactivated By US'}}
 											</span>
 										@empty
 											<span class="label" style="background-color: #2c3b41 !important">

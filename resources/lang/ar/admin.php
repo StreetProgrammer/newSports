@@ -1,5 +1,53 @@
 <?php
 return [
+    //////////////// start Playground features ////////////////////
+    'feature1'                                  => 'مكيف الهواء' ,
+    'feature2'                                  => 'دورات مياه' ,
+    'feature3'                                  => 'غرف تغيير ملابس' ,
+    'feature4'                                  => 'كافتريات' ,
+    'feature5'                                  => 'مطاعم' ,
+    'feature6'                                  => 'جراج' ,
+    //////////////// end Playground features /////////////////////
+
+     //////////////// Start Playgrounds Datatable ///////////////
+    'Playgrounds_Datatable'                     => [
+        'title'                                             => 'كل الملاعب' ,
+        'Name'                                              => 'الإسم' ,
+        'Phone'                                             => 'التليفون' ,
+        'Branch'                                            => 'الفرع' ,
+        'Club'                                              => 'النادي' ,
+        'Created_at'                                        => 'أنشئ في' ,
+        'view'                                              => 'عرض' ,
+        'delete'                                            => 'مسح' ,
+    ],
+    //////////////// end Playgrounds Datatable ///////////////
+
+    //////////////// start  Single Playground ////////////////////
+    'single_playground'                     => [
+        'dashboard'                                 => 'الرئيسية',
+        'Playground_Data'                           => 'بيانات الملعب' ,
+        'Created_since'                             => 'أنشئ في ' ,
+        'club'                                      => 'النادي',
+        'branch'                                    => 'الفرع',
+        'playgrounds'                               => 'الملاعب' ,
+        'Phone'                                     => 'التليفون' ,
+        'Location'                                  => 'العنوان' ,
+        'Features'                                  => 'المميزات' ,
+        'Price_Per_Hour'                            => 'سعر الساعه' ,
+        'Sport'                                     => 'الرياضة' ,
+        'Description'                               => 'الوصف' ,
+        'activated_by_Owner'                        => 'مفعل من المالك' ,
+        'deactivated_by_Owner'                      => 'معطل من المالك' ,
+        'Deactivate'                                => 'تعطيل' ,
+        'Activate'                                  => 'تفعيل' ,
+        'Total_Events_Count'                        => 'إجمالي عدد الماتشات',
+        'Total_Challenges_Count'                    => 'إجمالي عدد التحديات',
+        'Playground_Photos'                         => 'صور الملعب',
+        'No_Photos_for_This_Playground'             => 'لا توجد صور لهذا الملعب',
+        'Description'                               => 'الوصف',
+    ],
+    //////////////// end Single Playground ///////////////
+
     'login'                        => 'تسجيل دخول',
     'SignIn'                       => 'سجل الدخول' ,
     'loginFromHere'                => 'سجل الدخول من هنا' ,

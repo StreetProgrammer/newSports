@@ -103,7 +103,7 @@ trait ChartsGenrator
             $chart = Charts::multi('bar', 'highcharts')
                             ->responsive(false)
                             ->elementLabel('Total Revnue')
-                            ->title('Distribution Of Revnue')
+                            ->title('Distribution Of Income')
                             ->labels(array_keys($total))
                             ->dataset('Total', $total)
                             ->dataset('Club Total', $your_total)

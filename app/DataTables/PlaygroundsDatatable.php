@@ -37,7 +37,7 @@ class PlaygroundsDatatable extends DataTable
     public function query(Playground $model)
     {
         return DB::table('playgrounds')
-            //->leftJoin('users AS Club', 'playgrounds.c_user_id', '=', 'Club.id')
+            ->leftJoin('users AS Club', 'playgrounds.c_user_id', '=', 'Club.id')
             ->leftJoin('club_branches AS Branch', 'playgrounds.c_branch_id', '=', 'Branch.id')
             ->leftJoin('countries AS Country', 'playgrounds.c_b_p_country', '=', 'Country.id')
             ->leftJoin('governorates AS City', 'playgrounds.c_b_p_city', '=', 'City.id')
@@ -47,7 +47,7 @@ class PlaygroundsDatatable extends DataTable
             ->leftJoin('challenges', 'playgrounds.id', '=', 'challenges.C_playground_id')
             
             ->select(['playgrounds.*', 
-                        //'Club.name as Club',
+                        'Club.name as Club',
                         'Branch.c_b_name as Branch', 
                         'Country.c_en_name as enCountry',
                         'Country.c_ar_name as arCountry', 
@@ -55,11 +55,7 @@ class PlaygroundsDatatable extends DataTable
                         'City.g_ar_name as arCity',
                         'Area.a_en_name as enArea',
                         'Area.a_ar_name as arArea',
-                        //DB::raw("count(events.E_playground_id) as Events"),
-                        //DB::raw("count(challenges.C_playground_id) as Challenges"),
-
             ])
-            //->groupBy('playgrounds.id')
             ->get();
     }
 
@@ -109,13 +105,13 @@ class PlaygroundsDatatable extends DataTable
                         'dom'           => 'Blfrtip',
                         'lengthMenu'    => [[10, 25, 50, -1], [10, 25, 50, 'All Record']],
                         'buttons'       => [
-                           [
+                           /*[
                                 'className' => 'btn btn-flat margin bg-orange', 
                                 'text' => '<i class="fa fa-plus"></i> Add New', 
                                 'action' => "function(){
                                     window.location.href = '" . \URL::current() . "/create'
                                 }"
-                            ],
+                            ],*/
                             [
                                 'extend' => 'print', 
                                 'className' => 'btn btn-flat margin btn-info', 
@@ -136,10 +132,10 @@ class PlaygroundsDatatable extends DataTable
                                 'className' => 'btn btn-flat margin btn-default', 
                                 'text' => '<i class="fa fa-refresh"></i>'
                             ],
-                            [
+                            /*[
                                 'className' => 'btn btn-flat margin btn-danger delBtn', 
                                 'text' => '<i class="fa fa-trash"></i>'
-                            ],
+                            ],*/
                         ],
                         'initComplete' => 'function () {
                                 this.api().columns([2,3,4,5,6,7,8]).every(function () {
@@ -179,47 +175,32 @@ class PlaygroundsDatatable extends DataTable
             [
                 'name'      => 'c_b_p_name',
                 'data'      => 'c_b_p_name',
-                'title'     => 'Name' //trans('admin.C_name'),
+                'title'     => trans('admin.Playgrounds_Datatable.Name'),
             ],
             [
                 'name'      => 'c_b_p_phone',
                 'data'      => 'c_b_p_phone',
-                'title'     => 'Phone' //trans('admin.C_email'),
+                'title'     => trans('admin.Playgrounds_Datatable.Phone'),
             ],
             [
                 'name'      => 'Branch',
                 'data'      => 'Branch',
-                'title'     => 'Branch ' //trans('admin.C_created_at'),
+                'title'     => trans('admin.Playgrounds_Datatable.Branch'),
             ],
             [
                 'name'      => 'Club',
                 'data'      => 'Club',
-                'title'     => 'Club ' //trans('admin.C_created_at'),
-            ],
-             [
-                'name'      => 'Events',
-                'data'      => 'Events',
-                'title'     => 'Events ' //trans('admin.C_created_at'),
-            ],
-            [
-                'name'      => 'Challenges',
-                'data'      => 'Challenges',
-                'title'     => 'Challenges ' //trans('admin.C_created_at'),
-            ],
-            [
-                'name'      => 'Challenges',
-                'data'      => 'Challenges',
-                'title'     => 'Challenges ' //trans('admin.C_created_at'),
+                'title'     => trans('admin.Playgrounds_Datatable.Club'),
             ],
             [
                 'name'      => 'created_at',
                 'data'      => 'created_at',
-                'title'     => 'Created at' //trans('admin.C_created_at'),
+                'title'     => trans('admin.Playgrounds_Datatable.Created_at'),
             ],
             [
                 'name'          => 'view',
                 'data'          => 'view',
-                'title'         => trans('admin.C_view'),
+                'title'         => trans('admin.Playgrounds_Datatable.view'),
                 'exportable'    => false,
                 'printable'     => false,
                 'orderable'     => false,
@@ -227,7 +208,7 @@ class PlaygroundsDatatable extends DataTable
             [
                 'name'          => 'delete',
                 'data'          => 'delete',
-                'title'         => trans('admin.C_delete'),
+                'title'         => trans('admin.Playgrounds_Datatable.delete'),
                 'exportable'    => false,
                 'printable'     => false,
                 'orderable'     => false,

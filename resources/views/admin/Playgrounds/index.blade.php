@@ -2,20 +2,17 @@
 @section('content')
 
 <section class="content-header">
-      <h1>
-        Dashboard
-        <small>Control panel</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-</section>
+    <h1>
+        {{ trans('admin.Playgrounds_Datatable.title') }}
+    </h1>
+    
+    <ol class="breadcrumb">
+      <li><a href="{{ aurl('/') }}"><i class="fa fa-dashboard"></i> {{ trans('admin.dashboard') }}</a></li>
+      <li class="active">{{ trans('admin.Playgrounds_Datatable.title') }}</li>
+    </ol>
+  </section>
 
 <div class="box">
-  <div class="box-header">
-    <h3 class="box-title">{{ $title }}</h3>
-  </div>
     <!--box-header-->
   <div class="box-body">
       <div class="table-responsive">

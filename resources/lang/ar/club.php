@@ -1,5 +1,13 @@
 <?php
 return [
+    //////////////// start Playground features ////////////////////
+    'feature1'                                  => 'مكيف الهواء' ,
+    'feature2'                                  => 'دورات مياه' ,
+    'feature3'                                  => 'غرف تغيير ملابس' ,
+    'feature4'                                  => 'كافتريات' ,
+    'feature5'                                  => 'مطاعم' ,
+    'feature6'                                  => 'جراج' ,
+    //////////////// end Playground features /////////////////////
     /////////////////////start club.register.pageparts.mainRegisterAdvice ////////////////////////////
     'reg_how_to_title'                                      => 'كيفية التسجيل كنادي' , 
     'PrimaryRegisterInfo'                                   => 'معلومات أساسيه' ,

@@ -191,7 +191,7 @@ class ReportsController extends Controller
                         $reservations = $reservations->get();
                          
                         //return $reservations;
-                        return view('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts')) ;
+                        // return view('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts')) ;
 
                         $pdf = \PDF::loadView('club.Reports.Pages.reportsTemplates.courts', compact('reservations', 'fromDate', 'toDate', 'courts'));
                         return $pdf ->download('courts-report.pdf');

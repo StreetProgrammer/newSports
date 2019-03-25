@@ -1,5 +1,13 @@
 <?php
 return [
+    //////////////// start Playground features ////////////////////
+    'feature1'                                  => 'Air Conditioning' ,
+    'feature2'                                  => 'W.C. ' ,
+    'feature3'                                  => 'Changing Rooms' ,
+    'feature4'                                  => 'Coffee Shop' ,
+    'feature5'                                  => 'Restaurants' ,
+    'feature6'                                  => 'Parking' ,
+    //////////////// end Playground features ///////////////
     /////////////////////start club.register.pageparts.mainRegisterAdvice ////////////////////////////
     'reg_how_to_title'                                      => 'How To Register As A Club' , 
     'PrimaryRegisterInfo'                                   => 'Primary Register Information' ,
@@ -293,7 +301,7 @@ return [
     'admin'                                                     => 'Admin' ,
     'manager'                                                   => 'Manager' ,
     ////////////////////////// end club users datatable ////////////////////////////
-    ////////////////////////// end club users pages ////////////////////////////
+    ////////////////////////// end club users pages ////////////////////////////////
     'managerName'                                               => 'Manager Name' ,
     'adminName'                                                 => 'Admin Name' ,
     'email'                                                     => 'Email' ,

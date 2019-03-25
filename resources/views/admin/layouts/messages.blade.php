@@ -20,10 +20,18 @@
 
 @endif
 
-@if( session()->has('Error') )
+@if( session()->has('Error'))
 
 	<div class="alert alert-danger">
 		<h3>{{ session('Error') }}</h3>
+	</div>
+
+@endif
+
+@if( session()->has('error'))
+
+	<div class="alert alert-danger">
+		<h5>{{ session('error') }}</h5>
 	</div>
 
 @endif

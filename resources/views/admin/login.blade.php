@@ -31,10 +31,13 @@
 <div class="login-box">
   <div class="login-logo">
     <a href="{{ url('design/AdminLTE') }}/index2.html"><b>Sport Mate</b> Admin Area</a>
+    <img src="{{ Storage::url(setting()->icon) }}" width="150px ;height:auto">
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">{{ trans('admin.loginFromHere') }}</p>
+
+    @include('admin.layouts.messages')
 
     <form method="post">
     	{!! csrf_field() !!}

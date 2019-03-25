@@ -32,7 +32,7 @@ class AdminAuth extends Controller
             //return redirect()->back();
     	} else{
 
-    		session()->flash('error', trans('admin.inccorect_information_login'));
+    		session()->flash('error', trans('admin.inccorrect_information_login'));
     		return redirect('admin/login');
     	}
 
