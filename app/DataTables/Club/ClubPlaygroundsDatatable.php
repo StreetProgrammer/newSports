@@ -191,17 +191,17 @@ class ClubPlaygroundsDatatable extends DataTable
             [
                 'name'      => 'c_b_p_name',
                 'data'      => 'c_b_p_name',
-                'title'     => 'Name' //trans('admin.C_name'),
+                'title'     => trans('club.Playgrounds_Datatable.Name'),
             ],
             [
                 'name'      => 'c_b_p_phone',
                 'data'      => 'c_b_p_phone',
-                'title'     => 'Phone' //trans('admin.C_email'),
+                'title'     => trans('club.Playgrounds_Datatable.Phone'),
             ],
             [
                 'name'      => 'Branch',
                 'data'      => 'Branch',
-                'title'     => 'Branch ' //trans('admin.C_created_at'),
+                'title'     => trans('club.Playgrounds_Datatable.Branch'),
             ],
             /*[
                 'name'      => 'Events',
@@ -221,12 +221,12 @@ class ClubPlaygroundsDatatable extends DataTable
             [
                 'name'      => 'created_at',
                 'data'      => 'created_at',
-                'title'     => 'Created at' //trans('admin.C_created_at'),
+                'title'     => trans('club.Playgrounds_Datatable.Created_at'),
             ],
             [
                 'name'          => 'view',
                 'data'          => 'view',
-                'title'         => trans('admin.C_view'),
+                'title'         => trans('club.Playgrounds_Datatable.view'),
                 'exportable'    => false,
                 'printable'     => false,
                 'orderable'     => false,

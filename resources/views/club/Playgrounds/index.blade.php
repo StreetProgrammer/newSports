@@ -3,13 +3,13 @@
 
 <section class="content-header">
   <h1>
-    {{$title}}
-    {{-- <small>Control panel</small> --}}
+      {{ trans('club.Playgrounds_Datatable.title') }}
   </h1>
-  {{--<ol class="breadcrumb">
-    <li><a href="{{ url('/') }}club/"{{$club->id}}><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">{{ $title }}</li>
-  </ol>--}}
+  
+  <ol class="breadcrumb">
+    <li><a href="{{ url('/') }}/club/{{ Auth::id() }}"><i class="fa fa-dashboard"></i> {{ trans('club.dashboard') }}</a></li>
+    <li class="active">{{ trans('club.Playgrounds_Datatable.title') }}</li>
+  </ol>
 </section>
 
 <div class="box">

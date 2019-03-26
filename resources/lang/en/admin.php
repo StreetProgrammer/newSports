@@ -9,6 +9,45 @@ return [
     'feature6'                                  => 'Parking' ,
     //////////////// end Playground features ///////////////
 
+    //////////////// Start Branches Datatable ///////////////
+    'Branches_Datatable'                     => [
+        'title'                                             => 'All Branches' ,
+        'Name'                                              => 'Name' ,
+        'Phone'                                             => 'Phone' ,
+        'Club'                                              => 'Club' ,
+        'Created_at'                                        => 'Created at' ,
+        'view'                                              => 'View' ,
+        'delete'                                            => 'Delete' ,
+    ],
+    //////////////// end Branches Datatable ///////////////
+
+    //////////////// start  Single Branch ////////////////////
+    'single_branch'                     => [
+        'dashboard'                                 => 'Dashboard',
+        'Playground_Data'                           => 'Playground Data' ,
+        'Created_since'                             => 'Created since' ,
+        'club'                                      => 'Club',
+        'branch'                                    => 'Branch',
+        'branches'                                  => 'Branches' ,
+        'Phone'                                     => 'Phone' ,
+        'Location'                                  => 'Location' ,
+        'Features'                                  => 'Features' ,
+        'Price_Per_Hour'                            => 'Price Per Hour' ,
+        'Sport'                                     => 'Sport' ,
+        'Description'                               => 'Description' ,
+        'activated_by_Owner'                        => 'activated by Owner' ,
+        'deactivated_by_Owner'                      => 'deactivated by Owner' ,
+        'Deactivate'                                => 'Deactivate' ,
+        'Activate'                                  => 'Activate' ,
+        'Total_Reservations_Count'                  => 'Total Reservations Count',
+        'Total_Events_Count'                        => 'Total Events Count',
+        'Total_Challenges_Count'                    => 'Total Challenges Count',
+        'Playground_Photos'                         => 'Playground Photos',
+        'No_Photos_for_This_Playground'             => 'No Photos for This Playground !!',
+        'Description'                               => 'Description',
+    ],
+    //////////////// end Single Branch ///////////////
+
     //////////////// Start Playgrounds Datatable ///////////////
     'Playgrounds_Datatable'                     => [
         'title'                                             => 'All Playgrounds' ,
@@ -40,6 +79,7 @@ return [
         'deactivated_by_Owner'                      => 'deactivated by Owner' ,
         'Deactivate'                                => 'Deactivate' ,
         'Activate'                                  => 'Activate' ,
+        'Total_Reservations_Count'                  => 'Total Reservations Count',
         'Total_Events_Count'                        => 'Total Events Count',
         'Total_Challenges_Count'                    => 'Total Challenges Count',
         'Playground_Photos'                         => 'Playground Photos',

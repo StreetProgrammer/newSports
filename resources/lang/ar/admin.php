@@ -9,7 +9,46 @@ return [
     'feature6'                                  => 'جراج' ,
     //////////////// end Playground features /////////////////////
 
-     //////////////// Start Playgrounds Datatable ///////////////
+     //////////////// Start Branches Datatable ///////////////
+     'Branches_Datatable'                     => [
+        'title'                                             => 'كل الفروع' ,
+        'Name'                                              => 'الإسم' ,
+        'Phone'                                             => 'التليفون' ,
+        'Club'                                              => 'النادي' ,
+        'Created_at'                                        => 'أنشئ في' ,
+        'view'                                              => 'عرض' ,
+        'delete'                                            => 'مسح' ,
+    ],
+    //////////////// end Branches Datatable ///////////////
+
+    //////////////// start  Single Branch ////////////////////
+    'single_branch'                     => [
+        'dashboard'                                 => 'الرئيسية',
+        'Playground_Data'                           => 'بيانات الفرع' ,
+        'Created_since'                             => 'أنشئ في ' ,
+        'club'                                      => 'النادي',
+        'branch'                                    => 'الفرع',
+        'branches'                                  => 'الفروع' ,
+        'Phone'                                     => 'التليفون' ,
+        'Location'                                  => 'العنوان' ,
+        'Features'                                  => 'المميزات' ,
+        'Price_Per_Hour'                            => 'سعر الساعه' ,
+        'Sport'                                     => 'الرياضة' ,
+        'Description'                               => 'الوصف' ,
+        'activated_by_Owner'                        => 'مفعل من المالك' ,
+        'deactivated_by_Owner'                      => 'معطل من المالك' ,
+        'Deactivate'                                => 'تعطيل' ,
+        'Activate'                                  => 'تفعيل' ,
+        'Total_Reservations_Count'                  => 'إجمالي عدد الحجوزات',
+        'Total_Events_Count'                        => 'إجمالي عدد الماتشات',
+        'Total_Challenges_Count'                    => 'إجمالي عدد التحديات',
+        'Playground_Photos'                         => 'صور الملعب',
+        'No_Photos_for_This_Playground'             => 'لا توجد صور لهذا الملعب',
+        'Description'                               => 'الوصف',
+    ],
+    //////////////// end Single Branch ///////////////
+
+    //////////////// Start Playgrounds Datatable ///////////////
     'Playgrounds_Datatable'                     => [
         'title'                                             => 'كل الملاعب' ,
         'Name'                                              => 'الإسم' ,
@@ -40,6 +79,7 @@ return [
         'deactivated_by_Owner'                      => 'معطل من المالك' ,
         'Deactivate'                                => 'تعطيل' ,
         'Activate'                                  => 'تفعيل' ,
+        'Total_Reservations_Count'                  => 'إجمالي عدد الحجوزات',
         'Total_Events_Count'                        => 'إجمالي عدد الماتشات',
         'Total_Challenges_Count'                    => 'إجمالي عدد التحديات',
         'Playground_Photos'                         => 'صور الملعب',

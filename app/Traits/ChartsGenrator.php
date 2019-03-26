@@ -96,6 +96,11 @@ trait ChartsGenrator
                     $your_total[$key] = ($total[$key] / 100) * 80 ;
                     $mind_total[$key] = ($total[$key] / 100) * 20 ;
                 }
+            }else{
+                $dateArr = array();
+                $total = array();
+                $your_total = array();
+                $mind_total = array();
             }
             //return $total ;
             //////////////////////////////////////////////////////////////

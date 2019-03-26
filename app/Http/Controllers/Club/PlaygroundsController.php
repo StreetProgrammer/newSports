@@ -37,7 +37,7 @@ class PlaygroundsController extends Controller
       
       //return $Playground ;
 
-      return view('club.Playgrounds.Pages.displayEditPlayground', compact('Playground', 'governorate', 'countries', 'sports'));
+      return view('club.Playgrounds.Pages.ClubSinglePlayground', compact('Playground', 'governorate', 'countries', 'sports'));
     }
 
     public function StoreRegisterClubPlayground(Request $request)

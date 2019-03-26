@@ -38,11 +38,13 @@ class BranchesDatatable extends DataTable
      public function query(clubBranche $model)
     {
         return DB::table('club_branches')
+        ->leftJoin('users AS Club', 'club_branches.c_b_user_id', '=', 'Club.id')
         ->leftJoin('governorates AS governorates', 'club_branches.c_b_city', '=', 'governorates.id')
         ->leftJoin('areas AS areas', 'club_branches.c_b_area', '=', 'areas.id')
         ->leftJoin('playgrounds', 'club_branches.id', '=', 'playgrounds.c_branch_id')
 
         ->select(['club_branches.*',
+                    'Club.name as Club',
                     'governorates.g_en_name as enGovernorates',
                     'governorates.g_ar_name as arGovernorates',
                     'areas.a_en_name as enAreas',
@@ -171,32 +173,27 @@ class BranchesDatatable extends DataTable
             [
                 'name'      => 'c_b_name',
                 'data'      => 'c_b_name',
-                'title'     => 'Name' //trans('admin.C_name'),
+                'title'     => trans('admin.Branches_Datatable.Name'),
             ],
             [
                 'name'      => 'c_b_phone',
                 'data'      => 'c_b_phone',
-                'title'     => 'Phone' //trans('admin.C_email'),
+                'title'     => trans('admin.Branches_Datatable.Phone'),
             ],
             [
                 'name'      => 'Club',
                 'data'      => 'Club',
-                'title'     => 'Club ' //trans('admin.C_created_at'),
-            ],
-             [
-                'name'      => 'Playgrounds',
-                'data'      => 'Playgrounds',
-                'title'     => 'Playgrounds ' //trans('admin.C_created_at'),
+                'title'     => trans('admin.Branches_Datatable.Club'),
             ],
             [
                 'name'      => 'created_at',
                 'data'      => 'created_at',
-                'title'     => 'Created at' //trans('admin.C_created_at'),
+                'title'     => trans('admin.Branches_Datatable.Created_at'),
             ],
             [
                 'name'          => 'view',
                 'data'          => 'view',
-                'title'         => trans('admin.C_view'),
+                'title'         => trans('admin.Branches_Datatable.view'),
                 'exportable'    => false,
                 'printable'     => false,
                 'orderable'     => false,
@@ -204,7 +201,7 @@ class BranchesDatatable extends DataTable
             [
                 'name'          => 'delete',
                 'data'          => 'delete',
-                'title'         => trans('admin.C_delete'),
+                'title'         => trans('admin.Branches_Datatable.delete'),
                 'exportable'    => false,
                 'printable'     => false,
                 'orderable'     => false,

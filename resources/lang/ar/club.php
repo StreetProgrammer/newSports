@@ -364,4 +364,47 @@ return [
     'reservationDate'                                           => 'تاريخ الحجز',
     'ReservationCreatedDate'                                    => 'تاريخ انشاء الحجز' ,
     ////////////////////////// end club reports ////////////////////////////////
+
+
+     //////////////// Start Playgrounds Datatable ///////////////
+     'Playgrounds_Datatable'                     => [
+        'title'                                             => 'كل الملاعب' ,
+        'Name'                                              => 'الإسم' ,
+        'Phone'                                             => 'التليفون' ,
+        'Branch'                                            => 'الفرع' ,
+        'Club'                                              => 'النادي' ,
+        'Created_at'                                        => 'أنشئ في' ,
+        'view'                                              => 'عرض' ,
+        'delete'                                            => 'مسح' ,
+    ],
+    //////////////// end Playgrounds Datatable ///////////////
+
+    //////////////// start  Single Playground ////////////////////
+    'single_playground'                     => [
+        'dashboard'                                 => 'الرئيسية',
+        'Playground_Data'                           => 'بيانات الملعب' ,
+        'Created_since'                             => 'أنشئ في ' ,
+        'club'                                      => 'النادي',
+        'branch'                                    => 'الفرع',
+        'playgrounds'                               => 'الملاعب' ,
+        'Phone'                                     => 'التليفون' ,
+        'Location'                                  => 'العنوان' ,
+        'Features'                                  => 'المميزات' ,
+        'Price_Per_Hour'                            => 'سعر الساعه' ,
+        'Sport'                                     => 'الرياضة' ,
+        'Description'                               => 'الوصف' ,
+        'activated_by_Owner'                        => 'مفعل من المالك' ,
+        'deactivated_by_Owner'                      => 'معطل من المالك' ,
+        'Deactivate'                                => 'تعطيل' ,
+        'Activate'                                  => 'تفعيل' ,
+        'Total_Reservations_Count'                  => 'إجمالي عدد الحجوزات',
+        'Total_Events_Count'                        => 'إجمالي عدد الماتشات',
+        'Total_Challenges_Count'                    => 'إجمالي عدد التحديات',
+        'Playground_Photos'                         => 'صور الملعب',
+        'No_Photos_for_This_Playground'             => 'لا توجد صور لهذا الملعب',
+        'Description'                               => 'الوصف',
+    ],
+    //////////////// end Single Playground ///////////////
+
+
 ];
